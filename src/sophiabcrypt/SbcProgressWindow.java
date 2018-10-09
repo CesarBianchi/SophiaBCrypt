@@ -5,22 +5,12 @@
  */
 package sophiabcrypt;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-
 /**
  *
  * @author cesarbianchi
  */
 public class SbcProgressWindow extends javax.swing.JFrame {
-    private int nQtdFiles = 0;
-    private String[] aFiles = null;
-    private String cOper  = new String();    
-    private String cPsw = new String();
-    private JFileChooser jFile = null;
-    
-    
+
     /**
      * Creates new form SbcProgressWindow
      */
@@ -44,14 +34,6 @@ public class SbcProgressWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setType(java.awt.Window.Type.UTILITY);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Processando arquivos...");
@@ -64,10 +46,10 @@ public class SbcProgressWindow extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 709, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -80,47 +62,27 @@ public class SbcProgressWindow extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            Thread t = new Thread(() -> {
-                try {
-                    transferFiles();
-                } catch (Exception ex) {
-                    Logger.getLogger(SbcProgressWindow.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-            t.start();
-        } catch (Exception ex) {
-            Logger.getLogger(SbcProgressWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_formWindowOpened
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        jFile.updateUI();
-    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -171,92 +133,21 @@ public class SbcProgressWindow extends javax.swing.JFrame {
         this.jProgressBar1.setMaximum(Max);
     }
     
-    public void incProc(String cMsg1, String cMsg2, int nStep) throws InterruptedException{
-        
-        jLabel1.setText(cMsg1);
-        jLabel2.setText(cMsg2);
-        jProgressBar1.setValue(nStep);        
-
-        jLabel1.repaint();
-        jLabel2.repaint();
-        jPanel1.repaint();
-
-        jLabel1.updateUI();
-        jLabel2.updateUI();
-        jPanel1.repaint();
-        
-    }
-    
-    public void setQtdFiles(int Qtd){
-        nQtdFiles = Qtd;
-    }
-    
-    public int getQtdFiles(){
-        return nQtdFiles;
-    }
-    
-    public void setFiles(String[] aF){
-        aFiles = aF;
-    }
-    
-    public String[] getFiles(){
-        return aFiles;
-    }
-    
-    public void setOper(String cOp){
-        cOper = cOp;
-    }
-    
-    public String getOper(){
-        return cOper;
-    }
-    
-    public void setPsw(String cPassword){
-        cPsw = cPassword;
-    }
-    
-    public String getPsw(){
-        return cPsw;
-    }
-    
-    public void transferFiles() throws Exception{
-        
-        String cOp = getOper();
-        String[] aFl = getFiles();
-        String cPassword = getPsw();
-        
-        //Define tamanho da regua de processamento
-        this.jProgressBar1.setMaximum(getQtdFiles());
-        
-        //Instancia o motor de transformacao de arquivos
-        SbcEncEngine SbcEngine = new SbcEncEngine();
-        SbcEngine.setOper(cOp);
-        SbcEngine.setFiles(aFl);
-        SbcEngine.setQtdFiles(getQtdFiles());
-        SbcEngine.setSbcExtension(".sbc");
-        
-        //Converte os arquivos
-        for (int nI = 1; nI <= getQtdFiles();nI++){
-            //Atualiza o rotulo
-            String cMsg1 =  "Convertendo arquivo " + Integer.toString(nI) + " de " + Integer.toString(getQtdFiles());
-            String cMsg2 =  aFl[nI];
-            incProc(cMsg1,cMsg2,nI);
- 
-            //Converte o arquivo
-            if (cOp == "ENC") {
-                SbcEngine.GoCrypt(cPassword, aFl[nI]);
-            }else{
-                SbcEngine.GoDecrypt(cPassword, aFl[nI]);
-            }
+    public void incProc(String cMsg1, String cMsg2, int nStep){
+        //this.setVisible(false);
+  
+        this.jLabel1.setText(cMsg1);
+        this.jLabel2.setText(cMsg2);
+        this.jProgressBar1.setValue(nStep);
             
-        }
-        //jFile.updateUI();
-        this.dispose();
-            
-    }
-    
-    public void setFileTreeObj(JFileChooser jF){
-        jFile = jF;
+        this.jLabel1.setEnabled(true);
+        this.jLabel2.setEnabled(true);
+        
+        this.jLabel1.updateUI();
+        this.jLabel2.updateUI();                                  
+        this.jProgressBar1.updateUI();
+        this.jPanel1.updateUI();
+        this.repaint();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
