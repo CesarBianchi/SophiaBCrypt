@@ -5,12 +5,26 @@
  */
 package sophiabcrypt;
 
+<<<<<<< HEAD
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+=======
+>>>>>>> master
 /**
  *
  * @author cesarbianchi
  */
 public class SbcProgressWindow extends javax.swing.JFrame {
+<<<<<<< HEAD
+    private int nQtdFiles = 0;
+    private String[] aFiles = null;
+    private String cOper  = new String();    
+    private String cPsw = new String();
+    
+=======
 
+>>>>>>> master
     /**
      * Creates new form SbcProgressWindow
      */
@@ -34,6 +48,14 @@ public class SbcProgressWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setType(java.awt.Window.Type.UTILITY);
+<<<<<<< HEAD
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+=======
+>>>>>>> master
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Processando arquivos...");
@@ -49,7 +71,11 @@ public class SbcProgressWindow extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+=======
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+>>>>>>> master
                 .addContainerGap())
             .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -84,6 +110,24 @@ public class SbcProgressWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try {
+            Thread t = new Thread(() -> {
+                try {
+                    transferFiles();
+                } catch (Exception ex) {
+                    Logger.getLogger(SbcProgressWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            t.start();
+        } catch (Exception ex) {
+            Logger.getLogger(SbcProgressWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+=======
+>>>>>>> master
     /**
      * @param args the command line arguments
      */
@@ -140,6 +184,11 @@ public class SbcProgressWindow extends javax.swing.JFrame {
         this.jLabel2.setText(cMsg2);
         this.jProgressBar1.setValue(nStep);
             
+<<<<<<< HEAD
+        }
+        this.dispose();
+            
+=======
         this.jLabel1.setEnabled(true);
         this.jLabel2.setEnabled(true);
         
@@ -148,6 +197,7 @@ public class SbcProgressWindow extends javax.swing.JFrame {
         this.jProgressBar1.updateUI();
         this.jPanel1.updateUI();
         this.repaint();
+>>>>>>> master
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

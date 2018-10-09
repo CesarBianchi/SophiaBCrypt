@@ -246,6 +246,22 @@ public class SbcPswWindow extends javax.swing.JFrame {
         return cPath;
     }       
 
+<<<<<<< HEAD
+    private void ProcessFile(String cPath) throws Exception{
+        
+        SbcPlanFile PlanFile = new SbcPlanFile();
+        PlanFile.init(getOper());
+        PlanFile.DiscoveryFiles(cPath);
+        String aFiles[] = PlanFile.getFiles();
+        
+        SbcProgressWindow SbcProgress = new SbcProgressWindow();
+        SbcProgress.setQtdFiles(PlanFile.getQtdFiles());
+        SbcProgress.setOper(getOper());
+        SbcProgress.setFiles(aFiles);
+        SbcProgress.setPsw(getPsw());
+        SbcProgress.init(PlanFile.getQtdFiles());
+
+=======
     private void ProcessFile(String cPath){
         SbcEngine CryptEng = new SbcEngine();
         CryptEng.init(getOper());
@@ -253,6 +269,7 @@ public class SbcPswWindow extends javax.swing.JFrame {
             CryptEng.GoCrypt(cPath,getPsw());
         else
             CryptEng.GoDecrypt(cPath,getPsw());
+>>>>>>> master
         jFile.updateUI();
     }
     
