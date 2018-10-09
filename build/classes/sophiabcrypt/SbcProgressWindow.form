@@ -11,12 +11,6 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
-<<<<<<< HEAD
-  <Events>
-    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
-  </Events>
-=======
->>>>>>> master
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -57,11 +51,7 @@
               <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
-                  <Component id="jLabel2" pref="706" max="32767" attributes="0"/>
-=======
                   <Component id="jLabel2" pref="537" max="32767" attributes="0"/>
->>>>>>> master
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Component id="jProgressBar1" alignment="1" max="32767" attributes="0"/>

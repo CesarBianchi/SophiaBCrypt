@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package sophiabcrypt;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
 
@@ -48,7 +46,6 @@ public class SbcPswWindow extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setType(java.awt.Window.Type.UTILITY);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Deseja criptografar o arquivo selecionado ?");
@@ -158,11 +155,7 @@ public class SbcPswWindow extends javax.swing.JFrame {
         
         if (SbcPsw.IsValidPsw() == true){
             setPwsIsOk(true,cPsw1);
-            try {
-                ProcessFile(getPath());
-            } catch (Exception ex) {
-                Logger.getLogger(SbcPswWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            ProcessFile(getPath());
             this.dispose();
         }else{
             setPwsIsOk(false,"");
@@ -253,6 +246,7 @@ public class SbcPswWindow extends javax.swing.JFrame {
         return cPath;
     }       
 
+<<<<<<< HEAD
     private void ProcessFile(String cPath) throws Exception{
         
         SbcPlanFile PlanFile = new SbcPlanFile();
@@ -267,6 +261,15 @@ public class SbcPswWindow extends javax.swing.JFrame {
         SbcProgress.setPsw(getPsw());
         SbcProgress.init(PlanFile.getQtdFiles());
 
+=======
+    private void ProcessFile(String cPath){
+        SbcEngine CryptEng = new SbcEngine();
+        CryptEng.init(getOper());
+        if (getOper() == "ENC")
+            CryptEng.GoCrypt(cPath,getPsw());
+        else
+            CryptEng.GoDecrypt(cPath,getPsw());
+>>>>>>> master
         jFile.updateUI();
     }
     
