@@ -1,6 +1,5 @@
 package sophiabcrypt;
 import java.io.*;
-import javax.swing.JOptionPane;
 
 
 //@author cesarbianchi
@@ -14,14 +13,12 @@ public class SbcPlanFile {
     private String cSbcExtension = new String();
     private String cBfaExtension = new String();
     private String cOpType = new String();
-    private double nMaxLengthMB = 0;
   
     public void init(String cOperType){
         setOperType(cOperType);
         setBarType();
         initFileList();
         setSbcExtension(".sbc");
-        setMaxTamFile(60);
     }
     
     public void setOperType(String cOp){
@@ -40,15 +37,6 @@ public class SbcPlanFile {
       return nFileMax;
     }
   
-    public void setMaxTamFile(double nMax){
-        nMaxLengthMB = nMax;
-    }
-    
-    private double getMaxTamFile(){
-      return nMaxLengthMB;
-    }
-    
-    
     private void setBarType(){ 
         String cOperSyst = new String();
         cOperSyst = System.getProperty("os.name").toUpperCase();
@@ -78,18 +66,10 @@ public class SbcPlanFile {
 
     private void addFile(String cPath){
         if (getOperType().toUpperCase() == "ENC"){        
-            
-            //Adiciona somente se o tamanho for de no maximo 60MB
-            File file = new File(cPath);
-            if (CheckFileLength( file.length()) == true) {            
-                //Adiciona somente se nao for um arquivo de extensao .sbc ou .bfa
-                if ((cPath.contains(getSbcExtension()) == false) && (cPath.contains(getBfaExtension()) == false)) {                
-                    aFiles[getQtdFiles() + 1] = cPath;
-                    incFile();
-                }
-            }else{
-                String cMsg = "O arquivo " + cPath + " excede o tamanho maximo permitido de " + Double.toString(getMaxTamFile()) + "MB";
-                JOptionPane.showMessageDialog(null,cMsg,"Arquivo excede tamanho maximo permitido",JOptionPane.INFORMATION_MESSAGE);
+            //Adiciona somente se nao for um arquivo de extensao .sbc ou .bfa
+            if ((cPath.contains(getSbcExtension()) == false) && (cPath.contains(getBfaExtension()) == false)) {                
+                aFiles[getQtdFiles() + 1] = cPath;
+                incFile();
             }
         }else{
             //Adiciona somente se for um arquivo de extensao .sbc ou .bfa
@@ -217,10 +197,6 @@ public class SbcPlanFile {
         }
     }
     
-   private boolean CheckFileLength(double nLengthBytes){       
-       double nMaxTamMB = getMaxTamFile();
-       double nLengthMB = (nLengthBytes / 1024 / 1024);
-       
-       return nLengthMB <= nMaxTamMB;
-   }
+   
+ 
 }

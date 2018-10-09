@@ -43,14 +43,13 @@ public class SbcEncEngine {
         //1 Le o arquivo de origem
         byte[] cBinFileUn =  ReadBinFile(cPath);
 
-        //2 Confecciona nome do arquivo destino
+        //2 confecciona nome do arquivo destino
         cNewNameFile = GetNewName(cPath,getOper());
- 
+
         //3 converte o conteudo binario para BLOWFISH
         SbcEncryptor SbcCry = new SbcEncryptor();
-        //byte[] cBinFileEn = SbcCry.encrypt(cBinFileUn,cPsw);
         byte[] cBinFileEn = SbcCry.encrypt(cBinFileUn,cPsw);
-        
+
         //4 Cria o novo arquivo
         SetNewFile(cNewNameFile,cBinFileEn);
 
@@ -62,20 +61,20 @@ public class SbcEncEngine {
         int nI = 1;              
         String cNewNameFile = new String();
 
-        //1 Le o arquivo
+        //Le o arquivo
         byte[] cBinFileEn =  ReadBinFile(cPath);
 
-        //2 Confecciona novo nome
+        //confecciona novo nome
         cNewNameFile = GetNewName(cPath,getOper());
 
-        //3 Converte o conteudo blowfish para BINARIO
+        //converte o conteudo blowfish para BINARIO
         SbcEncryptor SbcCry = new SbcEncryptor();
         byte[] cBinFileUn = SbcCry.decrypt(cBinFileEn,cPsw);
-        
-        //5 Cria o novo arquivo
+
+        //Cria o novo arquivo
         SetNewFile(cNewNameFile,cBinFileUn);
-       
-        //6 Excluir o arquivo origem
+
+        //Excluir o arquivo origem
         EraseFile(cPath);
     }
     
