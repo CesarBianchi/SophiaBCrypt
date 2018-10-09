@@ -79,6 +79,8 @@ public class SbcMainWindow extends javax.swing.JFrame {
                 .addContainerGap(423, Short.MAX_VALUE))
         );
 
+        jFileChooser1.setDialogType(javax.swing.JFileChooser.CUSTOM_DIALOG);
+        jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
         jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFileChooser1ActionPerformed(evt);
