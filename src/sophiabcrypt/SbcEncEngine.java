@@ -1,5 +1,4 @@
 package sophiabcrypt;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,9 +7,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- *
+ * This a main engine class of SophiaBCrypt. It's used for start process encrypt and decrypt files
  * @author CesarBianchi
  * @since Oct/2018
+ * @see SbcEncryptor
  */
 public class SbcEncEngine {
     String cOper = new String();
@@ -22,7 +22,6 @@ public class SbcEncEngine {
     * Load all full path files for crpyt and call Encrypt method
     * @author CesarBianchi
     * @param cPsw user defined password for encrypt file
-    * @return Nil
     * @since Oct/2018
     */
     public void GoCryptM(String cPsw) throws Exception{
@@ -38,7 +37,6 @@ public class SbcEncEngine {
     * Load all full path files for decrpyt and call DeCrypt method
     * @author CesarBianchi
     * @param cPsw user defined password for decrypt file
-    * @return Nil
     * @since Oct/2018
     */
     public void GoDecryptM(String cPsw) throws Exception{
@@ -55,7 +53,6 @@ public class SbcEncEngine {
     * @author CesarBianchi
     * @param cPsw user defined password for encrypt file
     * @param cPath full path of primal file
-    * @return Nil
     * @since Sep/2018
     */
     public void GoCrypt(String cPsw, String cPath) throws Exception{
@@ -85,7 +82,6 @@ public class SbcEncEngine {
     * @author CesarBianchi
     * @param cPsw user defined password for decrypt file
     * @param cPath full path of encrypted file
-    * @return Nil
     * @since Sep/2018
     */
     public void GoDecrypt(String cPsw, String cPath) throws Exception{
@@ -129,11 +125,12 @@ public class SbcEncEngine {
     }
     
     /**
-    * This method read a binary file and return this contend at byte format
-    * @author CesarBianchi
-    * @param cPath full path of binary file
-    * @return sendBuf The content of input file at byte type format
-    * @since Sep/2018
+     * 
+     * This method read a binary file and return this contend at byte format
+     * @author CesarBianchi
+     * @param cPath full path of binary file
+     * @return sendBuf The content of input file at byte type format
+     * @since Sep/2018
     */
     private byte[] ReadBinFile(String cPath){
         File file = new File(cPath);
@@ -151,12 +148,13 @@ public class SbcEncEngine {
     }   
     
     /**
-    * This method create a new binary file based on Name and Content input params
-    * @author CesarBianchi
-    * @param cName String of full path of the new file
-    * @param cContent A file content at byte type format.
-    * @return Nil
-    * @since Sep/2018
+     * 
+     * This method create a new binary file based on Name and Content input params
+     * @author CesarBianchi
+     * @param cName String of full path of the new file
+     * @param cContent A file content at byte type format.
+     * @return Nil
+     * @since Sep/2018
     */
     private void SetNewFile(String cName,byte[] cContent){
         
@@ -200,7 +198,6 @@ public class SbcEncEngine {
     * This method set the private cOper attibute of this class (ENC or DEC)
     * @author CesarBianchi
     * @param cOp String of type operation. ENC equals "Encrypt" and DEC equals "Decrypt"
-    * @return Nil
     * @since Sep/2018
     */
     public void setOper(String cOp){
@@ -221,8 +218,7 @@ public class SbcEncEngine {
     * This method set the private aFiles array attibute of this class with all files for processing
     * @author CesarBianchi
     * @param aF Array of String with all files to processing
-    * @since Sep/2018
-    * @return Nil
+    * @since Sep/2018    
     */
     public void setFiles(String[] aF){
         aFiles = aF;
@@ -242,7 +238,6 @@ public class SbcEncEngine {
     * This method set the private nQtdFiles attibute of this class with quantity of files for processing
     * @author CesarBianchi
     * @param Qtd The quantity of files for processing (at integer type format)
-    * @return Nil
     * @since Sep/2018
     */
     public void setQtdFiles(int Qtd){

@@ -1,24 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sophiabcrypt;
-
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
 /**
- *
- * @author cesarbianchi
+ * This class is a main GUI for SophiaBCrypt
+ * It shows a graphical interface for the user to select files or folders 
+ * and to be able to choose the operations of Encrypt or Decrypt
+ * @author CesarBianchi
+ * @since Jun/2018
+ * @see SbcEncEngine
+ * @see SbcPlanFile
  */
 public class SbcMainWindow extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MainWindow
-     */
     
+    /**
+     * 
+     * This method create a new Main Window
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     public SbcMainWindow() {
         setSbcIcon();
         initComponents();
@@ -194,26 +195,58 @@ public class SbcMainWindow extends javax.swing.JFrame {
             exitDiag.show();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    /**
+     * 
+     * This method invokes a Encrypt Engine and process all selected files and folders
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         pressCrypt();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * 
+     * This method invokes a Decrypt Engine and process all selected files and folders
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         pressDecrypt();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+   
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
+    /**
+     * 
+     * This method invokes a Encrypt Engine and process all selected files and folders
+     * Its used from Ahead MenuItem
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         pressCrypt();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    /**
+     * 
+     * This method invokes a Decrypt Engine and process all selected files and folders
+     * @author CesarBianchi
+     * Its used from Ahead MenuItem
+     * @since Aug/2018
+    */
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         pressDecrypt();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    /**
+     * 
+     * This method invokes "The About Window"
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         SbcAboutWindow SbcAbout = new SbcAboutWindow();
         SbcAbout.init();
@@ -255,6 +288,13 @@ public class SbcMainWindow extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * 
+     * This method prepare enviroment for init Encrypt Process
+     * Its involke "The password Window" 
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void pressCrypt(){
         String cOper = new String();
         String cPath = new String();
@@ -271,6 +311,13 @@ public class SbcMainWindow extends javax.swing.JFrame {
         pswDiag.show();
     }
     
+    /**
+     * 
+     * This method prepare enviroment for init Decrypt Process
+     * Its involke "The password Window" 
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void pressDecrypt(){
         String cOper = new String();
         String cPath = new String();
@@ -286,13 +333,17 @@ public class SbcMainWindow extends javax.swing.JFrame {
         pswDiag.setFileTreeObj(jFileChooser1);
         pswDiag.show(); 
     }
-            
+
+    /**
+     * 
+     * Set the main application icon
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     public void setSbcIcon(){
         URL url = this.getClass().getResource("images/dog_icon.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(imagemTitulo);
-        
-        //jFileChooser1.setFileHidingEnabled(false);
     }
     
     
