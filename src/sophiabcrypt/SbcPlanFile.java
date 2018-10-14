@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2018 CesarBianchi
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
 package sophiabcrypt;
 import java.io.*;
 import javax.swing.JOptionPane;
@@ -85,42 +103,32 @@ public class SbcPlanFile {
       return nFileMax;
     }
   
-<<<<<<< HEAD
     /**
      * Return the quantity of files to be process 
      * @author CesarBianchi
      * @param nMax The quantity of files to be process
      * @since Sep/2018
     */
-=======
->>>>>>> master
     public void setMaxTamFile(double nMax){
         nMaxLengthMB = nMax;
     }
     
-<<<<<<< HEAD
     /**
      * Return the maximum file size allowed for processing (in MB)
      * @author CesarBianchi
      * @return The maximum file size allowed
      * @since Sep/2018
     */
-=======
->>>>>>> master
     private double getMaxTamFile(){
       return nMaxLengthMB;
     }
     
-<<<<<<< HEAD
     /**
      * Sets kind of bar of pathfiles by system in use
      * This method valides the operation system (Windows, Linux or Mac) to provide the bar
      * @author CesarBianchi
      * @since Sep/2018
     */
-=======
-    
->>>>>>> master
     private void setBarType(){ 
         String cOperSyst = new String();
         cOperSyst = System.getProperty("os.name").toUpperCase();
@@ -185,11 +193,7 @@ public class SbcPlanFile {
             
             //Adiciona somente se o tamanho for de no maximo 60MB
             File file = new File(cPath);
-<<<<<<< HEAD
             if (CheckFileLength(file.length()) == true) {            
-=======
-            if (CheckFileLength( file.length()) == true) {            
->>>>>>> master
                 //Adiciona somente se nao for um arquivo de extensao .sbc ou .bfa
                 if ((cPath.contains(getSbcExtension()) == false) && (cPath.contains(getBfaExtension()) == false)) {                
                     aFiles[getQtdFiles() + 1] = cPath;
@@ -424,7 +428,6 @@ public class SbcPlanFile {
         }
     }
     
-<<<<<<< HEAD
    /**
      * This method can validate if filesize is allowed to be process
      * @param nLengthBytes The file size in bytes
@@ -435,12 +438,6 @@ public class SbcPlanFile {
    private boolean CheckFileLength(double nLengthBytes){       
        double nMaxTamMB = getMaxTamFile();
        double nLengthMB = (nLengthBytes / 1024 / 1024);
-=======
-   private boolean CheckFileLength(double nLengthBytes){       
-       double nMaxTamMB = getMaxTamFile();
-       double nLengthMB = (nLengthBytes / 1024 / 1024);
-       
->>>>>>> master
        return nLengthMB <= nMaxTamMB;
    }
 }
