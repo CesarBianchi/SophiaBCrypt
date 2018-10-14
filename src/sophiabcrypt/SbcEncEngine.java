@@ -1,6 +1,4 @@
-
 package sophiabcrypt;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,8 +7,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- *
- * @author cesarbianchi
+ * This a main engine class of SophiaBCrypt. It's used for start process encrypt and decrypt files
+ * @author CesarBianchi
+ * @since Oct/2018
+ * @see SbcEncryptor
  */
 public class SbcEncEngine {
     String cOper = new String();
@@ -18,6 +18,13 @@ public class SbcEncEngine {
     int nQtdFiles = 0;
     private String cSbcExtension = new String();
      
+    /**
+    * Load all full path files for crpyt and call Encrypt method
+    * @author CesarBianchi
+    * @param cPsw user defined password for encrypt file
+    * @throws java.lang.Exception Cause List of Files is null or zero 
+    * @since Oct/2018
+    */
     public void GoCryptM(String cPsw) throws Exception{
         int nI = 1;
         String[] aListFiles = getFiles();
@@ -27,6 +34,13 @@ public class SbcEncEngine {
         }
     }
     
+    /**
+     * Load all full path files for decrpyt and call DeCrypt method
+     * @author CesarBianchi
+     * @param cPsw user defined password for decrypt file
+     * @throws java.lang.Exception  Cause List of Files is null or zero 
+     * @since Oct/2018
+    */
     public void GoDecryptM(String cPsw) throws Exception{
         int nI = 1;              
         String[] aListFiles = getFiles();
@@ -36,6 +50,14 @@ public class SbcEncEngine {
         }
     }
     
+    /**
+     * Read a binary file, create a new encrypt filename, call encrypt class, save new file and erase a primal file
+     * @author CesarBianchi
+     * @param cPsw user defined password for encrypt file
+     * @param cPath full path of primal file
+     * @throws java.lang.Exception Cause file read or file create be error
+     * @since Sep/2018
+    */
     public void GoCrypt(String cPsw, String cPath) throws Exception{
         
         String cNewNameFile = new String();
@@ -58,6 +80,14 @@ public class SbcEncEngine {
         EraseFile(cPath);
     }
     
+    /**
+     * Read a encrypted file, create a new decrypt filename, call decrypt class, save new file and erase a encrypted file
+     * @author CesarBianchi
+     * @param cPsw user defined password for decrypt file
+     * @param cPath full path of encrypted file
+     * @throws java.lang.Exception Cause file read or file create be error
+     * @since Sep/2018
+    */
     public void GoDecrypt(String cPsw, String cPath) throws Exception{
         int nI = 1;              
         String cNewNameFile = new String();
@@ -79,6 +109,14 @@ public class SbcEncEngine {
         EraseFile(cPath);
     }
     
+    /**
+    * This method return a new encrypted or decrypted filename based on input param
+    * @author CesarBianchi
+    * @param cPath full path of based file
+    * @param cOper The type of operation: ENC equals Encrpyted file name return or DEC equals DECRYPTED file name return
+    * @return cReturn The new file name at String type format
+    * @since Sep/2018
+    */
     private String GetNewName(String cPath, String cOper){
         String cReturn = new String();
         
@@ -90,6 +128,14 @@ public class SbcEncEngine {
         return cReturn;
     }
     
+    /**
+     * 
+     * This method read a binary file and return this contend at byte format
+     * @author CesarBianchi
+     * @param cPath full path of binary file
+     * @return sendBuf The content of input file at byte type format
+     * @since Sep/2018
+    */
     private byte[] ReadBinFile(String cPath){
         File file = new File(cPath);
         int len     = (int)file.length();  
@@ -104,7 +150,16 @@ public class SbcEncEngine {
       }
         return sendBuf;
     }   
-
+    
+    /**
+     * 
+     * This method create a new binary file based on Name and Content input params
+     * @author CesarBianchi
+     * @param cName String of full path of the new file
+     * @param cContent A file content at byte type format.
+     * @return Nil
+     * @since Sep/2018
+    */
     private void SetNewFile(String cName,byte[] cContent){
         
         try {
@@ -118,6 +173,13 @@ public class SbcEncEngine {
         }
     }
     
+    /**
+    * This method erase a specific file using a security recursive trying
+    * @author CesarBianchi
+    * @param cPath String of full path of file to be erased
+    * @return excluiu The result of attempting to delete the operation (in a boolean type format)
+    * @since Sep/2018
+    */
     private boolean EraseFile(String cPath){
         int nI = 1;
         int nTry = 5;
@@ -136,34 +198,82 @@ public class SbcEncEngine {
         return excluiu;
     }
     
+    /**
+    * This method set the private cOper attibute of this class (ENC or DEC)
+    * @author CesarBianchi
+    * @param cOp String of type operation. ENC equals "Encrypt" and DEC equals "Decrypt"
+    * @since Sep/2018
+    */
     public void setOper(String cOp){
         cOper = cOp;
     }
     
+    /**
+    * This method return the private cOper attibute of this class (ENC or DEC)
+    * @author CesarBianchi
+    * @return cOper String of type operation. ENC equals "Encrypt" and DEC equals "Decrypt"
+    * @since Sep/2018
+    */
     public String getOper(){
         return cOper;
     }
     
+    /**
+    * This method set the private aFiles array attibute of this class with all files for processing
+    * @author CesarBianchi
+    * @param aF Array of String with all files to processing
+    * @since Sep/2018    
+    */
     public void setFiles(String[] aF){
         aFiles = aF;
     }
     
+    /**
+    * This method returns the private aFiles array attibute of this class with all files for processing
+    * @author CesarBianchi
+    * @return aFiles Array of String with all files to processing
+    * @since Sep/2018
+    */
     public String[] getFiles(){
         return aFiles;
     }
     
+    /**
+    * This method set the private nQtdFiles attibute of this class with quantity of files for processing
+    * @author CesarBianchi
+    * @param Qtd The quantity of files for processing (at integer type format)
+    * @since Sep/2018
+    */
     public void setQtdFiles(int Qtd){
         nQtdFiles = Qtd;
     }
     
+    /**
+    * This method returns the private nQtdFiles attibute of this class with quantity of files for processing
+    * @author CesarBianchi
+    * @return nQtdFiles The quantity of files for processing (at integer type format)
+    * @since Sep/2018
+    */
     public int getQtdFiles(){
         return nQtdFiles;
     }
     
+    /**
+    * This method set the private cSbcExtension attibute of this class with three letters about file type of encrypted files
+    * @author CesarBianchi
+    * @param cType The three characters of type encrypted files
+    * @since Sep/2018
+    */
     public void setSbcExtension(String cType){
         cSbcExtension = cType;
     }
     
+    /**
+    * This method returns the private cSbcExtension attibute of this class with three letters about file type of encrypted files
+    * @author CesarBianchi
+    * @return cSbcExtension The three characters of type encrypted files
+    * @since Sep/2018
+    */
     private String getSbcExtension(){
         return cSbcExtension;
     }

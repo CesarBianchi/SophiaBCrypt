@@ -1,23 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sophiabcrypt;
-
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
 /**
- *
- * @author cesarbianchi
+ * This class is a main GUI for SophiaBCrypt
+ * It shows a graphical interface for the user to select files or folders 
+ * and to be able to choose the operations of Encrypt or Decrypt
+ * @author CesarBianchi
+ * @since Jun/2018
+ * @see SbcEncEngine
+ * @see SbcPlanFile
  */
 public class SbcMainWindow extends javax.swing.JFrame {
-
+    
     /**
-     * Creates new form MainWindow
-     */
+     * 
+     * This method create a new Main Window
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     public SbcMainWindow() {
         setSbcIcon();
         initComponents();
@@ -48,15 +50,25 @@ public class SbcMainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SophiaBCrypt - Criptografador de arquivos");
+        setName("MainFrame"); // NOI18N
 
+        jButton2.setFont(new java.awt.Font("Lucida Grande", 0, 13)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v4_unlock_little.png"))); // NOI18N
         jButton2.setText("Descriptografar");
+        jButton2.setToolTipText("Descriptografa os arquivos ou pastas selecionados a esquerda");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton2.setIconTextGap(2);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Criptografar");
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 0, 13)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v4_lock_little.png"))); // NOI18N
+        jButton1.setText("    Criptografar");
+        jButton1.setToolTipText("Criptografa os arquivos ou pastas selecionados a esquerda");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -68,15 +80,15 @@ public class SbcMainWindow extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, Short.MAX_VALUE)
+            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(423, Short.MAX_VALUE))
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jFileChooser1.setDialogType(javax.swing.JFileChooser.CUSTOM_DIALOG);
@@ -93,14 +105,15 @@ public class SbcMainWindow extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE))
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Arquivo");
@@ -155,23 +168,20 @@ public class SbcMainWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,26 +195,58 @@ public class SbcMainWindow extends javax.swing.JFrame {
             exitDiag.show();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    /**
+     * 
+     * This method invokes a Encrypt Engine and process all selected files and folders
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         pressCrypt();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * 
+     * This method invokes a Decrypt Engine and process all selected files and folders
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         pressDecrypt();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+   
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
+    /**
+     * 
+     * This method invokes a Encrypt Engine and process all selected files and folders
+     * Its used from Ahead MenuItem
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         pressCrypt();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    /**
+     * 
+     * This method invokes a Decrypt Engine and process all selected files and folders
+     * @author CesarBianchi
+     * Its used from Ahead MenuItem
+     * @since Aug/2018
+    */
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         pressDecrypt();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    /**
+     * 
+     * This method invokes "The About Window"
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         SbcAboutWindow SbcAbout = new SbcAboutWindow();
         SbcAbout.init();
@@ -246,6 +288,13 @@ public class SbcMainWindow extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * 
+     * This method prepare enviroment for init Encrypt Process
+     * Its involke "The password Window" 
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void pressCrypt(){
         String cOper = new String();
         String cPath = new String();
@@ -262,6 +311,13 @@ public class SbcMainWindow extends javax.swing.JFrame {
         pswDiag.show();
     }
     
+    /**
+     * 
+     * This method prepare enviroment for init Decrypt Process
+     * Its involke "The password Window" 
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void pressDecrypt(){
         String cOper = new String();
         String cPath = new String();
@@ -277,14 +333,17 @@ public class SbcMainWindow extends javax.swing.JFrame {
         pswDiag.setFileTreeObj(jFileChooser1);
         pswDiag.show(); 
     }
-    
-        
+
+    /**
+     * 
+     * Set the main application icon
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     public void setSbcIcon(){
-        URL url = this.getClass().getResource("dog_icon.png");
+        URL url = this.getClass().getResource("images/dog_icon.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(imagemTitulo);
-        
-        //jFileChooser1.setFileHidingEnabled(false);
     }
     
     
