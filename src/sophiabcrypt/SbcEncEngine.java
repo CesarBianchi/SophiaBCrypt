@@ -22,6 +22,7 @@ public class SbcEncEngine {
     * Load all full path files for crpyt and call Encrypt method
     * @author CesarBianchi
     * @param cPsw user defined password for encrypt file
+    * @throws java.lang.Exception Cause List of Files is null or zero 
     * @since Oct/2018
     */
     public void GoCryptM(String cPsw) throws Exception{
@@ -34,10 +35,11 @@ public class SbcEncEngine {
     }
     
     /**
-    * Load all full path files for decrpyt and call DeCrypt method
-    * @author CesarBianchi
-    * @param cPsw user defined password for decrypt file
-    * @since Oct/2018
+     * Load all full path files for decrpyt and call DeCrypt method
+     * @author CesarBianchi
+     * @param cPsw user defined password for decrypt file
+     * @throws java.lang.Exception  Cause List of Files is null or zero 
+     * @since Oct/2018
     */
     public void GoDecryptM(String cPsw) throws Exception{
         int nI = 1;              
@@ -49,11 +51,12 @@ public class SbcEncEngine {
     }
     
     /**
-    * Read a binary file, create a new encrypt filename, call encrypt class, save new file and erase a primal file
-    * @author CesarBianchi
-    * @param cPsw user defined password for encrypt file
-    * @param cPath full path of primal file
-    * @since Sep/2018
+     * Read a binary file, create a new encrypt filename, call encrypt class, save new file and erase a primal file
+     * @author CesarBianchi
+     * @param cPsw user defined password for encrypt file
+     * @param cPath full path of primal file
+     * @throws java.lang.Exception Cause file read or file create be error
+     * @since Sep/2018
     */
     public void GoCrypt(String cPsw, String cPath) throws Exception{
         
@@ -78,11 +81,12 @@ public class SbcEncEngine {
     }
     
     /**
-    * Read a encrypted file, create a new decrypt filename, call decrypt class, save new file and erase a encrypted file
-    * @author CesarBianchi
-    * @param cPsw user defined password for decrypt file
-    * @param cPath full path of encrypted file
-    * @since Sep/2018
+     * Read a encrypted file, create a new decrypt filename, call decrypt class, save new file and erase a encrypted file
+     * @author CesarBianchi
+     * @param cPsw user defined password for decrypt file
+     * @param cPath full path of encrypted file
+     * @throws java.lang.Exception Cause file read or file create be error
+     * @since Sep/2018
     */
     public void GoDecrypt(String cPsw, String cPath) throws Exception{
         int nI = 1;              

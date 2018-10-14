@@ -1,30 +1,64 @@
 package sophiabcrypt;
-
-//@author cesarbianchi
-
 import javax.swing.JOptionPane;
 
+/**
+ * This class can be validate password policy (if both are same, minimal length, formation)
+ * By the way, SophiaBCrypt just allow password with:
+ * 1 - That has at least 1 lowercase or uppercase letter
+ * 2 - That has at least 1 number
+ * 3 - That has at least 1 Special Char
+ * 4 - That has at least 8 Chars of length
+ * @see SbcMainWindow
+ * @author CesarBianchi
+ * @since Sep/2018
+*/
 public class SbcPswControl {
     private String cPsw1 = new String();
     private String cPsw2 = new String();
     private String cOper = new String();
     private int MinLength = 8;
     
-    
+    /**
+     * Is the same a "Constructor" method, receives a two passwords inputed by user
+     * @param cP1 The first password inputed
+     * @param cP2 The second password inputed
+     * @param cOp The Operation (ENC or DEC)
+     * @author CesarBianchi
+     * @since Sep/2018
+    */
     public void init(String cP1,String cP2,String cOp){
         cPsw1 = cP1.trim();
         cPsw2 = cP2.trim();
         cOper = cOp;
     }
     
+    /**
+     * This method returns the First password inputed by user
+     * @author CesarBianchi
+     * @return cPsw1 The First password inputed, without validations     
+     * @since Sep/2018
+    */
     private String getPsw1(){
         return cPsw1;
     }
     
+    /**
+     * This method returns the Second password inputed by user
+     * @author CesarBianchi
+     * @return cPsw2 The Second password inputed, without validations     
+     * @since Sep/2018
+    */
     private String getPsw2(){
         return cPsw2;
     }
     
+    /**
+     * This method provide all validations about passwords inputed, by according with SophiaBCrypt password policy.
+     * Details about password policy, read description of this class
+     * @author CesarBianchi
+     * @return lReturn True for valid password or False to invalid password
+     * @since Sep/2018
+    */
     public boolean IsValidPsw(){        
         boolean lReturn = false;
         String cMsgAlert = new String();
@@ -79,19 +113,37 @@ public class SbcPswControl {
         }
         return lReturn;
     }
-    
+   
+    /**
+     * This method validate if all passwords (1 and 2) are equals
+     * @author CesarBianchi
+     * @return lReturn True for equals passwords or False to diferent passwords
+     * @since Sep/2018
+    */
     private boolean PswsAreEquals(){
         boolean lReturn = false;
         lReturn = getPsw1().equals(getPsw2());
         return lReturn;
     }
     
+    /**
+     * This method validate the minimal length of password
+     * @author CesarBianchi
+     * @return lReturn True for Ok length password or False to not ok length passwords
+     * @since Sep/2018
+    */
     private boolean PswMinLength(){
         boolean lReturn = false;
         lReturn = getPsw1().length() >= MinLength;
         return lReturn;
     }
     
+    /**
+     * This method validate if password contains numbers
+     * @author CesarBianchi
+     * @return lReturn True for Ok password or False to not ok passwords
+     * @since Sep/2018
+    */
     private boolean PswContainNumber(){
         boolean lReturn = false;
         int nI = 0;
@@ -105,6 +157,12 @@ public class SbcPswControl {
         return lReturn;
     }
     
+    /**
+     * This method validate if password contains chars
+     * @author CesarBianchi
+     * @return lReturn True for Ok password or False to not ok passwords
+     * @since Sep/2018
+    */
     private boolean PswContainChars(){
         boolean lReturn = false;
         String alfabeto = new String();

@@ -2,13 +2,14 @@ package sophiabcrypt;
 import java.io.*;
 import javax.swing.JOptionPane;
 
-
 /**
  * This class control all details about Encrypt and Decrypt operations.
  * Get all files, folders and subfolders, Count files, Control Process Bar, Set encrypted file extension
  * Control max file lenght, and others!
  * @author CesarBianchi
  * @since Sep/2018
+ * @see SbcEncEngine
+ * @see SbcEncryptor
  */
 public class SbcPlanFile {
     private int nQtdFiles = 0;

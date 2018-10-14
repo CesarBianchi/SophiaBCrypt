@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/cesarbianchi/OneDrive/MyCloudFiles/Pessoais/Backup%20Desenvolvimento/Java/SophiaBCrypt%20v1.03.0/src/sophiabcrypt/SbcPlanFile.java</file>
-            <file>file:/Users/cesarbianchi/OneDrive/MyCloudFiles/Pessoais/Backup%20Desenvolvimento/Java/SophiaBCrypt%20v1.03.0/src/sophiabcrypt/SbcEncEngine.java</file>
-            <file>file:/Users/cesarbianchi/OneDrive/MyCloudFiles/Pessoais/Backup%20Desenvolvimento/Java/SophiaBCrypt%20v1.03.0/src/sophiabcrypt/SbcEncryptor.java</file>
-            <file>file:/Users/cesarbianchi/OneDrive/MyCloudFiles/Pessoais/Backup%20Desenvolvimento/Java/SophiaBCrypt%20v1.03.0/src/sophiabcrypt/SbcMainWindow.java</file>
+            <file>file:/Users/cesarbianchi/OneDrive/MyCloudFiles/Pessoais/Backup%20Desenvolvimento/Java/SophiaBCrypt%20v1.03.0/src/sophiabcrypt/SbcVersion.java</file>
+            <file>file:/Users/cesarbianchi/OneDrive/MyCloudFiles/Pessoais/Backup%20Desenvolvimento/Java/SophiaBCrypt%20v1.03.0/src/sophiabcrypt/SbcProgressWindow.java</file>
+            <file>file:/Users/cesarbianchi/OneDrive/MyCloudFiles/Pessoais/Backup%20Desenvolvimento/Java/SophiaBCrypt%20v1.03.0/src/sophiabcrypt/SbcPswControl.java</file>
+            <file>file:/Users/cesarbianchi/OneDrive/MyCloudFiles/Pessoais/Backup%20Desenvolvimento/Java/SophiaBCrypt%20v1.03.0/src/sophiabcrypt/SophiaBCrypt.java</file>
+            <file>file:/Users/cesarbianchi/OneDrive/MyCloudFiles/Pessoais/Backup%20Desenvolvimento/Java/SophiaBCrypt%20v1.03.0/src/sophiabcrypt/SbcPswWindow.java</file>
         </group>
     </open-files>
 </project-private>
