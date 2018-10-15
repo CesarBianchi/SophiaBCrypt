@@ -31,6 +31,7 @@ import java.net.URL;
  * @see SbcPlanFile
  */
 public class SbcMainWindow extends javax.swing.JFrame {
+    private String cLanguage = new String();
     
     /**
      * 
@@ -364,6 +365,13 @@ public class SbcMainWindow extends javax.swing.JFrame {
         this.setIconImage(imagemTitulo);
     }
     
+    public void setLanguage(String br) {
+        this.cLanguage = br;
+    }
+    
+    private String getLanguage() {
+        return this.cLanguage;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

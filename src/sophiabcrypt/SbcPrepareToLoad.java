@@ -19,14 +19,8 @@ package sophiabcrypt;
 import java.io.File;
 import com.thoughtworks.xstream.XStream;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 
 /**
  * This class is used to prepare environment for SophiaBCrypt tool
@@ -58,13 +52,12 @@ public class SbcPrepareToLoad {
         
         //1 - Se o arquivo nao existe, entao exibe interface para selecionar o Idioma e cria o arquivo.
         if (this.CheckParameterFile() == false){
-            String cLang = new String();
-            cLang = this.ShowLanguageWindow();
-            isAllowed = this.CreateParameterFile(cLang);
+            this.ShowLanguageWindow();
+            this.isAllowed = false;
         }else{
-            isAllowed = true;
+            this.isAllowed = true;
         }
-        return isAllowed;
+        return this.isAllowed;
     }
     
     /**
@@ -77,9 +70,9 @@ public class SbcPrepareToLoad {
     */
     public void SetParameterFileName(String cName){
         if (cName.equals("")){
-            cParameterFile = "SBC_Parameters.xml";
+            this.cParameterFile = "SBC_Parameters.xml";
         }else{
-            cParameterFile = cName;
+            this.cParameterFile = cName;
         }
     }
     
@@ -92,7 +85,7 @@ public class SbcPrepareToLoad {
      * 
     */
     public String getParameterFileName(){
-        return cParameterFile;
+        return this.cParameterFile;
     }
         
     /**
@@ -117,99 +110,17 @@ public class SbcPrepareToLoad {
 
     /**
      * Load a new "Select Language Interface" for user select your favourite language
-     * @return cLang Two letters to represents the language choice
      * @author CesarBianchi
      * @since October/2018
      * @version 1.03.1
      * 
     */
-    private String ShowLanguageWindow() {
-        String cLang = new String();
+    private void ShowLanguageWindow() {
         SbcLanguageWindow SbcLangWin = new SbcLanguageWindow();
+        SbcLangWin.setParamFileName(this.getParameterFileName());
         SbcLangWin.LoadLanguageWindow();
-        cLang = SbcLangWin.GetLanguage();
-        return cLang;
-    }
-        
-    /**
-     * This method create a new parameter file and write it
-     * @return lreturn True for succesfully file created or False for fail to create parameters file
-     * @author CesarBianchi
-     * @since October/2018
-     * @version 1.03.1
-     * 
-    */
-    private boolean CreateParameterFile(String cLang) throws IOException{
-        
-        boolean lreturn = false;
-        SbcVersion SbcVer = new SbcVersion();
-        SbcVer.setLanguage(cLang);
-        
-        XStream xstream = new XStream();
-        xstream.alias("Parameters",SbcVersion.class);
-        String cXMLParams = xstream.toXML(SbcVer);
-        
-        FileWriter fw = new FileWriter(this.getParameterFileName(), false);
-        BufferedWriter bw = new BufferedWriter( fw );
-        bw.write(cXMLParams);
-        bw.close();
-        fw.close();
-        lreturn = true;
-        
-        return lreturn;
-    }
-
-    
-    /**
-     * This method load all parameters by file
-     * @return lReturn True if parameters did are loaded
-     * @author CesarBianchi
-     * @throws java.io.IOException Case XML file don't exists
-     * @since October/2018
-     * @version 1.03.1
-     * 
-    */
-    public boolean LoadParametersByFile() throws IOException{
-        boolean lreturn = false;
-        
-        //String cFileContent = new String();
-        //cFileContent = this.ReadParameterFile();
-        File cFileXML = new File(this.getParameterFileName());
-        XStream xstream = new XStream();
-        //xstream.fromXML(cFileXML);      
-        //this.setLangInFile("BR");
-        lreturn = true;
-        
-        return lreturn;
     }
     
-    /**
-     * This method reads a parameter file and return in string format
-     * @return  cFileContent The content of file parameter
-     * @author CesarBianchi
-     * @since October/2018
-     * @version 1.03.1
-     * 
-    */
-    private String ReadParameterFile() throws IOException {
-        String cFileContent = new String();
-        String cFileName = new String();
-        cFileName = this.getParameterFileName();
-       
-        FileReader arq = new FileReader(cFileName);
-        BufferedReader lerArq = new BufferedReader(arq);
- 
-        String linha = lerArq.readLine(); 
-        cFileContent = linha;
-        while (linha != null) {
-            linha = lerArq.readLine();
-            cFileContent = cFileContent + linha;
-        } 
-        arq.close();
-       
-        return cFileContent;
-    }
-
     /**
      * This method set in class attribute the language define in Parameter File
      * @param cLang The Language reading of Parameter File
@@ -219,7 +130,7 @@ public class SbcPrepareToLoad {
      * 
     */
     private void setLangInFile(String cLang) {
-         cLangInFile = cLang;
+         this.cLangInFile = cLang;
     }
     
     /**
@@ -231,7 +142,7 @@ public class SbcPrepareToLoad {
      * 
     */
     public String getLanguage() {
-         return cLangInFile;
+         return this.cLangInFile;
     }
     
 }

@@ -38,25 +38,19 @@ import java.util.logging.Logger;
      * It's exec a Prepare Classes and SbcMainClass
      * @param args the command line arguments
      * @author CesarBianchi
+     * @throws java.io.IOException Case can't read param file
      * @since October/2018
     */
-    public static void main(String[] args) {    
+    public static void main(String[] args) throws IOException {    
         
         SbcPrepareToLoad SbcLoading = new SbcPrepareToLoad();
-        
-        try {
-            if (SbcLoading.CanBeLoad()){
-                if (SbcLoading.LoadParametersByFile()){
-                    /*SbcLoading.getLanguage();*/
-                    SbcMainWindow main = new SbcMainWindow();
-                    main.setLocationRelativeTo(null);
-                    main.setResizable(false);
-                    main.show();
-                    
-                }
+        if (SbcLoading.CanBeLoad()){
+            SbcToLoad SbcLoad = new SbcToLoad();
+            SbcLoad.SetParamFileName(SbcLoading.getParameterFileName());
+            if (SbcLoad.LoadParamFile()){
+                SbcLoad.LoadMainWindow();
             }
-        } catch (IOException ex) {        
-            Logger.getLogger(SophiaBCrypt.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 }

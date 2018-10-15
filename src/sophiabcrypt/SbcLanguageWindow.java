@@ -17,6 +17,13 @@
  */
 package sophiabcrypt;
 
+import com.thoughtworks.xstream.XStream;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * This class is used to user select a prefered language for SophiaBCrypt
  * @author CesarBianchi
@@ -27,6 +34,7 @@ package sophiabcrypt;
 public class SbcLanguageWindow extends javax.swing.JFrame {
 
     private String cLang = new String();
+    private String cParamFileName = new String();
     
     /**
      * Creates new form SbcLanguageWindow
@@ -108,26 +116,7 @@ public class SbcLanguageWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * This method sets the cLang attribute by according user language choice using the local method
-     * @author CesarBianchi
-     * @since October/2018
-     * @version 1.03.1
-     * 
-    */
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        if (jComboBox1.getSelectedIndex() == 0 ){
-            this.setLanguage("BR");
-        } else if (jComboBox1.getSelectedIndex() == 1){
-            this.setLanguage("EN");
-        } else if (jComboBox1.getSelectedIndex() == 2){
-            this.setLanguage("ES");
-        }
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -162,6 +151,70 @@ public class SbcLanguageWindow extends javax.swing.JFrame {
             }
         });
     }
+    /**
+     * This method sets the cLang attribute by according user language choice using the local method
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     * 
+    */
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        if (jComboBox1.getSelectedIndex() == 0 ){
+            this.setLanguage("BR");
+        } else if (jComboBox1.getSelectedIndex() == 1){
+            this.setLanguage("EN");
+        } else if (jComboBox1.getSelectedIndex() == 2){
+            this.setLanguage("ES");
+        }
+        
+        try {
+            this.CreateParameterFile();
+        } catch (IOException ex) {
+            Logger.getLogger(SbcLanguageWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(SbcLanguageWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
+        this.dispose();
+        SbcToLoad SbcLoad = new SbcToLoad();
+        if (SbcLoad.LoadParamFile()){
+            SbcLoad.SetParamFileName(this.getParamFileName());
+            SbcLoad.LoadMainWindow();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+     /**
+     * This method create a new parameter file and write it
+     * @return lreturn True for succesfully file created or False for fail to create parameters file
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     * 
+    */
+    private boolean CreateParameterFile() throws IOException{
+        
+        boolean lreturn = false;
+        SbcVersion SbcVer = new SbcVersion();
+        SbcVer.setLanguage(this.GetLanguage());
+        
+        XStream xstream = new XStream();
+        xstream.alias("Parameters",SbcVersion.class);
+        String cXMLParams = xstream.toXML(SbcVer);
+        
+        FileWriter fw = new FileWriter(this.getParamFileName(), false);
+        BufferedWriter bw = new BufferedWriter( fw );
+        bw.write(cXMLParams);
+        bw.close();
+        fw.close();
+        lreturn = true;
+        
+        return lreturn;
+    }
 
     /**
      * This method show the Window interface of this class
@@ -195,6 +248,30 @@ public class SbcLanguageWindow extends javax.swing.JFrame {
     */
     private void setLanguage(String Language) {
         cLang = Language;
+    }
+    
+    /**
+     * This method sets the ParamFileName
+     * @param cFileName The name of the file param
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     * 
+    */
+    public void setParamFileName(String cFileName) {
+        cParamFileName = cFileName;
+    }
+    
+    /**
+     * This method gets the ParamFileName
+     * @return cParamFileName The name of the file param
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     * 
+    */
+    private String getParamFileName() {
+        return cParamFileName;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
