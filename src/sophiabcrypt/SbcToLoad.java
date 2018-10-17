@@ -43,28 +43,34 @@ public class SbcToLoad {
      * This method load all parameters by file
      * @return lReturn True if parameters did are loaded
      * @author CesarBianchi
+     * @throws java.lang.InterruptedException Case isn't possible read param file
      * @since October/2018
      * @version 1.03.1
      * 
     */    
-    public boolean LoadParamFile(){
+    public boolean LoadParamFile() throws InterruptedException{
         boolean lReturn = false;
+        int nMaxTry = 5;
+        int nTrying = 1;
         
-         try {
-            
-            BufferedReader input = new BufferedReader(new FileReader(this.GetParamFileName()));
-            
-            XStream xStream = new XStream();
-            xStream.alias("Parameters", SbcVersion.class);
-            SbcVersion SbcV = (SbcVersion) xStream.fromXML(input);
-            input.close();            
-            this.setLanguage(SbcV.getLanguage());
-            lReturn = true;
- 
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        
+        for (nTrying = 1;nTrying<=nMaxTry;nTrying++){
+            try {
+
+                BufferedReader input = new BufferedReader(new FileReader(this.GetParamFileName()));
+                
+                XStream xStream = new XStream();
+                xStream.alias("Parameters", SbcVersion.class);
+                SbcVersion SbcV = (SbcVersion) xStream.fromXML(input);
+                input.close();            
+                this.setLanguage(SbcV.getLanguage());
+                lReturn = true;
+
+            } catch (IOException ex) {
+                System.out.println("Tentativa numero: " + Integer.toString(nTrying) + " falhou. Aguardando ...");
+                Thread.sleep(2000);
+            }
         }
-        
         return lReturn;
     }
     

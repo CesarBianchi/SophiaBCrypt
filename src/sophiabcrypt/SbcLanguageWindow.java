@@ -170,21 +170,17 @@ public class SbcLanguageWindow extends javax.swing.JFrame {
         
         try {
             this.CreateParameterFile();
+            
+            SbcToLoad SbcLoad = new SbcToLoad();    
+            SbcLoad.SetParamFileName(this.getParamFileName());
+            if (SbcLoad.LoadParamFile()){                
+                this.dispose();
+                SbcLoad.LoadMainWindow();
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SbcLanguageWindow.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(SbcLanguageWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(SbcLanguageWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-        
-        this.dispose();
-        SbcToLoad SbcLoad = new SbcToLoad();
-        if (SbcLoad.LoadParamFile()){
-            SbcLoad.SetParamFileName(this.getParamFileName());
-            SbcLoad.LoadMainWindow();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -207,10 +203,11 @@ public class SbcLanguageWindow extends javax.swing.JFrame {
         String cXMLParams = xstream.toXML(SbcVer);
         
         FileWriter fw = new FileWriter(this.getParamFileName(), false);
-        BufferedWriter bw = new BufferedWriter( fw );
+        BufferedWriter bw = new BufferedWriter(fw);
         bw.write(cXMLParams);
         bw.close();
-        fw.close();
+        fw.close();       
+        System.out.println("Fechei o arquivo");
         lreturn = true;
         
         return lreturn;
@@ -224,6 +221,8 @@ public class SbcLanguageWindow extends javax.swing.JFrame {
      * 
     */
     public void LoadLanguageWindow(){
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setVisible(true);
     }
     

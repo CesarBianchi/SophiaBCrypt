@@ -39,9 +39,10 @@ import java.util.logging.Logger;
      * @param args the command line arguments
      * @author CesarBianchi
      * @throws java.io.IOException Case can't read param file
+     * @throws java.lang.InterruptedException Case isn't load param file
      * @since October/2018
     */
-    public static void main(String[] args) throws IOException {    
+    public static void main(String[] args) throws IOException, InterruptedException {    
         
         SbcPrepareToLoad SbcLoading = new SbcPrepareToLoad();
         if (SbcLoading.CanBeLoad()){
