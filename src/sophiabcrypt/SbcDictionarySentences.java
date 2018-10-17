@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 CesarBianchi
+ * Copyright (C) 2018 cesarbianchi
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,25 +18,17 @@
 package sophiabcrypt;
 
 /**
- * This class is used to read "Program_Sentences.xml"
- * @author CesarBianchi
- * @since October/2018
- * @version 1.03.1
- * @see SbcLanguaWindow
- * @see SbcPrepareLoad
- * @see SbcToLoad
+ *
+ * @author cesarbianchi
  */
-public class SbcDictionaryDefines {
-
-/**
- * This is class a main method of class. It's load the dictionary files to object
- * @author This method
- * @since October/2018
- * @version 1.03.1
- */    
-    public static void main(){
+public class SbcDictionarySentences {
+        
+    private void Sentences(){
+        String sentenceID = new String();
+        String ClassOfUse = new String();
+        SbcDictionaryTranslations translations = new SbcDictionaryTranslations();
         
     }
-
     
+
 }
