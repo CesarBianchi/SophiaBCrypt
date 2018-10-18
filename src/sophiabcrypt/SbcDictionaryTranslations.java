@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 cesarbianchi
+ * Copyright (C) 2018 CesarBianchi
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,15 +18,131 @@
 package sophiabcrypt;
 
 /**
- *
- * @author cesarbianchi
+ * This class is used to manager translations defines
+ * @author CesarBianchi
+ * @since October/2018
+ * @version 1.00
  */
 public class SbcDictionaryTranslations {
     
-    private void Translations(){
-        String portuguese = new String();
-        String english = new String();
-        String spanish = new String();
-        String userDefined = new String();
+    private String portuguese = new String();
+    private String english = new String();
+    private String spanish = new String();
+    private String userDefined = new String();
+    
+    /**
+     * This is a main class (Constructor) for a single use (without input parameters)
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public void main(){
+        
     }
+    
+    /**
+     * This is a main class (Constructor) for a full use (with all input parameters)
+     * @author CesarBianchi
+     * @param PT The define in portuguese language
+     * @param EN The define in english language
+     * @param ES The define in spanish language
+     * @param UD The define by User Definitions language (Any language)
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public void main(String PT,String EN, String ES, String UD){
+        this.setPortuguese(PT);
+        this.setEnglish(EN);
+        this.setSpanish(ES);
+        this.setUserDefined(UD);
+    }
+    
+    /**
+     * This class set the portuguese define class attribute
+     * @author CesarBianchi
+     * @param PT The define in portuguese language
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public void setPortuguese(String PT){
+        this.portuguese = PT;
+    }
+
+    /**
+     * This class set the english define class attribute
+     * @author CesarBianchi
+     * @param EN The define in english language
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public void setEnglish(String EN){
+        this.english = EN;
+    }
+
+    /**
+     * This class set the spanish define class attribute
+     * @author CesarBianchi
+     * @param ES The define in spanish language
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public void setSpanish(String ES){
+        this.spanish = ES;
+    }
+    
+    /**
+     * This class set the User define class attribute
+     * @author CesarBianchi
+     * @param UD The define by User Definitions language (Any language)
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public void setUserDefined(String UD){
+        this.userDefined = UD;
+    }
+    
+    /**
+     * This class gets the portuguese define class attribute
+     * @author CesarBianchi
+     * @return portuguese The define in portuguese language
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public String getPortuguese(){
+        return this.portuguese;
+    }
+
+    /**
+     * This class gets the english define class attribute
+     * @author CesarBianchi
+     * @return english The define in english language
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public String getEnglish(){
+        return this.english;
+    }
+
+    /**
+     * This class gets the spanish define class attribute
+     * @author CesarBianchi
+     * @return spanish The define in spanish language
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public String getSpanish(){
+        return this.spanish;
+    }
+    
+    /**
+     * This class set the User define class attribute
+     * @author CesarBianchi
+     * @return userDefined The define by User Definitions language (Any language)
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public String getUserDefined(){
+        return this.userDefined;
+    }
+    
 }

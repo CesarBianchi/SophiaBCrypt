@@ -16,26 +16,36 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package sophiabcrypt;
+import java.util.ArrayList;
 
 /**
  * This class is used to read "Program_Sentences.xml"
  * @author CesarBianchi
  * @since October/2018
  * @version 1.03.1
- * @see SbcLanguaWindow
- * @see SbcPrepareLoad
+ * @see SbcLanguageWindow
+ * @see SbcPrepareToLoad
  * @see SbcToLoad
+ * @see SbcDictionarySentence
+ * @see SbcDictionaryTranslations
  */
 public class SbcDictionaryDefines {
-
-/**
- * This is class a main method of class. It's load the dictionary files to object
- * @author This method
- * @since October/2018
- * @version 1.03.1
- */    
-    public static void main(){
+    
         
+    /**
+     * This is class a main method of class. It's load the dictionary files to object
+     * @author This method
+     * @since October/2018
+     * @version 1.03.1
+     */    
+    public static void main(){
+        ArrayList<SbcDictionarySentence> SbcSentences = new ArrayList<SbcDictionarySentence>();
+        
+        SbcDictionarySentence Sentence = new SbcDictionarySentence(); 
+        Sentence.main("001", "MyFirstClass", "Mudar", "Change", "Cambiar", "Swap");
+        SbcSentences.add(Sentence);
+        
+        /*TODO TODO TODO*/
     }
 
     
