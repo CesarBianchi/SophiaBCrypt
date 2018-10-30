@@ -23,8 +23,6 @@ import java.util.logging.Logger;
 
 /**
  * This is a Main Class of SophiaBCrypt
- * @see SbcMainWindow
- * @see SbcPswWindow
  * @see SbcPswControl
  * @see SbcPlanFile
  * @see SbcEncEngine

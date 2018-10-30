@@ -20,7 +20,6 @@ package sophiabcrypt;
 
 /**
  * This class store the information about version and build date of last SophiaBCrypt
- * @see SbcMainWindow
  * @author CesarBianchi
  * @since October/2018
  */

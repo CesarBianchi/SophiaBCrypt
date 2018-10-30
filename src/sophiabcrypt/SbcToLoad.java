@@ -16,17 +16,17 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 package sophiabcrypt;
+import sophiabcrypt.forms.SbcMainWindow;
 import com.thoughtworks.xstream.XStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import sophiabcrypt.language.SbcDictionaryBase;
 
 /**
  * This Class Load Parameters from parameters file and exec the main program
  * @see SbcMainWindow
- * @see SbcPswWindow
  * @see SbcPswControl
  * @see SbcPlanFile
  * @see SbcEncEngine
@@ -36,6 +36,7 @@ import java.util.ArrayList;
 */
 public class SbcToLoad {
     
+    private String cSentenceFile = new String("LanguageFile.xml");
     private String cParamFileName = new String();
     private String cLanguage = new String();
     
@@ -60,14 +61,18 @@ public class SbcToLoad {
                 BufferedReader input = new BufferedReader(new FileReader(this.GetParamFileName()));
                 
                 XStream xStream = new XStream();
+                
+                Class<?>[] classes = new Class[] {SbcVersion.class};
+                xStream.setupDefaultSecurity(xStream);
+                xStream.allowTypes(classes);
+                
                 xStream.alias("Parameters", SbcVersion.class);
                 SbcVersion SbcV = (SbcVersion) xStream.fromXML(input);
                 input.close();            
                 this.setLanguage(SbcV.getLanguage());
                 lReturn = true;
-
+                break;
             } catch (IOException ex) {
-                System.out.println("Tentativa numero: " + Integer.toString(nTrying) + " falhou. Aguardando ...");
                 Thread.sleep(2000);
             }
         }
@@ -77,14 +82,27 @@ public class SbcToLoad {
     /**
      * This method load main window before load parameter file and set main attributes
      * @author CesarBianchi
+     * @throws java.io.IOException Case not possible read or write language file
+     * @throws java.lang.InterruptedException Case not possible read or write language file
      * @since October/2018
      * @version 1.03.1
     */
-    public void LoadMainWindow(){        
+    public void LoadMainWindow() throws IOException, InterruptedException{        
         SbcMainWindow main = new SbcMainWindow();
         main.setLocationRelativeTo(null);
         main.setResizable(false);
         main.setLanguage(this.getLanguage());
+        
+       File LangFile = new File(this.cSentenceFile);
+        if(LangFile.exists() == false){
+            SbcDictionaryBase NewDictionary = new SbcDictionaryBase();
+            NewDictionary.CreateFileByDefault(cSentenceFile);
+        }else{
+            /*SE JA EXISTE NAO RECRIA, MAS REVALIDA SENTENCA POR SENTENCA*/
+            /*ISTO É PARA PRESERVAR O USER LANGUAGE DEFINE*/
+            /*TODO TODO TODO*/
+        }
+        
         main.show();
     }
 

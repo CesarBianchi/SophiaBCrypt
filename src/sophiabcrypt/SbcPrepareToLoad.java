@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package sophiabcrypt;
+import sophiabcrypt.forms.SbcLanguageWindow;
 import java.io.File;
 import com.thoughtworks.xstream.XStream;
 import java.io.BufferedReader;

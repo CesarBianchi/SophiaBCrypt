@@ -26,7 +26,6 @@ import javax.swing.JOptionPane;
  * 2 - That has at least 1 number
  * 3 - That has at least 1 Special Char
  * 4 - That has at least 8 Chars of length
- * @see SbcMainWindow
  * @author CesarBianchi
  * @since Sep/2018
 */
