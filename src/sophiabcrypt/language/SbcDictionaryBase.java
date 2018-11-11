@@ -41,6 +41,26 @@ public class SbcDictionaryBase {
     private String cLanguageFile = new String();
     private String cLang = new String();
     private String cMasterNode = "Sentence";
+
+    /**
+     * This method is the same that of "Constructor of Class"
+     * @author CesarBianchi
+     * @since Sep/2018
+     */
+    public SbcDictionaryBase() {
+        /*NOTHING*/
+    }
+    
+    /**
+     * This method is the same that of "Constructor of Class"
+     * Sets the Language defined by user in Language attribute
+     * @param cDefinedLang String with language defined by user
+     * @author CesarBianchi
+     * @since Sep/2018
+     */
+    public SbcDictionaryBase(String cDefinedLang) {
+        this.setLanguage(cDefinedLang);
+    }
     
     /**
      * Sets the language file name by default name, load default translations and make a new LanguageFile.xml
@@ -65,27 +85,30 @@ public class SbcDictionaryBase {
     */ 
     private void LoadDefaultBase() {
         /*Language Default Definitions*/
-        this.AddNewSentence("0001","SbcMainWindow"      ,"Arquivo"              ,"File"        ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0002","SbcMainWindow"      ,"Criptografar"         ,"Encrypt"     ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0003","SbcMainWindow"      ,"Descriptografar"      ,"Decrypt"     ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0004","SbcMainWindow"      ,"Sair"                 ,"Exit"        ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0005","SbcMainWindow"      ,"Ajuda"                ,"Help"        ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0006","SbcMainWindow"      ,"Sobre"                ,"About"       ,"ES"           ,"UNKNOW");        
-        this.AddNewSentence("0007","SbcAboutWindow"     ,"Versão"               ,"EN"          ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0008","SbcAboutWindow"     ,"Desenvolvido por:"    ,"EN"          ,"ES"           ,"UNKNOW");        
-        this.AddNewSentence("0009","SbcExitWindow"      ,"Voce deseja sair ?"   ,"EN"          ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0010","SbcExitWindow"      ,"Sim"                  ,"EN"          ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0011","SbcExitWindow"      ,"Não"                  ,"EN"          ,"ES"           ,"UNKNOW");        
-        this.AddNewSentence("0012","SbcLanguageWindow"  ,"Selecione o Idioma"   ,"EN"          ,"ES"           ,"UNKNOW");        
-        this.AddNewSentence("0013","SbcProgressWindow"  ,"Processando Arquivos" ,"EN"          ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0014","SbcProgressWindow"  ,"Aguarde"              ,"EN"          ,"ES"           ,"UNKNOW");        
-        this.AddNewSentence("0015","SbcPswWindow"       ,"Deseja Criptografar o arquivo selecionado ?"                      ,"EN"          ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0016","SbcPswWindow"       ,"ATENÇÃO: Memorize a sua senha para restauração futura."           ,"EN"          ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0017","SbcPswWindow"       ,"Este arquivo só podera ser restaurado utilizando a mesma senha."  ,"EN"          ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0018","SbcPswWindow"       ,"Senha:"               ,"EN"          ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0019","SbcPswWindow"       ,"Confirme a senha:"    ,"EN"          ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0020","SbcPswWindow"       ,"Confirmar"            ,"EN"          ,"ES"           ,"UNKNOW");
-        this.AddNewSentence("0020","SbcPswWindow"       ,"Cancelar"             ,"EN"          ,"ES"           ,"UNKNOW");
+        this.AddNewSentence("0001","SbcMainWindow"      ,"Arquivo"              ,"File"                     ,"Ficheiro"                 ,"UNKNOW");
+        this.AddNewSentence("0002","SbcMainWindow"      ,"Criptografar"         ,"Encrypt"                  ,"Cifrar"                   ,"UNKNOW");
+        this.AddNewSentence("0003","SbcMainWindow"      ,"Descriptografar"      ,"Decrypt"                  ,"Desencriptar"             ,"UNKNOW");
+        this.AddNewSentence("0004","SbcMainWindow"      ,"Sair"                 ,"Exit"                     ,"Salida"                   ,"UNKNOW");
+        this.AddNewSentence("0005","SbcMainWindow"      ,"Ajuda"                ,"Help"                     ,"Ayuda"                    ,"UNKNOW");
+        this.AddNewSentence("0006","SbcMainWindow"      ,"Sobre"                ,"About"                    ,"Acerca"                   ,"UNKNOW");        
+        this.AddNewSentence("0007","SbcAboutWindow"     ,"Versão"               ,"Version"                  ,"Versión"                  ,"UNKNOW");
+        this.AddNewSentence("0008","SbcAboutWindow"     ,"Desenvolvido por:"    ,"Developed by:"            ,"Desarrollado por:"        ,"UNKNOW");        
+        this.AddNewSentence("0009","SbcExitWindow"      ,"Voce deseja sair ?"   ,"You want to leave ?"      ,"Quieres salir ?"          ,"UNKNOW");
+        this.AddNewSentence("0010","SbcExitWindow"      ,"Sim"                  ,"Yes"                      ,"Sí"                       ,"UNKNOW");
+        this.AddNewSentence("0011","SbcExitWindow"      ,"Não"                  ,"No"                       ,"No"                       ,"UNKNOW");        
+        this.AddNewSentence("0012","SbcLanguageWindow"  ,"Selecione o Idioma"   ,"Select language"          ,"Seleccione el idioma"     ,"UNKNOW");        
+        this.AddNewSentence("0013","SbcProgressWindow"  ,"Processando Arquivos" ,"Processing files"         ,"Procesando ficheiros"     ,"UNKNOW");
+        this.AddNewSentence("0014","SbcProgressWindow"  ,"Aguarde"              ,"Wait"                     ,"Espere"                   ,"UNKNOW");
+        this.AddNewSentence("0015","SbcPswWindow"       ,"Deseja Criptografar o arquivo selecionado ?"                      ,"Do you want to Encrypt the selected files ?"                  ,"Desea cifrar los archivos seleccionados ?"                            ,"UNKNOW");
+        this.AddNewSentence("0016","SbcPswWindow"       ,"ATENÇÃO: Memorize a sua senha para restauração futura."           ,"WARNING: Memorize your password for future decrypt."          ,"ADVERTENCIA: Memorice su contraseña para descifrar en el futuro."     ,"UNKNOW");
+        this.AddNewSentence("0017","SbcPswWindow"       ,"Este arquivo só podera ser restaurado utilizando a mesma senha."  ,"This file can only be decrypetd using the same password."     ,"Este archivo solo puede ser descifrado usando la misma contraseña."   ,"UNKNOW");
+        this.AddNewSentence("0018","SbcPswWindow"       ,"Senha:"               ,"Password"                 ,"Contraseña"                ,"UNKNOW");
+        this.AddNewSentence("0019","SbcPswWindow"       ,"Confirme a senha:"    ,"Confirm Password"         ,"Confirmar contraseña"      ,"UNKNOW");
+        this.AddNewSentence("0020","SbcPswWindow"       ,"Confirmar"            ,"Confirm"                  ,"Confirmar"                 ,"UNKNOW");
+        this.AddNewSentence("0021","SbcPswWindow"       ,"Cancelar"             ,"Cancel"                   ,"Cancelar"                  ,"UNKNOW");        
+        this.AddNewSentence("0022","SbcProgressWindow"  ,"Convertendo arquivo " ,"Converting file "         ,"Convertir ficheiro "      ,"UNKNOW");
+        this.AddNewSentence("0023","SbcProgressWindow"  ," de "                 ," of "                     ," de "                     ,"UNKNOW");        
+        this.AddNewSentence("0024","SbcPswWindow"       ,"Deseja descriptografar o arquivo selecionado ?"   ,"Do you want to decrypt the selected file ?"                     ,"Desea descifrar el archivo seleccionado "                           ,"UNKNOW");
         
         
         //this.AddNewSentence("cID","className","PT","EN","ES","UD");
@@ -216,17 +239,15 @@ public class SbcDictionaryBase {
                 if (Sentence.getSentenceID().equals(cID)){
                     String cLg = this.getLanguage();
                     
-                    switch (cLg) {
-                        case "UD":
-                            cReturn = Sentence.getTranslationUserDefined();
-                        case "EN":
-                            cReturn = Sentence.getTranslationEnglish();
-                        case "ES":
-                            cReturn = Sentence.getTranslationSpanish();
-                        default:
-                            cReturn = Sentence.getTranslationPortuguese();
-                    }
-                    break;
+                    if (cLg.equals("UD"))
+                        cReturn = Sentence.getTranslationUserDefined();
+                    else if (cLg.equals("EN"))
+                        cReturn = Sentence.getTranslationEnglish();
+                    else if (cLg.equals("ES"))
+                        cReturn = Sentence.getTranslationSpanish();
+                    else 
+                        cReturn = Sentence.getTranslationPortuguese();
+                    break;    
                 }
             }
         }
@@ -235,6 +256,19 @@ public class SbcDictionaryBase {
             cReturn = cDefaultContent;
         }
 
+        return cReturn;
+    }
+    
+      /**
+     * Get a Translate from SentenceID, by according language defined by user
+     * @author CesarBianchi
+     * @param cID The identifier of sentence searching
+     * @return The translation of SentenceID
+     * @since October/2018
+     * @version 1.03.1
+    */ 
+    public String getTranslation(String cID){
+        String cReturn = this.getTranslation(cID,"");
         return cReturn;
     }
     
@@ -267,7 +301,7 @@ public class SbcDictionaryBase {
      * @since October/2018
      * @version 1.03.1
     */ 
-    private Object getSentenceList() {
+    public Object getSentenceList() {
         return this.AllSentences;
     }
 
@@ -278,7 +312,7 @@ public class SbcDictionaryBase {
      * @since October/2018
      * @version 1.03.1
     */
-    private void setSentenceList(ArrayList<SbcDictionarySentence> SentecesLoaded) {
+    public void setSentenceList(ArrayList<SbcDictionarySentence> SentecesLoaded) {
         this.AllSentences = SentecesLoaded;
     }
 
@@ -289,7 +323,7 @@ public class SbcDictionaryBase {
      * @since October/2018
      * @version 1.03.1
     */ 
-    private void setLanguage(String cLg) {
+    public void setLanguage(String cLg) {
         this.cLang = cLg;
     }
     
@@ -300,7 +334,7 @@ public class SbcDictionaryBase {
      * @since October/2018
      * @version 1.03.1
     */ 
-    private String getLanguage(){
+    public String getLanguage(){
         return this.cLang;
     }
     

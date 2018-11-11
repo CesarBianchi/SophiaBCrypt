@@ -17,9 +17,11 @@
  */
 
 package sophiabcrypt.forms;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import sophiabcrypt.SbcVersion;
+import sophiabcrypt.language.SbcDictionaryBase;
+import sophiabcrypt.language.SbcDictionarySentence;
 
 /**
  * This class is used to show a "About Program Window"
@@ -30,6 +32,9 @@ import sophiabcrypt.SbcVersion;
  */
 public class SbcAboutWindow extends javax.swing.JFrame {
 
+    private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
+    private String cLanguage = new String();
+            
     /**
      * Creates new form SbcAboutWindow
      * @author CesarBianchi
@@ -39,7 +44,18 @@ public class SbcAboutWindow extends javax.swing.JFrame {
     public SbcAboutWindow() {
         initComponents();
     }
-
+    
+    /**
+     * This methods sets the language defined by user for use in translations
+     * @author CesarBianchi
+     * @param cLG The language defined by user
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public void setLanguage(String cLG){
+        this.cLanguage = cLG;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -220,10 +236,38 @@ public class SbcAboutWindow extends javax.swing.JFrame {
         //Define a versao na Dialog a partir da classe que controla a versao
         SbcVersion sbcVer = new SbcVersion();        
         this.jLabel7.setText(sbcVer.getVersion().concat(" - ").concat(sbcVer.getBuildDate()));
-            
+        
+        this.setTranslates();
+        
         this.show();
     }
-        
+    
+    /**
+     * This method sets all words to language defined by user
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     */
+    private void setTranslates() {
+        SbcDictionaryBase DictionaryBase = new SbcDictionaryBase(this.cLanguage);
+        DictionaryBase.setSentenceList(this.SentencesInMemory);
+        this.jLabel6.setText(DictionaryBase.getTranslation("0007"));
+        this.jLabel2.setText(DictionaryBase.getTranslation("0008"));
+    }
+    
+    /**
+     * Set Sentences in Memory before load xml language file
+     * @author CesarBianchi
+     * @since October/2018
+     * @param cLang String with language defined by user
+     * @param Sentences ArrayOfList with all sentences loaded from xml language file
+     * @version 1.03.1
+     */
+    public void SetSentences(String cLang,ArrayList<SbcDictionarySentence> Sentences) {
+        this.setLanguage(cLang);
+        this.SentencesInMemory = Sentences;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -235,4 +279,5 @@ public class SbcAboutWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+    
 }

@@ -20,6 +20,9 @@ package sophiabcrypt.forms;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
+import java.util.ArrayList;
+import sophiabcrypt.language.SbcDictionaryBase;
+import sophiabcrypt.language.SbcDictionarySentence;
 
 /**
  * This class is a main GUI for SophiaBCrypt
@@ -30,9 +33,9 @@ import java.net.URL;
  */
 public class SbcMainWindow extends javax.swing.JFrame {
     private String cLanguage = new String();
+    private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
     
     /**
-     * 
      * This method create a new Main Window
      * @author CesarBianchi
      * @since Aug/2018
@@ -42,6 +45,17 @@ public class SbcMainWindow extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * This methods show de window interface with all sentences translated
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public void init(){
+        this.setTranslates();
+        this.show();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -207,7 +221,8 @@ public class SbcMainWindow extends javax.swing.JFrame {
             exitDiag.setLocationRelativeTo(null);
             exitDiag.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             exitDiag.setResizable(false);
-            exitDiag.show();
+            exitDiag.setSentences(this.getLanguage(),this.SentencesInMemory);
+            exitDiag.init();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
@@ -217,7 +232,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
      * @since Aug/2018
     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        pressCrypt();
+        this.pressCrypt();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -227,7 +242,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
      * @since Aug/2018
     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        pressDecrypt();
+        this.pressDecrypt();
     }//GEN-LAST:event_jButton2ActionPerformed
    
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
@@ -242,7 +257,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
      * @since Aug/2018
     */
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        pressCrypt();
+        this.pressCrypt();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
@@ -253,7 +268,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
      * @since Aug/2018
     */
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        pressDecrypt();
+        this.pressDecrypt();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
@@ -264,6 +279,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
     */
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         SbcAboutWindow SbcAbout = new SbcAboutWindow();
+        SbcAbout.SetSentences(this.getLanguage(),this.SentencesInMemory);
         SbcAbout.init();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
@@ -320,10 +336,11 @@ public class SbcMainWindow extends javax.swing.JFrame {
         pswDiag.setLocationRelativeTo(null);
         pswDiag.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         pswDiag.setResizable(false);
+        pswDiag.setSentences(this.getLanguage(),this.SentencesInMemory);
         pswDiag.setOper(cOper);
         pswDiag.setPath(cPath);
         pswDiag.setFileTreeObj(jFileChooser1);
-        pswDiag.show();
+        pswDiag.init();
     }
     
     /**
@@ -343,14 +360,14 @@ public class SbcMainWindow extends javax.swing.JFrame {
         pswDiag.setLocationRelativeTo(null);
         pswDiag.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         pswDiag.setResizable(false);
+        pswDiag.setSentences(this.getLanguage(),this.SentencesInMemory);
         pswDiag.setOper(cOper);
         pswDiag.setPath(cPath);
-        pswDiag.setFileTreeObj(jFileChooser1);
-        pswDiag.show(); 
+        pswDiag.setFileTreeObj(jFileChooser1);        
+        pswDiag.init(); 
     }
 
     /**
-     * 
      * Set the main application icon
      * @author CesarBianchi
      * @since Aug/2018
@@ -361,12 +378,58 @@ public class SbcMainWindow extends javax.swing.JFrame {
         //this.setIconImage(imagemTitulo);
     }
     
-    public void setLanguage(String br) {
+    /**
+     * This methods sets the language defined by user for use in translations
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     */
+    private void setLanguage(String br) {
         this.cLanguage = br;
     }
     
+    /**
+     * This methods get the language defined by user
+     * @author CesarBianchi
+     * @since October/2018
+     * @return cLanguage The language defined by user
+     * @version 1.03.1
+    */
     private String getLanguage() {
         return this.cLanguage;
+    }
+    
+    /**
+     * Set Sentences in Memory before load xml language file
+     * @author CesarBianchi
+     * @since October/2018
+     * @param cLang String with language defined by user
+     * @param Sentences ArrayOfList with all sentences loaded from xml language file
+     * @version 1.03.1
+     */
+    public void setSentences(String cLang,ArrayList<SbcDictionarySentence> Sentences) {
+        this.setLanguage(cLang);
+        this.SentencesInMemory = Sentences;
+    }
+    
+    /**
+     * This method sets all words to language defined by user
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     */
+    private void setTranslates() {
+        SbcDictionaryBase Dictionary = new SbcDictionaryBase(this.getLanguage());
+        Dictionary.setSentenceList(this.SentencesInMemory);
+        
+        jMenu1.setText(Dictionary.getTranslation("0001"));
+        jMenuItem2.setText(Dictionary.getTranslation("0002"));
+        jMenuItem3.setText(Dictionary.getTranslation("0003"));
+        jMenuItem4.setText(Dictionary.getTranslation("0004"));                
+        jMenu2.setText(Dictionary.getTranslation("0005"));
+        jMenuItem1.setText(Dictionary.getTranslation("0006"));        
+        jButton1.setText(Dictionary.getTranslation("0002"));
+        jButton2.setText(Dictionary.getTranslation("0003"));                
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -384,4 +447,6 @@ public class SbcMainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
+
+    
 }

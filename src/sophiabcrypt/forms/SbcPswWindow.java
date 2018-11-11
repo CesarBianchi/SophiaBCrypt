@@ -17,11 +17,14 @@
  */
 
 package sophiabcrypt.forms;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import sophiabcrypt.SbcPlanFile;
 import sophiabcrypt.SbcPswControl;
+import sophiabcrypt.language.SbcDictionaryBase;
+import sophiabcrypt.language.SbcDictionarySentence;
 
 /**
  * This class create a new "Input Your Password Window" and start process of encrypt or decrypt
@@ -36,6 +39,9 @@ public class SbcPswWindow extends javax.swing.JFrame {
     private String cOper = new String();
     private String cPath = new String();
     JFileChooser jFile = null;
+    private String cLanguage = new String();
+    private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
+   
     
     /**
      * Creates new form SbcPswWindow
@@ -64,8 +70,8 @@ public class SbcPswWindow extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JPasswordField();
+        jTextField2 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -182,7 +188,7 @@ public class SbcPswWindow extends javax.swing.JFrame {
         if (SbcPsw.IsValidPsw() == true){
             setPwsIsOk(true,cPsw1);
             try {
-                ProcessFile(getPath());
+                this.ProcessFile(getPath());
             } catch (Exception ex) {
                 Logger.getLogger(SbcPswWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -240,8 +246,11 @@ public class SbcPswWindow extends javax.swing.JFrame {
      * @since Sep/2018
     */
     public void setLabels(String cOper){
+        SbcDictionaryBase Dictionary = new SbcDictionaryBase(this.getLanguage());
+        Dictionary.setSentenceList(this.getSentences());
+        
         if (cOper == "DEC"){
-            jLabel1.setText("Deseja descriptografar o arquivo selecionado ?");
+            jLabel1.setText(Dictionary.getTranslation("0024"));
             jLabel2.enable(false);
             jLabel2.setVisible(false);
             jLabel3.enable(false);
@@ -351,12 +360,81 @@ public class SbcPswWindow extends javax.swing.JFrame {
         SbcProgress.setFiles(aFiles);
         SbcProgress.setPsw(getPsw());
         SbcProgress.setFileTreeObj(jFile);
+        SbcProgress.setSentences(this.getLanguage(),this.getSentences());
         SbcProgress.init(PlanFile.getQtdFiles());
         //jFile.updateUI();
     }
     
     public void setFileTreeObj(JFileChooser jF){
         jFile = jF;
+    }
+    
+    /**
+     * This method is the same that of "Constructor of Class"
+     * It's used for define some grafical properties and show form
+     * @author CesarBianchi
+     * @version 1.03.1
+     */
+    public void init() {
+        this.SetTranslates();
+        this.show();
+    }
+
+    /**
+     * Set Sentences in Memory before load xml language file
+     * @author CesarBianchi
+     * @since October/2018
+     * @param cLang String with language defined by user
+     * @param Sentences ArrayOfList with all sentences loaded from xml language file
+     * @version 1.03.1
+     */
+    public void setSentences(String cLang, ArrayList<SbcDictionarySentence> Sentences) {
+        this.cLanguage = cLang;
+        this.SentencesInMemory = Sentences;
+    }
+    
+    /**
+     * This methods get the language defined by user
+     * @author CesarBianchi
+     * @since October/2018
+     * @return cLanguage The language defined by user
+     * @version 1.03.1
+    */
+    private String getLanguage(){
+        return this.cLanguage;
+    }
+    
+    /**
+     * Get List of Sentences in Memory
+     * @author CesarBianchi
+     * @since October/2018
+     * @return ArrayOfList with all sentences stored in memory
+     * @version 1.03.1
+     */
+    private ArrayList getSentences(){
+        return this.SentencesInMemory;
+    }
+
+    /**
+     * This method sets all words to language defined by user
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     */
+    private void SetTranslates() {
+        SbcDictionaryBase Dictionary = new SbcDictionaryBase(this.getLanguage());
+        Dictionary.setSentenceList(this.getSentences());
+        
+        if (this.getOper().equals("ENC"))
+            this.jLabel1.setText(Dictionary.getTranslation("0015"));
+        else
+            this.jLabel1.setText(Dictionary.getTranslation("0024"));
+        this.jLabel2.setText(Dictionary.getTranslation("0016"));
+        this.jLabel3.setText(Dictionary.getTranslation("0017"));
+        this.jLabel4.setText(Dictionary.getTranslation("0018"));
+        this.jLabel5.setText(Dictionary.getTranslation("0019"));
+        this.jButton1.setText(Dictionary.getTranslation("0020"));
+        this.jButton2.setText(Dictionary.getTranslation("0021"));
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -371,4 +449,5 @@ public class SbcPswWindow extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
+
 }

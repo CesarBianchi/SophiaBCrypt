@@ -22,7 +22,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import sophiabcrypt.language.SbcDictionaryBase;
+import sophiabcrypt.language.SbcDictionarySentence;
 
 /**
  * This Class Load Parameters from parameters file and exec the main program
@@ -39,6 +41,7 @@ public class SbcToLoad {
     private String cSentenceFile = new String("LanguageFile.xml");
     private String cParamFileName = new String();
     private String cLanguage = new String();
+    private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
     
     /**
      * This method load all parameters by file
@@ -88,22 +91,24 @@ public class SbcToLoad {
      * @version 1.03.1
     */
     public void LoadMainWindow() throws IOException, InterruptedException{        
-        SbcMainWindow main = new SbcMainWindow();
-        main.setLocationRelativeTo(null);
-        main.setResizable(false);
-        main.setLanguage(this.getLanguage());
         
        File LangFile = new File(this.cSentenceFile);
-        if(LangFile.exists() == false){
-            SbcDictionaryBase NewDictionary = new SbcDictionaryBase();
-            NewDictionary.CreateFileByDefault(cSentenceFile);
-        }else{
-            /*SE JA EXISTE NAO RECRIA, MAS REVALIDA SENTENCA POR SENTENCA*/
-            /*ISTO É PARA PRESERVAR O USER LANGUAGE DEFINE*/
-            /*TODO TODO TODO*/
-        }
-        
-        main.show();
+       SbcDictionaryBase NewDictionary = new SbcDictionaryBase();
+       
+       if(LangFile.exists() == false){
+           NewDictionary.CreateFileByDefault(cSentenceFile);
+       }else{
+           /*FAZER "bate do arquivo"*/
+           NewDictionary.LoadLanguage(this.cSentenceFile, this.getLanguage());
+       }
+       SentencesInMemory = (ArrayList<SbcDictionarySentence>) NewDictionary.getSentenceList();
+       
+       //Show Main Dialog
+       SbcMainWindow main = new SbcMainWindow();
+       main.setLocationRelativeTo(null);
+       main.setResizable(false);
+       main.setSentences(this.getLanguage(),SentencesInMemory);
+       main.init();
     }
 
     /**

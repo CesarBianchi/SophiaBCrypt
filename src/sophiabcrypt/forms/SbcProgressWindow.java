@@ -17,10 +17,13 @@
  */
 
 package sophiabcrypt.forms;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import sophiabcrypt.SbcEncEngine;
+import sophiabcrypt.language.SbcDictionaryBase;
+import sophiabcrypt.language.SbcDictionarySentence;
 
 /**
  * This class create a new "Process Window with progress bar and labels"
@@ -36,6 +39,9 @@ public class SbcProgressWindow extends javax.swing.JFrame {
     private String cOper  = new String();    
     private String cPsw = new String();
     private JFileChooser jFile = null;
+    
+    private String cLanguage = new String();
+    private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
     
     
     /**
@@ -193,7 +199,9 @@ public class SbcProgressWindow extends javax.swing.JFrame {
         this.setProgressBarLength(Max);
         this.setAlwaysOnTop(true);
         this.setAutoRequestFocus(true);
-        this.setVisible(true);
+        this.setTranslates();
+        this.setVisible(true);        
+        
     }
     
     /**
@@ -320,7 +328,8 @@ public class SbcProgressWindow extends javax.swing.JFrame {
      * @since Sep/2018
     */
     public void transferFiles() throws Exception{
-        
+        SbcDictionaryBase Dictionary = new SbcDictionaryBase(this.getLanguage());
+        Dictionary.setSentenceList(this.getSentences());
         String cOp = getOper();
         String[] aFl = getFiles();
         String cPassword = getPsw();
@@ -338,7 +347,7 @@ public class SbcProgressWindow extends javax.swing.JFrame {
         //Converte os arquivos
         for (int nI = 1; nI <= getQtdFiles();nI++){
             //Atualiza o rotulo
-            String cMsg1 =  "Convertendo arquivo " + Integer.toString(nI) + " de " + Integer.toString(getQtdFiles());
+            String cMsg1 =  Dictionary.getTranslation("0022") + Integer.toString(nI) + Dictionary.getTranslation("0023") + Integer.toString(getQtdFiles());
             String cMsg2 =  aFl[nI];
             incProc(cMsg1,cMsg2,nI);
  
@@ -364,6 +373,56 @@ public class SbcProgressWindow extends javax.swing.JFrame {
     public void setFileTreeObj(JFileChooser jF){
         jFile = jF;
     }
+    
+    /**
+     * Set Sentences in Memory before load xml language file
+     * @author CesarBianchi
+     * @since October/2018
+     * @param cLang String with language defined by user
+     * @param Sentences ArrayOfList with all sentences loaded from xml language file
+     * @version 1.03.1
+     */
+    public void setSentences(String cLang, ArrayList<SbcDictionarySentence> Sentences) {
+        this.cLanguage = cLang;
+        this.SentencesInMemory = Sentences;
+    }
+    
+    /**
+     * This method sets all words to language defined by user
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     */
+    private void setTranslates() {
+        SbcDictionaryBase Dictionary = new SbcDictionaryBase(this.getLanguage());
+        Dictionary.setSentenceList(this.getSentences());
+        
+        this.jLabel1.setText(Dictionary.getTranslation("0013"));
+        this.jLabel2.setText(Dictionary.getTranslation("0014"));
+    }
+    
+    /**
+     * This methods get the language defined by user
+     * @author CesarBianchi
+     * @since October/2018
+     * @return cLanguage The language defined by user
+     * @version 1.03.1
+    */
+    private String getLanguage(){
+        return this.cLanguage;
+    }
+    
+    /**
+     * Get List of Sentences in Memory
+     * @author CesarBianchi
+     * @since October/2018
+     * @return ArrayOfList with all sentences stored in memory
+     * @version 1.03.1
+     */
+    private ArrayList getSentences(){
+        return this.SentencesInMemory;
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

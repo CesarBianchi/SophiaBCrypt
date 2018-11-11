@@ -18,6 +18,10 @@
 
 package sophiabcrypt.forms;
 
+import java.util.ArrayList;
+import sophiabcrypt.language.SbcDictionaryBase;
+import sophiabcrypt.language.SbcDictionarySentence;
+
 /**
  * This class is used to show a new form "Do you really want quit of program"
  * @author CesarBianchi
@@ -26,6 +30,10 @@ package sophiabcrypt.forms;
  */
 public class SbcExitWindow extends javax.swing.JFrame {
 
+    private String cLanguage = new String();
+    private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
+    
+    
     /**
      * Creates new form ExitConfirm
      * @author CesarBianchi
@@ -52,7 +60,6 @@ public class SbcExitWindow extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setTitle("Deseja Sair ?");
         setLocationByPlatform(true);
         setResizable(false);
 
@@ -124,6 +131,67 @@ public class SbcExitWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
+     * Set Sentences in Memory before load xml language file
+     * @author CesarBianchi
+     * @since October/2018
+     * @param cLang String with language defined by user
+     * @param Sentences ArrayOfList with all sentences loaded from xml language file
+     * @version 1.03.1
+     */
+    public void setSentences(String cLang, ArrayList<SbcDictionarySentence> Sentences) {
+        this.cLanguage = cLang;
+        this.SentencesInMemory = Sentences;
+    }
+    
+    /**
+     * This methods show de window interface with all sentences translated
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public void init() {
+        this.setTranslates();
+        this.show();
+    }
+    
+    /**
+     * This method sets all words to language defined by user
+     * @author CesarBianchi
+     * @since October/2018
+     * @version 1.03.1
+     */
+    private void setTranslates() {
+        SbcDictionaryBase Dictionary = new SbcDictionaryBase(this.getLanguage());
+        Dictionary.setSentenceList(this.getSentences());
+        
+        this.jButton1.setText(Dictionary.getTranslation("0011"));
+        this.jButton2.setText(Dictionary.getTranslation("0010"));
+        this.jLabel1.setText(Dictionary.getTranslation("0009"));
+    }
+    
+    /**
+     * This methods get the language defined by user
+     * @author CesarBianchi
+     * @since October/2018
+     * @return cLanguage The language defined by user
+     * @version 1.03.1
+    */
+    private String getLanguage(){
+        return this.cLanguage;
+    }
+    
+    /**
+     * Get List of Sentences in Memory
+     * @author CesarBianchi
+     * @since October/2018
+     * @return ArrayOfList with all sentences stored in memory
+     * @version 1.03.1
+     */
+    private ArrayList getSentences(){
+        return this.SentencesInMemory;
+    }
+    
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -165,4 +233,5 @@ public class SbcExitWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
 }

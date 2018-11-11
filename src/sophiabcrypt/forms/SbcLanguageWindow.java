@@ -215,7 +215,6 @@ public class SbcLanguageWindow extends javax.swing.JFrame {
         bw.write(cXMLParams);
         bw.close();
         fw.close();       
-        System.out.println("Fechei o arquivo");
         lreturn = true;
         
         return lreturn;
