@@ -19,6 +19,7 @@ package sophiabcrypt;
 import sophiabcrypt.forms.SbcLanguageWindow;
 import java.io.File;
 import com.thoughtworks.xstream.XStream;
+import java.awt.Cursor;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -118,6 +119,7 @@ public class SbcPrepareToLoad {
     */
     private void ShowLanguageWindow() {
         SbcLanguageWindow SbcLangWin = new SbcLanguageWindow();
+        SbcLangWin.fromLoad(true);
         SbcLangWin.setParamFileName(this.getParameterFileName());
         SbcLangWin.LoadLanguageWindow();
     }
