@@ -123,7 +123,7 @@ public class SbcDictionaryBase {
         this.AddNewSentence("0033","SbcSentencesWindow" ,"Arquivo Atualizado"   ,"File Updated"             ,"Ficheiro actualizado"      ,"UNKNOW");
         this.AddNewSentence("0034","SbcSentencesWindow" ,"O arquivo de idiomas foi atualizado com sucesso." ,"The language file has been successfully updated."            ,"El archivo de idioma se ha actualizado correctamente."    ,"UNKNOW");    
         this.AddNewSentence("0035","SbcSentencesWindow" ,"É recomendável que você reinice a aplicação agora." ,"We recommend that you restart the app now."                ,"Es recomendable que reinice la aplicación ahora."         ,"UNKNOW");    
-        
+        this.AddNewSentence("0036","SbcSentencesWindow" ,"Idioma definido com sucesso"                      ,"Language successfully defined"                               ,"Idioma definido con éxito"                                ,"UNKNOW");
 
         //this.AddNewSentence("cID","className","PT","EN","ES","UD");
     }
@@ -166,6 +166,8 @@ public class SbcDictionaryBase {
     /**
      * Create a new LanguageFile.xml from Sentence Object List
      * @author CesarBianchi
+     * @throws java.io.IOException Case fail during manage language file
+     * @throws java.lang.InterruptedException Case fail during manage language file
      * @since October/2018
      * @version 1.03.1
     */ 
@@ -355,6 +357,7 @@ public class SbcDictionaryBase {
     /**
      * Update Sentences in LanguageFile.xml
      * This method is used for incremente languagefile.xml of older versions with new sentences
+     * @param cLangFile String with name of language xml file
      * @author CesarBianchi
      * @since November/2018
      * @version 1.03.2
@@ -427,6 +430,7 @@ public class SbcDictionaryBase {
     /**
      * This method exclude LanguageFile.xml WARNING: Can be used only in update Process
      * @author CesarBianchi
+     * @return true case sucessfully exclude
      * @since November/2018
      * @version 1.03.2
     */ 

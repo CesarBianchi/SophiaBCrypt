@@ -113,8 +113,7 @@ public class SbcSentencesWindow extends javax.swing.JFrame {
     }
     
     private void setNewSentences() {
-        
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));   
 
         //Carrega mensagem de confirmacao ao usuario
         SbcDictionaryBase SbcDic = new SbcDictionaryBase();
@@ -146,10 +145,10 @@ public class SbcSentencesWindow extends javax.swing.JFrame {
         NewDic.setSentenceList(NewSentecesList);
         try {
             NewDic.MakeLanguageFile();
+            this.setCursor(Cursor.getDefaultCursor());
             JOptionPane.showMessageDialog(rootPane,cMsg, cTitle, JOptionPane.WARNING_MESSAGE, null);
             
             this.dispose();
-            this.setCursor(Cursor.getDefaultCursor());
             
             SbcExitWindow exitDiag = new SbcExitWindow();
             exitDiag.setLocationRelativeTo(null);

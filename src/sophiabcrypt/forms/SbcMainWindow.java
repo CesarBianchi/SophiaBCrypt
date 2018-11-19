@@ -34,6 +34,7 @@ import sophiabcrypt.language.SbcDictionarySentence;
 public class SbcMainWindow extends javax.swing.JFrame {
     private String cLanguage = new String();
     private String cLangFileName = new String();
+    private String cParamFileName = new String();
     private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
     
     /**
@@ -59,6 +60,10 @@ public class SbcMainWindow extends javax.swing.JFrame {
     
     public void setLanguageFileName(String cSentenceFile) {
         this.cLangFileName = cSentenceFile;
+    }
+    
+    public void setParamFileName(String cParamFile) {
+        this.cParamFileName = cParamFile;
     }
     
     /**
@@ -316,7 +321,11 @@ public class SbcMainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        
+        SbcLanguageWindow SbcLangWin = new SbcLanguageWindow();
+        SbcLangWin.fromLoad(false);
+        SbcLangWin.setSentences(this.SentencesInMemory);
+        SbcLangWin.setParamFileName(this.cParamFileName);
+        SbcLangWin.LoadLanguageWindow();        
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed

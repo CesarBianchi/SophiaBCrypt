@@ -119,6 +119,7 @@ public class SbcPrepareToLoad {
     */
     private void ShowLanguageWindow() {
         SbcLanguageWindow SbcLangWin = new SbcLanguageWindow();
+        SbcLangWin.fromLoad(true);
         SbcLangWin.setParamFileName(this.getParameterFileName());
         SbcLangWin.LoadLanguageWindow();
     }
