@@ -20,11 +20,14 @@ package sophiabcrypt.language;
 import com.thoughtworks.xstream.XStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -83,7 +86,7 @@ public class SbcDictionaryBase {
      * @since October/2018
      * @version 1.03.1
     */ 
-    private void LoadDefaultBase() {
+    public void LoadDefaultBase() {
         /*Language Default Definitions*/
         this.AddNewSentence("0001","SbcMainWindow"      ,"Arquivo"              ,"File"                     ,"Ficheiro"                 ,"UNKNOW");
         this.AddNewSentence("0002","SbcMainWindow"      ,"Criptografar"         ,"Encrypt"                  ,"Cifrar"                   ,"UNKNOW");
@@ -106,11 +109,22 @@ public class SbcDictionaryBase {
         this.AddNewSentence("0019","SbcPswWindow"       ,"Confirme a senha:"    ,"Confirm Password"         ,"Confirmar contraseña"      ,"UNKNOW");
         this.AddNewSentence("0020","SbcPswWindow"       ,"Confirmar"            ,"Confirm"                  ,"Confirmar"                 ,"UNKNOW");
         this.AddNewSentence("0021","SbcPswWindow"       ,"Cancelar"             ,"Cancel"                   ,"Cancelar"                  ,"UNKNOW");        
-        this.AddNewSentence("0022","SbcProgressWindow"  ,"Convertendo arquivo " ,"Converting file "         ,"Convertir ficheiro "      ,"UNKNOW");
-        this.AddNewSentence("0023","SbcProgressWindow"  ," de "                 ," of "                     ," de "                     ,"UNKNOW");        
-        this.AddNewSentence("0024","SbcPswWindow"       ,"Deseja descriptografar o arquivo selecionado ?"   ,"Do you want to decrypt the selected file ?"                     ,"Desea descifrar el archivo seleccionado "                           ,"UNKNOW");
-        
-        
+        this.AddNewSentence("0022","SbcProgressWindow"  ,"Convertendo arquivo " ,"Converting file "         ,"Convertir ficheiro "       ,"UNKNOW");
+        this.AddNewSentence("0023","SbcProgressWindow"  ," de "                 ," of "                     ," de "                      ,"UNKNOW");        
+        this.AddNewSentence("0024","SbcPswWindow"       ,"Deseja descriptografar o arquivo selecionado ?"   ,"Do you want to decrypt the selected file ?"                     ,"Desea descifrar el archivo seleccionado "                           ,"UNKNOW");        
+        this.AddNewSentence("0025","SbcMainWindow"      ,"Opções"               ,"Options"                  ,"Opciones"                  ,"UNKNOW");
+        this.AddNewSentence("0026","SbcMainWindow"      ,"Selecionar Idioma"    ,"Select Language"          ,"Seleccionar Idioma"                    ,"UNKNOW");
+        this.AddNewSentence("0027","SbcMainWindow"      ,"Construir Tradução"   ,"Make Translation"         ,"Construir Traducción"      ,"UNKNOW");
+        this.AddNewSentence("0028","SbcSentencesWindow" ,"Código"               ,"ID "                      ,"ID"                        ,"UNKNOW");        
+        this.AddNewSentence("0029","SbcSentencesWindow" ,"Português"            ,"Portuguese"               ,"Portugués"                 ,"UNKNOW");        
+        this.AddNewSentence("0030","SbcSentencesWindow" ,"Inglês"               ,"English"                  ,"Inglés"                    ,"UNKNOW");
+        this.AddNewSentence("0031","SbcSentencesWindow" ,"Espanhol"             ,"Spanish"                  ,"Español"                   ,"UNKNOW");
+        this.AddNewSentence("0032","SbcSentencesWindow" ,"Definido Pelo Usuário","User Defined"             ,"Definido por el usuario"   ,"UNKNOW");        
+        this.AddNewSentence("0033","SbcSentencesWindow" ,"Arquivo Atualizado"   ,"File Updated"             ,"Ficheiro actualizado"      ,"UNKNOW");
+        this.AddNewSentence("0034","SbcSentencesWindow" ,"O arquivo de idiomas foi atualizado com sucesso." ,"The language file has been successfully updated."            ,"El archivo de idioma se ha actualizado correctamente."    ,"UNKNOW");    
+        this.AddNewSentence("0035","SbcSentencesWindow" ,"É recomendável que você reinice a aplicação agora." ,"We recommend that you restart the app now."                ,"Es recomendable que reinice la aplicación ahora."         ,"UNKNOW");    
+        this.AddNewSentence("0036","SbcSentencesWindow" ,"Idioma definido com sucesso"                      ,"Language successfully defined"                               ,"Idioma definido con éxito"                                ,"UNKNOW");
+
         //this.AddNewSentence("cID","className","PT","EN","ES","UD");
     }
     
@@ -152,10 +166,12 @@ public class SbcDictionaryBase {
     /**
      * Create a new LanguageFile.xml from Sentence Object List
      * @author CesarBianchi
+     * @throws java.io.IOException Case fail during manage language file
+     * @throws java.lang.InterruptedException Case fail during manage language file
      * @since October/2018
      * @version 1.03.1
     */ 
-    private void MakeLanguageFile() throws IOException, InterruptedException{
+    public void MakeLanguageFile() throws IOException, InterruptedException{
         XStream xstream = new XStream();
         
         Class<?>[] classes = new Class[] { SbcDictionarySentence.class };
@@ -336,6 +352,107 @@ public class SbcDictionaryBase {
     */ 
     public String getLanguage(){
         return this.cLang;
+    }
+
+    /**
+     * Update Sentences in LanguageFile.xml
+     * This method is used for incremente languagefile.xml of older versions with new sentences
+     * @param cLangFile String with name of language xml file
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.2
+    */ 
+    public void UpdateSentences(String cLangFile) {
+        boolean hasDiff = false;
+        boolean located = false;
+        
+        
+        //Load Sentences from file
+        SbcDictionaryBase BaseFromFile = new SbcDictionaryBase();
+        BaseFromFile.setLanguageFileName(cLangFile);
+        try {
+            BaseFromFile.LoadLanguageSentences();
+            
+            //Load Sentences from code
+            SbcDictionaryBase BaseFromCode = new SbcDictionaryBase();
+            BaseFromCode.setLanguageFileName(cLangFile);
+            BaseFromCode.LoadDefaultBase();
+            
+            
+            //Compare one to one
+            ArrayList<SbcDictionarySentence> ListFromFile = (ArrayList<SbcDictionarySentence>) BaseFromFile.getSentenceList();
+            ArrayList<SbcDictionarySentence> ListFromCode = (ArrayList<SbcDictionarySentence>) BaseFromCode.getSentenceList();
+            SbcDictionarySentence SentenceFromFile = new SbcDictionarySentence();
+            SbcDictionarySentence SentenceFromCode = new SbcDictionarySentence();
+            String cIdFromFile = new String();
+            String cIdFromCode = new String();
+
+            for (int nI = 0;nI<=ListFromCode.size()-1;nI++){
+                SentenceFromCode = ListFromCode.get(nI);
+                cIdFromCode = SentenceFromCode.getSentenceID();
+
+                located=false;
+                hasDiff=false;
+                
+                for (int nJ = 0;nJ<=ListFromFile.size()-1;nJ++){
+                    SentenceFromFile = ListFromFile.get(nJ);
+                    cIdFromFile = SentenceFromFile.getSentenceID();
+
+                    if (cIdFromCode.equals(cIdFromFile)){
+                        located = true;
+                        if (!(SentenceFromFile.getTranslationUserDefined().equals("UNKNOW"))){
+                            SentenceFromCode.setTranslationUserDefined(SentenceFromFile.getTranslationUserDefined());
+                            ListFromCode.set(nI,SentenceFromCode);
+                            hasDiff = true;
+                        }
+                        break;
+                    }
+                }
+            }
+            
+            //Se tem diferenca, exclui o arquivo e recria
+            if (!located){
+                BaseFromCode.EraseFile();
+                BaseFromCode.setSentenceList(ListFromCode);
+                BaseFromCode.MakeLanguageFile();
+                System.out.println("The LanguageFile.xml for SophiaBCrypt is updated !!!");
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(SbcDictionaryBase.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SbcDictionaryBase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+
+    /**
+     * This method exclude LanguageFile.xml WARNING: Can be used only in update Process
+     * @author CesarBianchi
+     * @return true case sucessfully exclude
+     * @since November/2018
+     * @version 1.03.2
+    */ 
+    public boolean EraseFile() {
+        int nI = 1;
+        int nTry = 5;
+        int nDelay = 500;
+        boolean excluiu = false;
+        
+        File cF = new File(this.cLanguageFile);
+
+        for (nI = 1; nI <= nTry; nI++) {
+            excluiu = cF.delete();
+            if (excluiu == false){
+                try {
+                    Thread.sleep(nDelay);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(SbcDictionaryBase.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return excluiu;
     }
     
 }

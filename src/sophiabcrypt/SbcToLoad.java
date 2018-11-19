@@ -98,7 +98,7 @@ public class SbcToLoad {
        if(LangFile.exists() == false){
            NewDictionary.CreateFileByDefault(cSentenceFile);
        }else{
-           /*FAZER "bate do arquivo"*/
+           NewDictionary.UpdateSentences(this.cSentenceFile);
            NewDictionary.LoadLanguage(this.cSentenceFile, this.getLanguage());
        }
        SentencesInMemory = (ArrayList<SbcDictionarySentence>) NewDictionary.getSentenceList();
@@ -107,7 +107,9 @@ public class SbcToLoad {
        SbcMainWindow main = new SbcMainWindow();
        main.setLocationRelativeTo(null);
        main.setResizable(false);
-       main.setSentences(this.getLanguage(),SentencesInMemory);
+       main.setLanguageFileName(this.cSentenceFile);
+       main.setSentences(this.getLanguage(),this.SentencesInMemory);       
+       main.setParamFileName(this.cParamFileName);
        main.init();
     }
 
