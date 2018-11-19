@@ -107,7 +107,8 @@ public class SbcToLoad {
        SbcMainWindow main = new SbcMainWindow();
        main.setLocationRelativeTo(null);
        main.setResizable(false);
-       main.setSentences(this.getLanguage(),SentencesInMemory);
+       main.setLanguageFileName(this.cSentenceFile);
+       main.setSentences(this.getLanguage(),SentencesInMemory);       
        main.init();
     }
 

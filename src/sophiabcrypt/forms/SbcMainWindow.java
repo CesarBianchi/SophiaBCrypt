@@ -33,6 +33,7 @@ import sophiabcrypt.language.SbcDictionarySentence;
  */
 public class SbcMainWindow extends javax.swing.JFrame {
     private String cLanguage = new String();
+    private String cLangFileName = new String();
     private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
     
     /**
@@ -56,6 +57,10 @@ public class SbcMainWindow extends javax.swing.JFrame {
         this.show();
     }
     
+    public void setLanguageFileName(String cSentenceFile) {
+        this.cLangFileName = cSentenceFile;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,6 +81,9 @@ public class SbcMainWindow extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -176,6 +184,30 @@ public class SbcMainWindow extends javax.swing.JFrame {
         jMenu1.add(jMenuItem4);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Opções");
+
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_NUMPAD1, 0));
+        jMenuItem5.setText("Idioma");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
+
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_NUMPAD2, 0));
+        jMenuItem6.setText("Traduzir Sentencas");
+        jMenuItem6.setToolTipText("");
+        jMenuItem6.setActionCommand("Traduzir Sentenças");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem6);
+
+        jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Ajuda");
 
@@ -282,6 +314,16 @@ public class SbcMainWindow extends javax.swing.JFrame {
         SbcAbout.SetSentences(this.getLanguage(),this.SentencesInMemory);
         SbcAbout.init();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        SbcSentencesWindow SbcSentWin = new SbcSentencesWindow();
+        SbcSentWin.init(this.getLanguage(),this.SentencesInMemory,this.cLangFileName);
+        
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -422,14 +464,19 @@ public class SbcMainWindow extends javax.swing.JFrame {
         SbcDictionaryBase Dictionary = new SbcDictionaryBase(this.getLanguage());
         Dictionary.setSentenceList(this.SentencesInMemory);
         
-        jMenu1.setText(Dictionary.getTranslation("0001"));
-        jMenuItem2.setText(Dictionary.getTranslation("0002"));
-        jMenuItem3.setText(Dictionary.getTranslation("0003"));
-        jMenuItem4.setText(Dictionary.getTranslation("0004"));                
-        jMenu2.setText(Dictionary.getTranslation("0005"));
-        jMenuItem1.setText(Dictionary.getTranslation("0006"));        
-        jButton1.setText(Dictionary.getTranslation("0002"));
-        jButton2.setText(Dictionary.getTranslation("0003"));                
+        this.jMenu1.setText(Dictionary.getTranslation("0001"));
+        this.jMenuItem2.setText(Dictionary.getTranslation("0002"));
+        this.jMenuItem3.setText(Dictionary.getTranslation("0003"));
+        this.jMenuItem4.setText(Dictionary.getTranslation("0004"));                
+        this.jMenu2.setText(Dictionary.getTranslation("0005"));
+        this.jMenuItem1.setText(Dictionary.getTranslation("0006"));        
+        this.jButton1.setText(Dictionary.getTranslation("0002"));
+        this.jButton2.setText(Dictionary.getTranslation("0003"));        
+        this.jMenu3.setText(Dictionary.getTranslation("0025"));
+        this.jMenuItem5.setText(Dictionary.getTranslation("0026"));
+        this.jMenuItem6.setText(Dictionary.getTranslation("0027"));
+        
+        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -438,11 +485,14 @@ public class SbcMainWindow extends javax.swing.JFrame {
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu.Separator jSeparator1;

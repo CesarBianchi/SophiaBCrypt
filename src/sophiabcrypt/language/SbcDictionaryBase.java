@@ -109,10 +109,22 @@ public class SbcDictionaryBase {
         this.AddNewSentence("0019","SbcPswWindow"       ,"Confirme a senha:"    ,"Confirm Password"         ,"Confirmar contraseña"      ,"UNKNOW");
         this.AddNewSentence("0020","SbcPswWindow"       ,"Confirmar"            ,"Confirm"                  ,"Confirmar"                 ,"UNKNOW");
         this.AddNewSentence("0021","SbcPswWindow"       ,"Cancelar"             ,"Cancel"                   ,"Cancelar"                  ,"UNKNOW");        
-        this.AddNewSentence("0022","SbcProgressWindow"  ,"Convertendo arquivo " ,"Converting file "         ,"Convertir ficheiro "      ,"UNKNOW");
-        this.AddNewSentence("0023","SbcProgressWindow"  ," de "                 ," of "                     ," de "                     ,"UNKNOW");        
-        this.AddNewSentence("0024","SbcPswWindow"       ,"Deseja descriptografar o arquivo selecionado ?"   ,"Do you want to decrypt the selected file ?"                     ,"Desea descifrar el archivo seleccionado "                           ,"UNKNOW");
+        this.AddNewSentence("0022","SbcProgressWindow"  ,"Convertendo arquivo " ,"Converting file "         ,"Convertir ficheiro "       ,"UNKNOW");
+        this.AddNewSentence("0023","SbcProgressWindow"  ," de "                 ," of "                     ," de "                      ,"UNKNOW");        
+        this.AddNewSentence("0024","SbcPswWindow"       ,"Deseja descriptografar o arquivo selecionado ?"   ,"Do you want to decrypt the selected file ?"                     ,"Desea descifrar el archivo seleccionado "                           ,"UNKNOW");        
+        this.AddNewSentence("0025","SbcMainWindow"      ,"Opções"               ,"Options"                  ,"Opciones"                  ,"UNKNOW");
+        this.AddNewSentence("0026","SbcMainWindow"      ,"Selecionar Idioma"    ,"Select Language"          ,"Seleccionar Idioma"                    ,"UNKNOW");
+        this.AddNewSentence("0027","SbcMainWindow"      ,"Construir Tradução"   ,"Make Translation"         ,"Construir Traducción"      ,"UNKNOW");
+        this.AddNewSentence("0028","SbcSentencesWindow" ,"Código"               ,"ID "                      ,"ID"                        ,"UNKNOW");        
+        this.AddNewSentence("0029","SbcSentencesWindow" ,"Português"            ,"Portuguese"               ,"Portugués"                 ,"UNKNOW");        
+        this.AddNewSentence("0030","SbcSentencesWindow" ,"Inglês"               ,"English"                  ,"Inglés"                    ,"UNKNOW");
+        this.AddNewSentence("0031","SbcSentencesWindow" ,"Espanhol"             ,"Spanish"                  ,"Español"                   ,"UNKNOW");
+        this.AddNewSentence("0032","SbcSentencesWindow" ,"Definido Pelo Usuário","User Defined"             ,"Definido por el usuario"   ,"UNKNOW");        
+        this.AddNewSentence("0033","SbcSentencesWindow" ,"Arquivo Atualizado"   ,"File Updated"             ,"Ficheiro actualizado"      ,"UNKNOW");
+        this.AddNewSentence("0034","SbcSentencesWindow" ,"O arquivo de idiomas foi atualizado com sucesso." ,"The language file has been successfully updated."            ,"El archivo de idioma se ha actualizado correctamente."    ,"UNKNOW");    
+        this.AddNewSentence("0035","SbcSentencesWindow" ,"É recomendável que você reinice a aplicação agora." ,"We recommend that you restart the app now."                ,"Es recomendable que reinice la aplicación ahora."         ,"UNKNOW");    
         
+
         //this.AddNewSentence("cID","className","PT","EN","ES","UD");
     }
     
