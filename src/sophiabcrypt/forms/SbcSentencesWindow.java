@@ -31,18 +31,39 @@ import sophiabcrypt.language.SbcDictionaryBase;
 import sophiabcrypt.language.SbcDictionarySentence;
 
 /**
+ * This class is used to prepare environment for SophiaBCrypt tool
  * @author CesarBianchi
+ * @since October/2018
+ * @version 1.03.1
+ * @see SbcDictionaryBase
+ * @see SbcDictionarySentence
+ * @see SbcMainWindow
  */
 public class SbcSentencesWindow extends javax.swing.JFrame {
     private String cLanguage = new String();
     private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
     private String cLangFileName = new String();
     
+    /**
+     * This constructor method
+     * Provides a translation of the terms present in window
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
     public SbcSentencesWindow() {
         initComponents();
     }
 
-    
+    /**
+     * Initialize main attributes and show window interface
+     * @param cLang The language defined by user
+     * @param Sentences The sentenced loaded from language file
+     * @param cLangFile The name of language file
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
     public void init(String cLang,ArrayList Sentences,String cLangFile){
         this.setSentences(Sentences);
         this.setLanguage(cLang);        
@@ -57,14 +78,33 @@ public class SbcSentencesWindow extends javax.swing.JFrame {
         this.show();
     }
     
+    /**
+     * Set Sentences in Memory before load xml language file
+     * @author CesarBianchi
+     * @since November/2018
+     * @param Sentences ArrayOfList with all sentences loaded from xml language file
+     * @version 1.03.3
+     */
     private void setSentences(ArrayList Sentences) {
         this.SentencesInMemory = Sentences;
     }
     
+    /**
+     * This method sets the cLang attribute by according input parameter
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
     private void setLanguage(String cLang) {
         this.cLanguage = cLang;
     }
     
+    /**
+     * Provide translation of the labels and gets of the window
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
     private void setTranslations() {
         SbcDictionaryBase Dictionary = new SbcDictionaryBase(this.cLanguage);
         Dictionary.setSentenceList(this.SentencesInMemory);        
@@ -73,6 +113,12 @@ public class SbcSentencesWindow extends javax.swing.JFrame {
         this.setGridTitles();
     }
     
+    /**
+     * Provide translation of the Grid Titles
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
     private void setGridTitles() {
         SbcDictionaryBase Dictionary = new SbcDictionaryBase(this.cLanguage);
         Dictionary.setSentenceList(this.SentencesInMemory);
@@ -99,6 +145,12 @@ public class SbcSentencesWindow extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Load all rows of grid after reed language file
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
     private void loadRows() {
         
         SbcDictionarySentence Sentence = new SbcDictionarySentence();
@@ -112,6 +164,12 @@ public class SbcSentencesWindow extends javax.swing.JFrame {
         jTable1.setModel(model);
     }
     
+    /**
+     * Write all user defined terms in language file present in window interface 
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
     private void setNewSentences() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));   
 

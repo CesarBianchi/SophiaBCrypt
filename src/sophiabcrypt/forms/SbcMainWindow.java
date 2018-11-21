@@ -17,10 +17,14 @@
  */
 
 package sophiabcrypt.forms;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.net.URL;
+import java.awt.Cursor;
+import java.io.File;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import sophiabcrypt.SbcNodeDetails;
 import sophiabcrypt.language.SbcDictionaryBase;
 import sophiabcrypt.language.SbcDictionarySentence;
 
@@ -29,13 +33,16 @@ import sophiabcrypt.language.SbcDictionarySentence;
  * It shows a graphical interface for the user to select files or folders 
  * and to be able to choose the operations of Encrypt or Decrypt
  * @author CesarBianchi
- * @since Jun/2018
+ * @see SbcLanguageWindow
+ * @since June/2018
  */
 public class SbcMainWindow extends javax.swing.JFrame {
     private String cLanguage = new String();
     private String cLangFileName = new String();
     private String cParamFileName = new String();
     private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
+    private String cPathSelected = new String();
+    private ArrayList<String> afiles = new ArrayList<String>();
     
     /**
      * This method create a new Main Window
@@ -48,23 +55,325 @@ public class SbcMainWindow extends javax.swing.JFrame {
     }
 
     /**
-     * This methods show de window interface with all sentences translated
+     * This method show de window interface with all sentences translated
      * @author CesarBianchi
      * @since October/2018
      * @version 1.03.1
      */
     public void init(){
         this.setTranslates();
+        this.loadRoots();
         this.show();
     }
     
+    /**
+     * This method load all root units from machine (MacOs, Windows or Linux) and input this roots in JTree
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
+    private void loadRoots() {
+        File[] units = File.listRoots();
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+        
+        for (int nI = 0; nI < units.length; nI++){
+            DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(new SbcNodeDetails(units[nI].getPath(),units[nI].getPath()));
+            root.add(rootNode);
+            
+            DefaultMutableTreeNode Aux = new DefaultMutableTreeNode(new SbcNodeDetails("..",units[nI].getPath()));
+            rootNode.add(Aux);
+        }
+        
+        DefaultTreeModel model = new DefaultTreeModel(root);
+        this.jTree1.setModel(model);
+        
+    }
+    
+    /**
+     * This method load all content present in node referenced by input param and set in new node.
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
+    private void loadFilesAndFolders(DefaultMutableTreeNode node,String cPathSelected,boolean isSubDir){
+        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        
+        String fullPath = new String();
+        File rootfile = new File( cPathSelected );
+        
+        if (rootfile.isDirectory()){
+            node.setUserObject(rootfile);
+            File[] ListOfFiles = rootfile.listFiles();
+            
+            for (int nI = 0; nI <= ListOfFiles.length-1; nI++){
+
+                fullPath = this.buildFullPath(cPathSelected,ListOfFiles[nI].getName());
+
+                if (ListOfFiles[nI].isDirectory()){
+                    DefaultMutableTreeNode directory = new DefaultMutableTreeNode(new SbcNodeDetails(ListOfFiles[nI].getName(),fullPath));
+                    node.add(directory);
+
+                    DefaultMutableTreeNode Aux = new DefaultMutableTreeNode(new SbcNodeDetails("..",cPathSelected));
+                    directory.add(Aux);
+
+                } else {
+                    DefaultMutableTreeNode file = new DefaultMutableTreeNode(new SbcNodeDetails(ListOfFiles[nI].getName(),fullPath));
+                    node.add(file);
+                }
+
+            }
+        
+            DefaultTreeModel model = new DefaultTreeModel(node);
+            this.jTree1.setModel(model);
+        }
+        
+        this.verifyNode(node,cPathSelected);        
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    /**
+     * This method is called at click or expand node in JTree
+     * Load all sub-content by according the node selected
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
+    private void NodeSelected() {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.jTree1.getLastSelectedPathComponent();
+        String cFullPath = new String("");
+        
+        if (node == null){
+            return;
+        } else {
+        
+            SbcNodeDetails NodeDetails = (SbcNodeDetails) node.getUserObject();
+            cFullPath = NodeDetails.getfullPathOfNode();
+
+            this.loadFilesAndFolders(node,cFullPath,true);
+        }
+        
+    }
+    
+    /**
+     * Verify if node content have back option "..˜
+     * Load all sub-content by according the node selected
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
+    private void verifyNode(DefaultMutableTreeNode node, String cFullPath) {
+        boolean locatedBackOpt = false;
+        
+        if (!cFullPath.equals(this.getBarByOs())){
+            SbcNodeDetails sbcNode = new SbcNodeDetails();
+            DefaultMutableTreeNode nodeDetail = new DefaultMutableTreeNode();
+
+            int qtdChilds = this.jTree1.getModel().getChildCount(node);
+            for (int nI = 0; nI < qtdChilds; nI ++ ){
+                nodeDetail = (DefaultMutableTreeNode) this.jTree1.getModel().getChild(node,nI);
+                sbcNode = (SbcNodeDetails) nodeDetail.getUserObject();
+                if (sbcNode.getNodeName().equals("..")){
+                    locatedBackOpt = true;
+                    break;
+                }
+            }
+            
+            if (!locatedBackOpt){
+                File arq = new File(cFullPath);
+                if (arq.isDirectory()){
+                    String cPrevPath = this.prevPath(cFullPath);
+                    DefaultMutableTreeNode backOpt = new DefaultMutableTreeNode(new SbcNodeDetails("..",cPrevPath));
+                    node.insert(backOpt, 0);
+                    
+                    DefaultTreeModel model = new DefaultTreeModel(node);
+                    this.jTree1.setModel(model);
+                }
+            }
+        }
+    }
+    
+    /**
+     * Build a absolute path by according the input params
+     * @param cPathSelect The path of root
+     * @param name The name of selected node
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
+    private String buildFullPath(String cPathSelected, String name) {
+        String cReturn = new String();
+        String cBarra = this.getBarByOs();
+        
+        if (!cPathSelected.substring(cPathSelected.length()-1).equals(cBarra)){
+            if (!name.substring(0,0).equals(cBarra)){
+                cReturn = cPathSelected + cBarra + name;
+            } else {
+                cReturn = cPathSelected + name;
+            }    
+        } else {
+            cReturn = cPathSelected + name;        
+        }
+        return cReturn;
+    }
+    
+    /**
+     * Tokenize a specific absolut path and return a ArrayList
+     * @param cPath The path to be tokenize
+     * @return The tokenized path in arraylist
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
+    private ArrayList tokenizePath(String cPath){
+        ArrayList<String> aReturn = new ArrayList<String>();
+        int cBarraLen = 0;
+        String cBarra = this.getBarByOs();
+        String cAux = new String("");
+        
+        cBarraLen = cBarra.length();
+        
+        if (!cPath.equals("")){
+            for (int nI = 0; nI < cPath.length(); nI++){
+                if (cPath.substring(nI,nI+cBarraLen).equals(cBarra)){
+                    if (!cAux.equals("")){
+                        aReturn.add(cAux);
+                        cAux = "";
+                    }
+                } else {
+                    cAux = cAux + cPath.substring(nI,nI+1);
+                }    
+            }
+            if (!cAux.equals("")){
+                aReturn.add(cAux);
+                cAux = "";
+            }
+        }        
+        
+        return aReturn;
+    }
+    
+    /**
+     * Returns the path separator by according of Operational System
+     * @return Char of path separator
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
+    private String getBarByOs(){        
+        String cBarra = File.separator;        
+        return cBarra;
+    }
+    
+    /**
+     * Returns the a new path after erase the last directory of input path
+     * @param cPath The path to be cut the last directory
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
+    private String prevPath(String cPath){
+        String cReturn = new String("");
+        ArrayList pathTokenized = this.tokenizePath(cPath);
+        String cBarra = this.getBarByOs();
+        
+        for (int nI = 0; nI < pathTokenized.size()-1;nI++){
+            cReturn = cReturn + cBarra + pathTokenized.get(nI);
+        }
+        if (cReturn.equals("")){
+            cReturn = cBarra;
+        }
+        return cReturn;
+    }
+    
+    /**
+     * Returns the main path defined (root path)
+     * @return The main path of the root path
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
+    public String getPathSelected(){
+        return this.cPathSelected;
+    }
+    
+    /**
+     * Sets the main path defined (root path)
+     * @param cPath The main path of the root path
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
+    public void setPathSelected(String cPath){
+        if (cPath.equals("")){
+            this.cPathSelected = File.separator;
+        } else {
+            this.cPathSelected = cPath;
+        }     
+    }
+    
+    /**
+     * Sets the language file name used by translation features
+     * @param cSentenceFile The name of the language file (usually LanguageFile.xml)
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
     public void setLanguageFileName(String cSentenceFile) {
         this.cLangFileName = cSentenceFile;
     }
     
+    /**
+     * Sets the Param file name used by aplication
+     * @param cParamFile The name of the param file
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
     public void setParamFileName(String cParamFile) {
         this.cParamFileName = cParamFile;
     }
+    
+    /**
+     * Add a new path to Process List in the right side of the main window
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
+    private void addPathToProcess() {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.jTree1.getLastSelectedPathComponent();
+                
+        if (node == null){
+            JOptionPane.showMessageDialog(rootPane,"Selecione ao menos um arquivo ou diretorio para adicionar a lista.", "Nenhum diretorio ou arquivo selecionado", JOptionPane.WARNING_MESSAGE, null);
+        } else {
+            SbcNodeDetails NodeDetails = (SbcNodeDetails) node.getUserObject();
+            String cFullPath = NodeDetails.getfullPathOfNode();            
+            
+            DefaultListModel list = (DefaultListModel) this.jList2.getModel();            
+            list.addElement(new String(cFullPath));
+            this.jList2.setModel(list);
+
+        }          
+    }
+
+    /**
+     * Remove a specific path to Process List in the right side of the main window
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+    */
+    private void removePathToProcess() {
+        int nInd = this.jList2.getSelectedIndex();
+        
+        if (nInd >= 0){
+            DefaultListModel list = (DefaultListModel) this.jList2.getModel();            
+            list.remove(nInd);
+            this.jList2.setModel(list);
+        } else {
+            JOptionPane.showMessageDialog(rootPane,"Selecione ao menos um item da lista para remover.", "Nenhum item selecionado", JOptionPane.WARNING_MESSAGE, null);
+        }
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,8 +387,12 @@ public class SbcMainWindow extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jFileChooser1 = new javax.swing.JFileChooser();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<String>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -96,7 +409,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         setTitle("SophiaBCrypt - Criptografador de arquivos");
         setName("MainFrame"); // NOI18N
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v4_unlock_little.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v5_unlock_blue_small.png"))); // NOI18N
         jButton2.setText("Descriptografar");
         jButton2.setToolTipText("Descriptografa os arquivos ou pastas selecionados a esquerda");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -108,7 +421,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v4_lock_little.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v5_lock_blue_small.png"))); // NOI18N
         jButton1.setText("    Criptografar");
         jButton1.setToolTipText("Criptografa os arquivos ou pastas selecionados a esquerda");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -117,45 +430,83 @@ public class SbcMainWindow extends javax.swing.JFrame {
             }
         });
 
+        jList2.setModel(new DefaultListModel ());
+        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(jList2);
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree1MouseClicked(evt);
+            }
+        });
+        jTree1.addTreeWillExpandListener(new javax.swing.event.TreeWillExpandListener() {
+            public void treeWillExpand(javax.swing.event.TreeExpansionEvent evt)throws javax.swing.tree.ExpandVetoException {
+                jTree1TreeWillExpand(evt);
+            }
+            public void treeWillCollapse(javax.swing.event.TreeExpansionEvent evt)throws javax.swing.tree.ExpandVetoException {
+            }
+        });
+        jScrollPane3.setViewportView(jTree1);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/to_right_blue_small.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/to_left_blue_small.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jFileChooser1.setDialogType(javax.swing.JFileChooser.CUSTOM_DIALOG);
-        jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
-        jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFileChooser1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 20, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(158, 158, 158)
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Arquivo");
@@ -233,21 +584,17 @@ public class SbcMainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -282,10 +629,6 @@ public class SbcMainWindow extends javax.swing.JFrame {
         this.pressDecrypt();
     }//GEN-LAST:event_jButton2ActionPerformed
    
-    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFileChooser1ActionPerformed
-
     /**
      * 
      * This method invokes a Encrypt Engine and process all selected files and folders
@@ -333,6 +676,29 @@ public class SbcMainWindow extends javax.swing.JFrame {
         SbcSentWin.init(this.getLanguage(),this.SentencesInMemory,this.cLangFileName);
         
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jTree1TreeWillExpand(javax.swing.event.TreeExpansionEvent evt)throws javax.swing.tree.ExpandVetoException {//GEN-FIRST:event_jTree1TreeWillExpand
+        this.jTree1.setSelectionPath(evt.getPath());
+        this.NodeSelected();
+    }//GEN-LAST:event_jTree1TreeWillExpand
+
+    private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
+        if (evt.getClickCount() == 2) {
+            this.NodeSelected();  
+        }
+    }//GEN-LAST:event_jTree1MouseClicked
+
+    private void jTree1TreeExpanded(javax.swing.event.TreeExpansionEvent evt) {//GEN-FIRST:event_jTree1TreeExpanded
+        /*NOTHING*/
+    }//GEN-LAST:event_jTree1TreeExpanded
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.addPathToProcess();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.removePathToProcess();
+    }//GEN-LAST:event_jButton4ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -379,8 +745,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
     */
     private void pressCrypt(){
         String cOper = new String();
-        String cPath = new String();
-        cPath = jFileChooser1.getSelectedFile().getAbsolutePath();
+        DefaultListModel cPaths = (DefaultListModel) this.jList2.getModel();            
         
         cOper = "ENC";
         SbcPswWindow pswDiag = new SbcPswWindow();  
@@ -389,9 +754,10 @@ public class SbcMainWindow extends javax.swing.JFrame {
         pswDiag.setResizable(false);
         pswDiag.setSentences(this.getLanguage(),this.SentencesInMemory);
         pswDiag.setOper(cOper);
-        pswDiag.setPath(cPath);
-        pswDiag.setFileTreeObj(jFileChooser1);
+        pswDiag.setPaths(cPaths);
         pswDiag.init();
+        
+        this.jList2.setModel(new DefaultListModel());
     }
     
     /**
@@ -403,8 +769,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
     */
     private void pressDecrypt(){
         String cOper = new String();
-        String cPath = new String();
-        cPath = jFileChooser1.getSelectedFile().getAbsolutePath();
+        DefaultListModel cPaths = (DefaultListModel) this.jList2.getModel();            
         
         cOper = "DEC";
         SbcPswWindow pswDiag = new SbcPswWindow();
@@ -413,9 +778,10 @@ public class SbcMainWindow extends javax.swing.JFrame {
         pswDiag.setResizable(false);
         pswDiag.setSentences(this.getLanguage(),this.SentencesInMemory);
         pswDiag.setOper(cOper);
-        pswDiag.setPath(cPath);
-        pswDiag.setFileTreeObj(jFileChooser1);        
+        pswDiag.setPaths(cPaths);    
         pswDiag.init(); 
+        
+        this.jList2.setModel(new DefaultListModel());
     }
 
     /**
@@ -424,9 +790,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
      * @since Aug/2018
     */
     public void setSbcIcon(){
-        //URL url = this.getClass().getResource("/images/dog_icon.png");
-        //Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
-        //this.setIconImage(imagemTitulo);
+        
     }
     
     /**
@@ -491,7 +855,9 @@ public class SbcMainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -503,9 +869,12 @@ public class SbcMainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 
     
+
 }

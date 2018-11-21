@@ -18,8 +18,6 @@
 
 package sophiabcrypt;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This is a Main Class of SophiaBCrypt

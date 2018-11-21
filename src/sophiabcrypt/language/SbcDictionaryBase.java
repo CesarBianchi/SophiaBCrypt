@@ -102,7 +102,7 @@ public class SbcDictionaryBase {
         this.AddNewSentence("0012","SbcLanguageWindow"  ,"Selecione o Idioma"   ,"Select language"          ,"Seleccione el idioma"     ,"UNKNOW");        
         this.AddNewSentence("0013","SbcProgressWindow"  ,"Processando Arquivos" ,"Processing files"         ,"Procesando ficheiros"     ,"UNKNOW");
         this.AddNewSentence("0014","SbcProgressWindow"  ,"Aguarde"              ,"Wait"                     ,"Espere"                   ,"UNKNOW");
-        this.AddNewSentence("0015","SbcPswWindow"       ,"Deseja Criptografar o arquivo selecionado ?"                      ,"Do you want to Encrypt the selected files ?"                  ,"Desea cifrar los archivos seleccionados ?"                            ,"UNKNOW");
+        this.AddNewSentence("0015","SbcPswWindow"       ,"Deseja Criptografar o(s) arquivo(s) selecionado(s) ?"                      ,"Do you want to Encrypt the selected file(s) ?"                  ,"Desea cifrar lo(s) ficheiro(s) seleccionado(s) ?"                            ,"UNKNOW");
         this.AddNewSentence("0016","SbcPswWindow"       ,"ATENÇÃO: Memorize a sua senha para restauração futura."           ,"WARNING: Memorize your password for future decrypt."          ,"ADVERTENCIA: Memorice su contraseña para descifrar en el futuro."     ,"UNKNOW");
         this.AddNewSentence("0017","SbcPswWindow"       ,"Este arquivo só podera ser restaurado utilizando a mesma senha."  ,"This file can only be decrypetd using the same password."     ,"Este archivo solo puede ser descifrado usando la misma contraseña."   ,"UNKNOW");
         this.AddNewSentence("0018","SbcPswWindow"       ,"Senha:"               ,"Password"                 ,"Contraseña"                ,"UNKNOW");
@@ -111,7 +111,7 @@ public class SbcDictionaryBase {
         this.AddNewSentence("0021","SbcPswWindow"       ,"Cancelar"             ,"Cancel"                   ,"Cancelar"                  ,"UNKNOW");        
         this.AddNewSentence("0022","SbcProgressWindow"  ,"Convertendo arquivo " ,"Converting file "         ,"Convertir ficheiro "       ,"UNKNOW");
         this.AddNewSentence("0023","SbcProgressWindow"  ," de "                 ," of "                     ," de "                      ,"UNKNOW");        
-        this.AddNewSentence("0024","SbcPswWindow"       ,"Deseja descriptografar o arquivo selecionado ?"   ,"Do you want to decrypt the selected file ?"                     ,"Desea descifrar el archivo seleccionado "                           ,"UNKNOW");        
+        this.AddNewSentence("0024","SbcPswWindow"       ,"Deseja descriptografar o(s) arquivo(s) selecionado(s) ?"   ,"Do you want to decrypt the selected file(s) ?"                     ,"Desea descifrar el ficheiro(s) seleccionado(s) "                           ,"UNKNOW");        
         this.AddNewSentence("0025","SbcMainWindow"      ,"Opções"               ,"Options"                  ,"Opciones"                  ,"UNKNOW");
         this.AddNewSentence("0026","SbcMainWindow"      ,"Selecionar Idioma"    ,"Select Language"          ,"Seleccionar Idioma"                    ,"UNKNOW");
         this.AddNewSentence("0027","SbcMainWindow"      ,"Construir Tradução"   ,"Make Translation"         ,"Construir Traducción"      ,"UNKNOW");
