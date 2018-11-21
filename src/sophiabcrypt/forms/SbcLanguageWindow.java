@@ -34,10 +34,10 @@ import sophiabcrypt.language.SbcDictionarySentence;
 
 /**
  * This class is used to user select a prefered language for SophiaBCrypt
+ * Show a window interface with all sentences in all languages. The users can input your favourite language using "User Defined" option
  * @author CesarBianchi
- * @since October/2018
- * @version 1.03.1
- * 
+ * @since November/2018
+ * @version 1.03.2
  */
 public class SbcLanguageWindow extends javax.swing.JFrame {
 
@@ -56,6 +56,13 @@ public class SbcLanguageWindow extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * Set if class was instanced from Load modules
+     * @param IsLoad Define if class was instanced by Load Modules
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+     */    
     public void fromLoad(boolean IsLoad){
         this.fromLoad = IsLoad;
     }
@@ -335,6 +342,12 @@ public class SbcLanguageWindow extends javax.swing.JFrame {
         return cParamFileName;
     }
     
+    /**
+     * Erase the Param File from disk
+     * @author CesarBianchi
+     * @since November/2018
+     * @version 1.03.3
+     */ 
     private void eraseParamFile() {
         int nI = 1;
         int nTry = 5;

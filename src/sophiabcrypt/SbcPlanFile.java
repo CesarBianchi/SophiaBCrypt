@@ -129,15 +129,8 @@ public class SbcPlanFile {
      * @author CesarBianchi
      * @since Sep/2018
     */
-    private void setBarType(){ 
-        String cOperSyst = new String();
-        cOperSyst = System.getProperty("os.name").toUpperCase();
-        
-        if (cOperSyst.contains("WIN")) {
-            cBarra = "\\";
-        }else{
-            cBarra = "/";
-        }
+    private void setBarType(){         
+        this.cBarra = File.separator;
     }
     
     /**

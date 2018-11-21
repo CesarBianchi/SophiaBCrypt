@@ -20,7 +20,7 @@ package sophiabcrypt.forms;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
+import javax.swing.DefaultListModel;
 import sophiabcrypt.SbcPlanFile;
 import sophiabcrypt.SbcPswControl;
 import sophiabcrypt.language.SbcDictionaryBase;
@@ -37,8 +37,7 @@ public class SbcPswWindow extends javax.swing.JFrame {
     private boolean PswIsOk = false;
     private String cPsw = new String();
     private String cOper = new String();
-    private String cPath = new String();
-    JFileChooser jFile = null;
+    private DefaultListModel cPaths = new DefaultListModel();
     private String cLanguage = new String();
     private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
    
@@ -188,7 +187,7 @@ public class SbcPswWindow extends javax.swing.JFrame {
         if (SbcPsw.IsValidPsw() == true){
             setPwsIsOk(true,cPsw1);
             try {
-                this.ProcessFile(getPath());
+                this.ProcessFile(this.getPaths());
             } catch (Exception ex) {
                 Logger.getLogger(SbcPswWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -322,23 +321,23 @@ public class SbcPswWindow extends javax.swing.JFrame {
     }
     
     /**
-     * Set the main path selected by user on TreeFileObj
-     * @param cP The main path
+     * Set the paths selected by user on List
+     * @param cPs The paths to be processing
      * @author CesarBianchi
      * @since Sep/2018
     */
-    public void setPath(String cP){
-        cPath = cP;
+    public void setPaths(DefaultListModel cPs){
+        this.cPaths = cPs;
     }
     
     /**
-     * Get the main path selected by user on TreeFileObj
-     * @return cPath The main path
+     * Get the paths selected by user on List
+     * @return cPath The paths to be processing
      * @author CesarBianchi
      * @since Sep/2018
     */
-    public String getPath(){
-        return cPath;
+    public DefaultListModel getPaths(){
+        return this.cPaths;
     }       
 
     /**
@@ -347,26 +346,32 @@ public class SbcPswWindow extends javax.swing.JFrame {
      * @author CesarBianchi
      * @since Sep/2018
     */
-    private void ProcessFile(String cPath) throws Exception{
+    private void ProcessFile(DefaultListModel cPaths) throws Exception{
         
-        SbcPlanFile PlanFile = new SbcPlanFile();
-        PlanFile.init(getOper());
-        PlanFile.DiscoveryFiles(cPath);
-        String aFiles[] = PlanFile.getFiles();
+        String cPath = new String();
+        int nQtd = 0;
         
-        SbcProgressWindow SbcProgress = new SbcProgressWindow();
-        SbcProgress.setQtdFiles(PlanFile.getQtdFiles());
-        SbcProgress.setOper(getOper());
-        SbcProgress.setFiles(aFiles);
-        SbcProgress.setPsw(getPsw());
-        SbcProgress.setFileTreeObj(jFile);
-        SbcProgress.setSentences(this.getLanguage(),this.getSentences());
-        SbcProgress.init(PlanFile.getQtdFiles());
-        //jFile.updateUI();
-    }
-    
-    public void setFileTreeObj(JFileChooser jF){
-        jFile = jF;
+        if (cPaths.size() > 0){
+            
+            for (int nI = 0; nI < cPaths.size(); nI++){
+            
+                cPath = (String) cPaths.get(nI);
+                
+                SbcPlanFile PlanFile = new SbcPlanFile();
+                PlanFile.init(getOper());
+                PlanFile.DiscoveryFiles(cPath);
+                String aFiles[] = PlanFile.getFiles();
+
+                SbcProgressWindow SbcProgress = new SbcProgressWindow();
+                SbcProgress.setQtdFiles(PlanFile.getQtdFiles());
+                SbcProgress.setOper(getOper());
+                SbcProgress.setFiles(aFiles);
+                SbcProgress.setPsw(getPsw());
+                SbcProgress.setSentences(this.getLanguage(),this.getSentences());
+                SbcProgress.init(PlanFile.getQtdFiles());
+            }
+        }
+        
     }
     
     /**

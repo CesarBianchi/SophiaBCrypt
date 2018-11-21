@@ -20,7 +20,6 @@ package sophiabcrypt.forms;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
 import sophiabcrypt.SbcEncEngine;
 import sophiabcrypt.language.SbcDictionaryBase;
 import sophiabcrypt.language.SbcDictionarySentence;
@@ -38,7 +37,6 @@ public class SbcProgressWindow extends javax.swing.JFrame {
     private String[] aFiles = null;
     private String cOper  = new String();    
     private String cPsw = new String();
-    private JFileChooser jFile = null;
     
     private String cLanguage = new String();
     private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
@@ -147,7 +145,7 @@ public class SbcProgressWindow extends javax.swing.JFrame {
      * @since Sep/2018
      */
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        jFile.updateUI();
+
     }//GEN-LAST:event_formWindowClosed
 
     /**
@@ -349,7 +347,7 @@ public class SbcProgressWindow extends javax.swing.JFrame {
             //Atualiza o rotulo
             String cMsg1 =  Dictionary.getTranslation("0022") + Integer.toString(nI) + Dictionary.getTranslation("0023") + Integer.toString(getQtdFiles());
             String cMsg2 =  aFl[nI];
-            incProc(cMsg1,cMsg2,nI);
+            this.incProc(cMsg1,cMsg2,nI);
  
             //Converte o arquivo
             if (cOp == "ENC") {
@@ -359,19 +357,8 @@ public class SbcProgressWindow extends javax.swing.JFrame {
             }
             
         }
-        //jFile.updateUI();
         this.dispose();
             
-    }
-    
-    /**
-     * This method receives a FileTreeObj from other class
-     * @param jF The fileTree object
-     * @author CesarBianchi
-     * @since Sep/2018
-    */
-    public void setFileTreeObj(JFileChooser jF){
-        jFile = jF;
     }
     
     /**
