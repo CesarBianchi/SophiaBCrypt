@@ -60,7 +60,7 @@ public class SbcPswWindow extends javax.swing.JFrame {
      * @since Sep/2018
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -169,7 +169,7 @@ public class SbcPswWindow extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     /**
      * This method is used in "Confirm" button on Password Window.
@@ -177,7 +177,7 @@ public class SbcPswWindow extends javax.swing.JFrame {
      * @author CesarBianchi
      * @since Sep/2018
      */
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         String cPsw1 = jTextField1.getText().trim();
         String cPsw2 = jTextField2.getText().trim();
         
@@ -195,12 +195,12 @@ public class SbcPswWindow extends javax.swing.JFrame {
         }else{
             setPwsIsOk(false,"");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }                                        
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }                                        
 
     /**
      * @param args the command line arguments
@@ -442,7 +442,7 @@ public class SbcPswWindow extends javax.swing.JFrame {
         this.jButton2.setText(Dictionary.getTranslation("0021"));
     }
     
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -453,6 +453,6 @@ public class SbcPswWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 
 }
