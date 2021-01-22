@@ -60,7 +60,7 @@ public class SbcProgressWindow extends javax.swing.JFrame {
      * @since Sep/2018
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -120,9 +120,9 @@ public class SbcProgressWindow extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
         try {
             Thread t = new Thread(() -> {
                 try {
@@ -135,7 +135,7 @@ public class SbcProgressWindow extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(SbcProgressWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_formWindowOpened
+    }                                 
 
     /**
      * This method "refresh" (update view) the File Tree Grafic Interface
@@ -144,9 +144,9 @@ public class SbcProgressWindow extends javax.swing.JFrame {
      * @author NetBeans 8.1 IDE
      * @since Sep/2018
      */
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {                                  
 
-    }//GEN-LAST:event_formWindowClosed
+    }                                 
 
     /**
      * @param args the command line arguments
@@ -411,10 +411,10 @@ public class SbcProgressWindow extends javax.swing.JFrame {
     }
     
     
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
