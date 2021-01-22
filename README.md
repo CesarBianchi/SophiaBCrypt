@@ -5,4 +5,4 @@ This software was created by CesarBianchi.
 Please visit http://www.sophiacrypt.com (under construction) or write for me: cesar_bianchi@hotmail.com
 
 Copyright (C) 2018 CesarBianchi
-This software is licensed under GNU 2.0 
+This software is licensed under GNU 2.0  
