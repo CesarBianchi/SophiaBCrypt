@@ -65,7 +65,7 @@ public class SbcAboutWindow extends javax.swing.JFrame {
      * @since October/2018
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -168,11 +168,11 @@ public class SbcAboutWindow extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {                                     
         // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowActivated
+    }                                    
 
     /**
      * The main method of class. Used to show a new form.
@@ -260,7 +260,7 @@ public class SbcAboutWindow extends javax.swing.JFrame {
         this.SentencesInMemory = Sentences;
     }
     
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -269,6 +269,6 @@ public class SbcAboutWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
     
 }
