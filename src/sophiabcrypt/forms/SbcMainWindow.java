@@ -38,27 +38,31 @@ import sophiabcrypt.language.SbcDictionarySentence;
  */
 public class SbcMainWindow extends javax.swing.JFrame {
     
-    private javax.swing.JButton jButton1;
+	//Graphical objects
+	private javax.swing.GroupLayout layout;
+    private javax.swing.JButton jButEncrypt;
     private javax.swing.JButton jButDecrypt;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JButton jButAddFile;
+    private javax.swing.JButton jButRemoveFile;
+    private javax.swing.JList<String> jListAddedFiles;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.GroupLayout jPanel1Layout; 
+    private javax.swing.JScrollPane jScrollPaneAddedFiles;
+    private javax.swing.JScrollPane jScrollPaneFileSystem;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JTree jTreeFileSystem;
     
+    //Core objects
 	private String cLanguage = new String();
     private String cLangFileName = new String();
     private String cParamFileName = new String();
@@ -76,7 +80,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         this.setLookAndFeel();
         this.paintDialog();
     }
-
+    
     /**
      * This method set a Look and Feel Style
      * @author CesarBianchi
@@ -84,11 +88,12 @@ public class SbcMainWindow extends javax.swing.JFrame {
     */
     private void setLookAndFeel() {
     	SbcLookAndFeel lookAndFeel = new SbcLookAndFeel();
-    	lookAndFeel.setLookAndFeelNimbus();
+    	//lookAndFeel.setLookAndFeelNimbus();
+    	lookAndFeel.setLookAndFeelFlatDarculaLaf();
     }
     
     /**
-     * This method show de window interface with all sentences translated
+     * This method show the window interface with all sentences translated
      * @author CesarBianchi
      * @since October/2018
      * @version 1.03.1
@@ -118,7 +123,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         }
         
         DefaultTreeModel model = new DefaultTreeModel(root);
-        this.jTree1.setModel(model);
+        this.jTreeFileSystem.setModel(model);
         
     }
     
@@ -158,7 +163,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
             }
         
             DefaultTreeModel model = new DefaultTreeModel(node);
-            this.jTree1.setModel(model);
+            this.jTreeFileSystem.setModel(model);
         }
         
         this.verifyNode(node,cPathSelected);        
@@ -173,7 +178,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
      * @version 1.03.3
     */
     private void NodeSelected() {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.jTree1.getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.jTreeFileSystem.getLastSelectedPathComponent();
         String cFullPath = new String("");
         
         if (node == null){
@@ -202,9 +207,9 @@ public class SbcMainWindow extends javax.swing.JFrame {
             SbcNodeDetails sbcNode = new SbcNodeDetails();
             DefaultMutableTreeNode nodeDetail = new DefaultMutableTreeNode();
 
-            int qtdChilds = this.jTree1.getModel().getChildCount(node);
+            int qtdChilds = this.jTreeFileSystem.getModel().getChildCount(node);
             for (int nI = 0; nI < qtdChilds; nI ++ ){
-                nodeDetail = (DefaultMutableTreeNode) this.jTree1.getModel().getChild(node,nI);
+                nodeDetail = (DefaultMutableTreeNode) this.jTreeFileSystem.getModel().getChild(node,nI);
                 sbcNode = (SbcNodeDetails) nodeDetail.getUserObject();
                 if (sbcNode.getNodeName().equals("..")){
                     locatedBackOpt = true;
@@ -220,7 +225,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
                     node.insert(backOpt, 0);
                     
                     DefaultTreeModel model = new DefaultTreeModel(node);
-                    this.jTree1.setModel(model);
+                    this.jTreeFileSystem.setModel(model);
                 }
             }
         }
@@ -374,7 +379,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
      * @version 1.03.3
     */
     private void addPathToProcess() {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.jTree1.getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.jTreeFileSystem.getLastSelectedPathComponent();
                 
         if (node == null){
             JOptionPane.showMessageDialog(rootPane,"Selecione ao menos um arquivo ou diretorio para adicionar a lista.", "Nenhum diretorio ou arquivo selecionado", JOptionPane.WARNING_MESSAGE, null);
@@ -382,9 +387,9 @@ public class SbcMainWindow extends javax.swing.JFrame {
             SbcNodeDetails NodeDetails = (SbcNodeDetails) node.getUserObject();
             String cFullPath = NodeDetails.getfullPathOfNode();            
             
-            DefaultListModel list = (DefaultListModel) this.jList2.getModel();            
+            DefaultListModel list = (DefaultListModel) this.jListAddedFiles.getModel();            
             list.addElement(new String(cFullPath));
-            this.jList2.setModel(list);
+            this.jListAddedFiles.setModel(list);
 
         }          
     }
@@ -396,240 +401,24 @@ public class SbcMainWindow extends javax.swing.JFrame {
      * @version 1.03.3
     */
     private void removePathToProcess() {
-        int nInd = this.jList2.getSelectedIndex();
+        int nInd = this.jListAddedFiles.getSelectedIndex();
         
         if (nInd >= 0){
-            DefaultListModel list = (DefaultListModel) this.jList2.getModel();            
+            DefaultListModel list = (DefaultListModel) this.jListAddedFiles.getModel();            
             list.remove(nInd);
-            this.jList2.setModel(list);
+            this.jListAddedFiles.setModel(list);
         } else {
             JOptionPane.showMessageDialog(rootPane,"Selecione ao menos um item da lista para remover.", "Nenhum item selecionado", JOptionPane.WARNING_MESSAGE, null);
         }
     }
     
     
-
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                             
-    private void paintDialog() {
-
-        jPanel1 = new javax.swing.JPanel();
-        jButDecrypt = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<String>();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("SophiaBCrypt - Criptografador de arquivos");
-        setName("MainFrame"); // NOI18N
-
-        jButDecrypt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v5_unlock_blue_small.png"))); // NOI18N
-        jButDecrypt.setText("Descriptografar");
-        jButDecrypt.setToolTipText("Descriptografa os arquivos ou pastas selecionados a esquerda");
-        jButDecrypt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButDecrypt.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jButDecrypt.setIconTextGap(2);
-        jButDecrypt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v5_lock_blue_small.png"))); // NOI18N
-        jButton1.setText("    Criptografar");
-        jButton1.setToolTipText("Criptografa os arquivos ou pastas selecionados a esquerda");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jList2.setModel(new DefaultListModel ());
-        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(jList2);
-
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTree1MouseClicked(evt);
-            }
-        });
-        jTree1.addTreeWillExpandListener(new javax.swing.event.TreeWillExpandListener() {
-            public void treeWillExpand(javax.swing.event.TreeExpansionEvent evt)throws javax.swing.tree.ExpandVetoException {
-                jTree1TreeWillExpand(evt);
-            }
-            public void treeWillCollapse(javax.swing.event.TreeExpansionEvent evt)throws javax.swing.tree.ExpandVetoException {
-            }
-        });
-        jScrollPane3.setViewportView(jTree1);
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/to_right_blue_small.png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/to_left_blue_small.png"))); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButDecrypt, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButDecrypt)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 20, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(158, 158, 158)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
-
-        jMenu1.setText("Arquivo");
-
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setText("Criptografar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem3.setText("Descriptografar");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem3);
-        jMenu1.add(jSeparator1);
-
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItem4.setText("Sair");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem4);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu3.setText("Opções");
-
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_NUMPAD1, 0));
-        jMenuItem5.setText("Idioma");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem5);
-
-        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_NUMPAD2, 0));
-        jMenuItem6.setText("Traduzir Sentencas");
-        jMenuItem6.setToolTipText("");
-        jMenuItem6.setActionCommand("Traduzir Sentenças");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem6);
-
-        jMenuBar1.add(jMenu3);
-
-        jMenu2.setText("Ajuda");
-
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        jMenuItem1.setText("Sobre");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-
-        pack();
-    }// </editor-fold>                        
-
-    
+    /**
+     * This methods call the functions when MenuItem4 Option is clicked
+     * @author CesarBianchi
+     * @since January/2021
+     * @version 1.03.1
+     */
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {                                           
             SbcExitWindow exitDiag = new SbcExitWindow();
             exitDiag.setLocationRelativeTo(null);
@@ -645,7 +434,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
      * @author CesarBianchi
      * @since Aug/2018
     */
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void buttonEncryptClicked(java.awt.event.ActionEvent evt) {                                         
         this.pressCrypt();
     }                                        
 
@@ -655,7 +444,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
      * @author CesarBianchi
      * @since Aug/2018
     */
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void buttonDecryptClicked(java.awt.event.ActionEvent evt) {                                         
         this.pressDecrypt();
     }                                        
    
@@ -693,6 +482,12 @@ public class SbcMainWindow extends javax.swing.JFrame {
         SbcAbout.init();
     }                                          
 
+    /**
+     * 
+     * This method invokes "The Language Definitions Window"
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         SbcLanguageWindow SbcLangWin = new SbcLanguageWindow();
         SbcLangWin.fromLoad(false);
@@ -701,70 +496,61 @@ public class SbcMainWindow extends javax.swing.JFrame {
         SbcLangWin.LoadLanguageWindow();        
     }                                          
 
+    /**
+     * 
+     * This method invokes "The Translations Sentences Window"
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         SbcSentencesWindow SbcSentWin = new SbcSentencesWindow();
         SbcSentWin.init(this.getLanguage(),this.SentencesInMemory,this.cLangFileName);
         
     }                                          
 
+    /**
+     * 
+     * This method expand the file tree when clicked
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void jTree1TreeWillExpand(javax.swing.event.TreeExpansionEvent evt)throws javax.swing.tree.ExpandVetoException {                                      
-        this.jTree1.setSelectionPath(evt.getPath());
+        this.jTreeFileSystem.setSelectionPath(evt.getPath());
         this.NodeSelected();
     }                                     
 
+    /**
+     * 
+     * This method expand the file tree when clicked
+     * @author CesarBianchi
+     * @since Aug/2018
+    */
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {                                    
         if (evt.getClickCount() == 2) {
             this.NodeSelected();  
         }
     }                                   
-
-    private void jTree1TreeExpanded(javax.swing.event.TreeExpansionEvent evt) {                                    
-        /*NOTHING*/
-    }                                   
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+   
+    /**
+     * This methods call the functions when AddFile Button is clicked
+     * @author CesarBianchi
+     * @since January/2021
+     * @version 1.03.1
+     */
+    private void buttonAddFileClicked(java.awt.event.ActionEvent evt) {                                         
         this.addPathToProcess();
     }                                        
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    /**
+     * This methods call the functions when RemoveFile Button is clicked
+     * @author CesarBianchi
+     * @since January/2021
+     * @version 1.03.1
+     */
+    private void buttonRemoveFileClicked(java.awt.event.ActionEvent evt) {                                         
         this.removePathToProcess();
     }                                        
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SbcMainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SbcMainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SbcMainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SbcMainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SbcMainWindow().setVisible(true);
-            }
-        });
-    }
+   
 
     /**
      * 
@@ -775,7 +561,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
     */
     private void pressCrypt(){
         String cOper = new String();
-        DefaultListModel cPaths = (DefaultListModel) this.jList2.getModel();            
+        DefaultListModel cPaths = (DefaultListModel) this.jListAddedFiles.getModel();            
         
         cOper = "ENC";
         SbcPswWindow pswDiag = new SbcPswWindow();  
@@ -787,7 +573,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         pswDiag.setPaths(cPaths);
         pswDiag.init();
         
-        this.jList2.setModel(new DefaultListModel());
+        this.jListAddedFiles.setModel(new DefaultListModel());
     }
     
     /**
@@ -799,7 +585,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
     */
     private void pressDecrypt(){
         String cOper = new String();
-        DefaultListModel cPaths = (DefaultListModel) this.jList2.getModel();            
+        DefaultListModel cPaths = (DefaultListModel) this.jListAddedFiles.getModel();            
         
         cOper = "DEC";
         SbcPswWindow pswDiag = new SbcPswWindow();
@@ -811,7 +597,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         pswDiag.setPaths(cPaths);    
         pswDiag.init(); 
         
-        this.jList2.setModel(new DefaultListModel());
+        this.jListAddedFiles.setModel(new DefaultListModel());
     }
 
     /**
@@ -868,18 +654,253 @@ public class SbcMainWindow extends javax.swing.JFrame {
         Dictionary.setSentenceList(this.SentencesInMemory);
         
         this.jMenu1.setText(Dictionary.getTranslation("0001"));
-        this.jMenuItem2.setText(Dictionary.getTranslation("0002"));
-        this.jMenuItem3.setText(Dictionary.getTranslation("0003"));
-        this.jMenuItem4.setText(Dictionary.getTranslation("0004"));                
-        this.jMenu2.setText(Dictionary.getTranslation("0005"));
-        this.jMenuItem1.setText(Dictionary.getTranslation("0006"));        
-        this.jButton1.setText(Dictionary.getTranslation("0002"));
+        this.jMenuItem1.setText(Dictionary.getTranslation("0002"));
+        this.jMenuItem2.setText(Dictionary.getTranslation("0003"));
+        this.jMenuItem3.setText(Dictionary.getTranslation("0004"));                
+        this.jMenu3.setText(Dictionary.getTranslation("0005"));
+        this.jMenuItem6.setText(Dictionary.getTranslation("0006"));        
+        this.jButEncrypt.setText(Dictionary.getTranslation("0002"));
         this.jButDecrypt.setText(Dictionary.getTranslation("0003"));        
-        this.jMenu3.setText(Dictionary.getTranslation("0025"));
-        this.jMenuItem5.setText(Dictionary.getTranslation("0026"));
-        this.jMenuItem6.setText(Dictionary.getTranslation("0027"));
-        
-        
+        this.jMenu2.setText(Dictionary.getTranslation("0025"));
+        this.jMenuItem4.setText(Dictionary.getTranslation("0026"));
+        this.jMenuItem5.setText(Dictionary.getTranslation("0027"));
     }
+                
+    /**
+     * Build the MainWindow Dialog
+     * @author CesarBianchi
+     * @since January/2021
+     * @version 1.10.1
+    */
+    private void paintDialog() {
+    		
+    	layout = new javax.swing.GroupLayout(getContentPane());
+        jPanel1 = new javax.swing.JPanel();
+        jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
 
+        jTreeFileSystem = new javax.swing.JTree();
+        jListAddedFiles = new javax.swing.JList<String>();
+
+        jScrollPaneAddedFiles = new javax.swing.JScrollPane();
+        jScrollPaneFileSystem = new javax.swing.JScrollPane();
+
+        jButAddFile = new javax.swing.JButton();
+        jButRemoveFile = new javax.swing.JButton();
+        jButEncrypt = new javax.swing.JButton();
+        jButDecrypt = new javax.swing.JButton();
+        
+        jMenuBar = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        
+        
+        //Set main Title and internal Name
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SophiaBCrypt - Criptografador de arquivos");
+        setName("MainFrame");
+
+        //Paint the layout object
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        
+        //Paint the main Panel
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPaneFileSystem, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButAddFile, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButRemoveFile, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPaneAddedFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButDecrypt, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(jButEncrypt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jButEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButDecrypt)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 20, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPaneAddedFiles, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(158, 158, 158)
+                                        .addComponent(jButAddFile, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jButRemoveFile, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPaneFileSystem, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        
+        //Paint Menu 1
+        jMenu1.setText("Arquivo");
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Criptografar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Descriptografar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem3.setText("Sair");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+        jMenu1.add(jMenuItem2);
+        jMenu1.add(jSeparator1);
+        jMenu1.add(jMenuItem3);
+
+        
+        //Paint Menu 2
+        jMenu2.setText("Opções");
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_NUMPAD1, 0));
+        jMenuItem4.setText("Idioma");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_NUMPAD2, 0));
+        jMenuItem5.setText("Traduzir Sentencas");
+        jMenuItem5.setToolTipText("");
+        jMenuItem5.setActionCommand("Traduzir Sentenças");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+        jMenu2.add(jMenuItem5);
+
+        
+        //Paint Menu 3
+        jMenu3.setText("Ajuda");
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        jMenuItem6.setText("Sobre");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem6);
+
+        //Paint Menu Bar with menu 1, 2 and 3
+        jMenuBar.add(jMenu1);
+        jMenuBar.add(jMenu2);
+        jMenuBar.add(jMenu3);
+        setJMenuBar(jMenuBar);
+        
+        
+        //Paint the left corner display - File System Tree
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        jTreeFileSystem.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTreeFileSystem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree1MouseClicked(evt);
+            }
+        });
+        jTreeFileSystem.addTreeWillExpandListener(new javax.swing.event.TreeWillExpandListener() {
+            public void treeWillExpand(javax.swing.event.TreeExpansionEvent evt)throws javax.swing.tree.ExpandVetoException {
+                jTree1TreeWillExpand(evt);
+            }
+            public void treeWillCollapse(javax.swing.event.TreeExpansionEvent evt)throws javax.swing.tree.ExpandVetoException {
+            }
+        });
+        jScrollPaneFileSystem.setViewportView(jTreeFileSystem);
+        
+        
+        //Paint Button "Add File/Directory"        
+        jButAddFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/to_right_blue_small.png"))); // NOI18N
+        jButAddFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddFileClicked(evt);
+            }
+        });
+        
+        //Paint Button "Remove File/Directory"
+        jButRemoveFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/to_left_blue_small.png"))); // NOI18N
+        jButRemoveFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRemoveFileClicked(evt);
+            }
+        });
+        
+        //Paint the right corner display - "Files Added"
+        jListAddedFiles.setModel(new DefaultListModel ());
+        jListAddedFiles.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPaneAddedFiles.setViewportView(jListAddedFiles);
+        
+        //Paint the button "Encrypt"
+        jButEncrypt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v5_lock_blue_small.png"))); // NOI18N
+        jButEncrypt.setText("    Criptografar");
+        jButEncrypt.setToolTipText("Criptografa os arquivos ou pastas selecionados a esquerda");
+        jButEncrypt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEncryptClicked(evt);
+            }
+        });
+        
+        //Paint the button "Decrypt"
+        jButDecrypt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v5_unlock_blue_small.png"))); // NOI18N
+        jButDecrypt.setText("Descriptografar");
+        jButDecrypt.setToolTipText("Descriptografa os arquivos ou pastas selecionados a esquerda");
+        jButDecrypt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButDecrypt.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButDecrypt.setIconTextGap(2);
+        jButDecrypt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDecryptClicked(evt);
+            }
+        });
+        
+        pack();
+    }     
+    
 }
