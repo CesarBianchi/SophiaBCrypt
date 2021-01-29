@@ -19,6 +19,8 @@
 package sophiabcrypt;
 import java.io.IOException;
 
+import sophiabcrypt.forms.SbcLookAndFeel;
+
 /**
  * This is a Main Class of SophiaBCrypt
  * @see SbcPswControl
@@ -39,15 +41,20 @@ import java.io.IOException;
      * @since October/2018
     */
     public static void main(String[] args) throws IOException, InterruptedException {    
-        
+    
+    	//Set Look and Feel Theme
+    	SbcLookAndFeel lookAndFeel = new SbcLookAndFeel();
+    	lookAndFeel.setLookAndFeelFlatDarculaLaf();
+    	
         SbcPrepareToLoad SbcLoading = new SbcPrepareToLoad();
         if (SbcLoading.CanBeLoad()){
             SbcToLoad SbcLoad = new SbcToLoad();
             SbcLoad.SetParamFileName(SbcLoading.getParameterFileName());
             if (SbcLoad.LoadParamFile()){
-                SbcLoad.LoadMainWindow();
+            	SbcLoad.LoadMainWindow();
             }
         }
-
+        
     }
+    
 }
