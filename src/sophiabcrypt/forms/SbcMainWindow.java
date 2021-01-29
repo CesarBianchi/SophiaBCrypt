@@ -77,21 +77,10 @@ public class SbcMainWindow extends javax.swing.JFrame {
     */
     public SbcMainWindow() {
         this.setSbcIcon();
-        this.setLookAndFeel();
-        this.paintDialog();
+        this.paintMainDialog();
     }
     
-    /**
-     * This method set a Look and Feel Style
-     * @author CesarBianchi
-     * @since Jan/2021
-    */
-    private void setLookAndFeel() {
-    	SbcLookAndFeel lookAndFeel = new SbcLookAndFeel();
-    	//lookAndFeel.setLookAndFeelNimbus();
-    	lookAndFeel.setLookAndFeelFlatDarculaLaf();
-    }
-    
+  
     /**
      * This method show the window interface with all sentences translated
      * @author CesarBianchi
@@ -672,7 +661,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
      * @since January/2021
      * @version 1.10.1
     */
-    private void paintDialog() {
+    private void paintMainDialog() {
     		
     	layout = new javax.swing.GroupLayout(getContentPane());
         jPanel1 = new javax.swing.JPanel();
@@ -768,6 +757,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
+        pack();
         
         //Paint Menu 1
         jMenu1.setText("Arquivo");
@@ -857,7 +847,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         
         
         //Paint Button "Add File/Directory"        
-        jButAddFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/to_right_blue_small.png"))); // NOI18N
+        jButAddFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/to_right_blue_small.png"))); 
         jButAddFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAddFileClicked(evt);
@@ -865,7 +855,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         });
         
         //Paint Button "Remove File/Directory"
-        jButRemoveFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/to_left_blue_small.png"))); // NOI18N
+        jButRemoveFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/to_left_blue_small.png"))); 
         jButRemoveFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonRemoveFileClicked(evt);
@@ -878,7 +868,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         jScrollPaneAddedFiles.setViewportView(jListAddedFiles);
         
         //Paint the button "Encrypt"
-        jButEncrypt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v5_lock_blue_small.png"))); // NOI18N
+        jButEncrypt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v5_lock_blue_small.png")));
         jButEncrypt.setText("    Criptografar");
         jButEncrypt.setToolTipText("Criptografa os arquivos ou pastas selecionados a esquerda");
         jButEncrypt.addActionListener(new java.awt.event.ActionListener() {
@@ -888,7 +878,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         });
         
         //Paint the button "Decrypt"
-        jButDecrypt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v5_unlock_blue_small.png"))); // NOI18N
+        jButDecrypt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v5_unlock_blue_small.png")));
         jButDecrypt.setText("Descriptografar");
         jButDecrypt.setToolTipText("Descriptografa os arquivos ou pastas selecionados a esquerda");
         jButDecrypt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -900,7 +890,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
             }
         });
         
-        pack();
+        
     }     
     
 }
