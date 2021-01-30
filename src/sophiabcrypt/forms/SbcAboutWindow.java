@@ -18,6 +18,7 @@
 
 package sophiabcrypt.forms;
 import java.awt.Cursor;
+
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -36,6 +37,7 @@ import javax.swing.JLabel;
 import sophiabcrypt.SbcVersion;
 import sophiabcrypt.language.SbcDictionaryBase;
 import sophiabcrypt.language.SbcDictionarySentence;
+//import sophiabcrypt.images.*;
 
 /**
  * This class is used to show a "About Program Window"
@@ -107,7 +109,6 @@ public class SbcAboutWindow extends javax.swing.JFrame {
         //Define a versao na Dialog a partir da classe que controla a versao
         SbcVersion sbcVer = new SbcVersion();        
         this.jLabVersionInfo.setText(sbcVer.getVersion().concat(" - ").concat(sbcVer.getBuildDate()));
-        
         this.setTranslates();
         
         this.show();
@@ -178,10 +179,10 @@ public class SbcAboutWindow extends javax.swing.JFrame {
         });
 
         //Set and load SophiaBCrypt logo (Dog Icon)
-        BufferedImage img = ImageIO.read(new File("src/dog_icon.png"));
-        ImageIcon icon = new ImageIcon(img);
-        labelIconLabel = new javax.swing.JLabel(icon);
-
+        //BufferedImage img = ImageIO.read(new File("src/dog_icon.png"));
+        //ImageIcon icon = new ImageIcon(img);
+        //labelIconLabel = new javax.swing.JLabel(icon);
+        labelIconLabel = new javax.swing.JLabel();
         
         //Set labels texts
         jLabProgramName.setFont(new java.awt.Font("Lucida Grande", 1, 13));

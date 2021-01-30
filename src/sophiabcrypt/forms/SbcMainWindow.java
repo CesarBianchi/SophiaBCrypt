@@ -409,12 +409,10 @@ public class SbcMainWindow extends javax.swing.JFrame {
      * @version 1.03.1
      */
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-            SbcExitWindow exitDiag = new SbcExitWindow();
-            exitDiag.setLocationRelativeTo(null);
-            exitDiag.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            exitDiag.setResizable(false);
-            exitDiag.setSentences(this.getLanguage(),this.SentencesInMemory);
-            exitDiag.init();
+    	
+    	SbcExitWindow exitDiag = new SbcExitWindow(this.getLanguage(),this.getSentences());
+        exitDiag.openExitDialog();
+    	
     }                                          
 
     /**
@@ -467,7 +465,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
     */
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         SbcAboutWindow SbcAbout = new SbcAboutWindow();
-        SbcAbout.SetSentences(this.getLanguage(),this.SentencesInMemory);
+        SbcAbout.SetSentences(this.getLanguage(),this.getSentences());
         SbcAbout.init();
     }                                          
 
@@ -480,7 +478,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         SbcLanguageWindow SbcLangWin = new SbcLanguageWindow();
         SbcLangWin.fromLoad(false);
-        SbcLangWin.setSentences(this.SentencesInMemory);
+        SbcLangWin.setSentences(this.getSentences());
         SbcLangWin.setParamFileName(this.cParamFileName);
         SbcLangWin.LoadLanguageWindow();        
     }                                          
@@ -493,7 +491,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
     */
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         SbcSentencesWindow SbcSentWin = new SbcSentencesWindow();
-        SbcSentWin.init(this.getLanguage(),this.SentencesInMemory,this.cLangFileName);
+        SbcSentWin.init(this.getLanguage(),this.getSentences(),this.cLangFileName);
         
     }                                          
 
@@ -557,7 +555,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         pswDiag.setLocationRelativeTo(null);
         pswDiag.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         pswDiag.setResizable(false);
-        pswDiag.setSentences(this.getLanguage(),this.SentencesInMemory);
+        pswDiag.setSentences(this.getLanguage(),this.getSentences());
         pswDiag.setOper(cOper);
         pswDiag.setPaths(cPaths);
         pswDiag.init();
@@ -631,6 +629,18 @@ public class SbcMainWindow extends javax.swing.JFrame {
         this.setLanguage(cLang);
         this.SentencesInMemory = Sentences;
     }
+    
+    /**
+     * Get List of Sentences in Memory
+     * @author CesarBianchi
+     * @since October/2018
+     * @return ArrayOfList with all sentences stored in memory
+     * @version 1.03.1
+     */
+    private ArrayList getSentences(){
+        return this.SentencesInMemory;
+    }
+    
     
     /**
      * This method sets all words to language defined by user
