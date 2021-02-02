@@ -25,8 +25,8 @@ package sophiabcrypt;
  */
 public class SbcVersion {
 
-    private String cVersion = "1.03.3";
-    private String cBuildDate = "21 Nov 2018";
+    private String cVersion = "1.10.1";
+    private String cBuildDate = "28 Jan 2021";
     private String cLang = "";
     
     /**

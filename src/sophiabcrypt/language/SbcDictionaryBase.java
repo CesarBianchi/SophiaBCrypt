@@ -124,7 +124,10 @@ public class SbcDictionaryBase {
         this.AddNewSentence("0034","SbcSentencesWindow" ,"O arquivo de idiomas foi atualizado com sucesso." ,"The language file has been successfully updated."            ,"El archivo de idioma se ha actualizado correctamente."    ,"UNKNOW");    
         this.AddNewSentence("0035","SbcSentencesWindow" ,"É recomendável que você reinice a aplicação agora." ,"We recommend that you restart the app now."                ,"Es recomendable que reinice la aplicación ahora."         ,"UNKNOW");    
         this.AddNewSentence("0036","SbcSentencesWindow" ,"Idioma definido com sucesso"                      ,"Language successfully defined"                               ,"Idioma definido con éxito"                                ,"UNKNOW");
+        this.AddNewSentence("0037","SbcExitWindow" 		,"Encerrar SophiaBCrypt ?","Exit SophiaBCrypt"      ,"Cerrar SophiaBCrypt"       ,"UNKNOW");
 
+        
+        
         //this.AddNewSentence("cID","className","PT","EN","ES","UD");
     }
     
