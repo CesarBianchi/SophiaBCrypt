@@ -664,7 +664,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         this.jMenuItem4.setText(Dictionary.getTranslation("0026"));
         this.jMenuItem5.setText(Dictionary.getTranslation("0027"));
     }
-                
+    
     /**
      * Build the MainWindow Dialog
      * @author CesarBianchi
@@ -673,6 +673,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
     */
     private void paintMainDialog() {
     		
+    	
     	layout = new javax.swing.GroupLayout(getContentPane());
         jPanel1 = new javax.swing.JPanel();
         jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -701,8 +702,16 @@ public class SbcMainWindow extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         
         
+        
+        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+        
         //Set main Title and internal Name
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SophiaBCrypt - Criptografador de arquivos");
         setName("MainFrame");
 
@@ -900,7 +909,18 @@ public class SbcMainWindow extends javax.swing.JFrame {
             }
         });
         
-        
-    }     
+    } 
+      
+    /**
+     * Invoke the default close application dialog
+     * @author CesarBianchi
+     * @since January/2021
+     * @version 1.10.1
+    */
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    	SbcExitWindow exitWindow = new SbcExitWindow(this.getLanguage(),this.getSentences());
+    	exitWindow.openExitDialog();
+    			
+    }
     
 }

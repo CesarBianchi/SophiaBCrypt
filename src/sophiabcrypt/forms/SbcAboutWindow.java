@@ -179,10 +179,11 @@ public class SbcAboutWindow extends javax.swing.JFrame {
         });
 
         //Set and load SophiaBCrypt logo (Dog Icon)
+        labelIconLabel = new javax.swing.JLabel();
         //BufferedImage img = ImageIO.read(new File("src/dog_icon.png"));
         //ImageIcon icon = new ImageIcon(img);
         //labelIconLabel = new javax.swing.JLabel(icon);
-        labelIconLabel = new javax.swing.JLabel();
+        
         
         //Set labels texts
         jLabProgramName.setFont(new java.awt.Font("Lucida Grande", 1, 13));

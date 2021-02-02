@@ -29,6 +29,7 @@ import java.io.OutputStream;
  * @author CesarBianchi
  * @since Oct/2018
  * @see SbcEncryptor
+ * @see javax.crypto.Cipher
  */
 public class SbcEncEngine {
     String cOper = new String();
@@ -37,7 +38,7 @@ public class SbcEncEngine {
     private String cSbcExtension = new String();
      
     /**
-    * Load all full path files for crpyt and call Encrypt method
+    * Load all full path files for Encrpyt and call Encrypt method
     * @author CesarBianchi
     * @param cPsw user defined password for encrypt file
     * @throws java.lang.Exception Cause List of Files is null or zero 

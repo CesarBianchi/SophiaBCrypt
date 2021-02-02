@@ -35,13 +35,15 @@ import sophiabcrypt.SbcEncryptor;
 
 
 /**
- * This class manage a collection of Look and Feel Java Swing themes, to apply in SophiaBCrypt.
- * The colletions listed here are: 
+ * This class manage a lot of collection to Look and Feel Java Swing themes, to apply in SophiaBCrypt.
+ * The collections listed here are: 
  *      FlatLaf - https://www.formdev.com/flatlaf/  - All Rights Reserved.
  *      IntelliJ Platform  - https://www.formdev.com/flatlaf/themes/#intellij_platform_themes - All Rights Reserved.
  * @author Cesar_Bianchi
  * @since January/2021
  * @see SbcEncryptor
+ * @see FlatLaf
+ * @see IntelliJ
  */
 public class SbcLookAndFeel {
 	

@@ -32,17 +32,7 @@ public class SbcDictionarySentence {
     private SbcDictionaryTranslations translations = new SbcDictionaryTranslations();
 
     /**
-     * This is a main class (Constructor) for a single use (without input parameters)
-     * @author CesarBianchi
-     * @since October/2018
-     * @version 1.03.1
-     */
-    public void main(){
-        
-    }
-    
-    /**
-     * This is a main class (Constructor) for a full use (with all input parameters)
+     * A single constructor without parameters
      * @author CesarBianchi
      * @param sentenceCode The id of sentence
      * @param classOrigin The name of the class where sentence is used
@@ -53,7 +43,23 @@ public class SbcDictionarySentence {
      * @since October/2018
      * @version 1.03.1
      */
-    public void main(String sentenceCode, String classOrigin, String PT, String EN, String ES, String UD){
+    public void SbcDictionarySentence() {
+    	
+    }
+    
+    /**
+     * This is a Constructor for a full use (with all input parameters)
+     * @author CesarBianchi
+     * @param sentenceCode The id of sentence
+     * @param classOrigin The name of the class where sentence is used
+     * @param PT The define in portuguese language
+     * @param EN The define in english language
+     * @param ES The define in spanish language
+     * @param UD The define by User Definitions language (Any language)
+     * @since October/2018
+     * @version 1.03.1
+     */
+    public void SbcDictionarySentence(String sentenceCode, String classOrigin, String PT, String EN, String ES, String UD){
         this.setSentenceID(sentenceCode);
         this.setClassOfUse(classOrigin);
         this.setTranslationPortuguese(PT);

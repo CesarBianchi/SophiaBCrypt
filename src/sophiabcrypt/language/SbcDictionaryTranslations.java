@@ -31,17 +31,17 @@ public class SbcDictionaryTranslations {
     private String userDefined = new String();
     
     /**
-     * This is a main class (Constructor) for a single use (without input parameters)
+     * This is a simple Constructor for a single use (without input parameters)
      * @author CesarBianchi
      * @since October/2018
      * @version 1.03.1
      */
-    public void main(){
+    public void SbcDictionaryTranslations(){
         
     }
     
     /**
-     * This is a main class (Constructor) for a full use (with all input parameters)
+     * This is a Constructor for a full use (with all input parameters)
      * @author CesarBianchi
      * @param PT The define in portuguese language
      * @param EN The define in english language
@@ -50,7 +50,7 @@ public class SbcDictionaryTranslations {
      * @since October/2018
      * @version 1.03.1
      */
-    public void main(String PT,String EN, String ES, String UD){
+    public void SbcDictionaryTranslations(String PT,String EN, String ES, String UD){
         this.setPortuguese(PT);
         this.setEnglish(EN);
         this.setSpanish(ES);
