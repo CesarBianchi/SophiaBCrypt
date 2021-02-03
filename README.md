@@ -9,7 +9,7 @@ You can found a main class to run this program in **/src/sophiabcrypt/SophiaBCry
 The binary file (executable file) about SophiaBCrypt are avaiable in **/Runnable** directory
 After download it, plese run the following commands in your command line application (Terminal to MacOs/Linux users or CMD to Windows Users)
 ```
-{path_of_file} java -jar SophiaBCrypt.jar
+java -jar SophiaBCrypt.jar
 ```
 
 ## Prerequisites
