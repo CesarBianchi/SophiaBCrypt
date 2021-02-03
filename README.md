@@ -18,7 +18,7 @@ The binary file (executable file) about SophiaBCrypt are avaiable in **/Runnable
 - [Eclipse IDE](https://www.eclipse.org/downloads/) - IDE to compile and run Java code.
 
 ## Authors
-- Cesar Bianchi - As a part of particular initiative, since 2018.
+- [Cesar Bianchi](https://www.linkedin.com/in/cesar-bianchi-9b90571b/), since 2018.
 
 ## License
  This software is licensed under [GNU 2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)   
