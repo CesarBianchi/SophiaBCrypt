@@ -7,8 +7,10 @@ You can found a main class to run this program in /src/sophiabcrypt/SophiaBCrypt
 
 ## Prerequisites
 ```
-To use/compile this project, you will need a Eclispe IDE (or another Java IDE application of your preference) installed in your desktop and a JDK
- 1.8 or greater.
+To use/compile this project, you will need a Eclispe IDE (or another Java IDE application of your preference) installed in your desktop.
+```
+```
+JDK 1.8 or greater
 ```
 
 
