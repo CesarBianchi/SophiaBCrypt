@@ -1,5 +1,5 @@
 # SophiaBCrypt
-SophiaBCrypt is a simple and free tool made for Windows, Mac and Linux users across the globe to encrypt any kind of files, using a personal key. Perfect for enjoy your favourite cloud provider for storage personal data with security and privacy.
+SophiaBCrypt is a simple and free tool made for a lot of kind desktop operational systems, as Microsoft Windows, MacOS and Linux users across the world to encrypt/decrypt any kind of files extensions, using a private and personal key. Perfect for enjoy your favourite cloud provider for storage personal data with security and privacy.
 
 ## Getting Started (for developers)
 All code about SophiaBCrypt are available in **/src** directory and all libraries dependency are available in **/LIBS** directory.
@@ -7,6 +7,10 @@ You can found a main class to run this program in **/src/sophiabcrypt/SophiaBCry
 
 ## Getting Started (for end-users)
 The binary file (executable file) about SophiaBCrypt are avaiable in **/Runnable** directory
+After download it, plese run the following commands in your command line application (Terminal to MacOs/Linux users or CMD to Windows Users)
+```
+java -jar SophiaBCrypt.jar
+```
 
 ## Prerequisites
  - To use/compile this project, you will need a Eclispe IDE (or another Java IDE application of your preference) installed in your desktop.
