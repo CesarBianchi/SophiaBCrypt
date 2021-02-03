@@ -6,12 +6,8 @@ All code about SophiaBCrypt are available in /src directory and all library depe
 You can found a main class to run this program in /src/sophiabcrypt/SophiaBCrypt.java
 
 ## Prerequisites
-```
-To use/compile this project, you will need a Eclispe IDE (or another Java IDE application of your preference) installed in your desktop.
-```
-```
-JDK 1.8 or greater
-```
+ - To use/compile this project, you will need a Eclispe IDE (or another Java IDE application of your preference) installed in your desktop.
+ - JDK 1.8 or greater
 
 
 This software was created by CesarBianchi.
