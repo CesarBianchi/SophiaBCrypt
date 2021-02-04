@@ -1,2 +1,6 @@
-
 .DS_Store
+/.metadata/
+/.project/
+/src/sophiabcrypt/.metadata/
+/src/sophiabcrypt/.project/
+/src/sophiabcrypt/.project
