@@ -1,5 +1,5 @@
 # SophiaBCrypt
-SophiaBCrypt is a simple and free tool made for a lot of kind desktop operational systems, as Microsoft Windows, MacOS and Linux users across the world to encrypt/decrypt any kind of files extensions, using a private and personal key. Perfect for enjoy your favourite cloud provider for storage personal data with security and privacy.
+SophiaBCrypt is a simple and free tool made for a lot of kind desktop operational systems (cross-platform), as Microsoft Windows, MacOS and Linux users across the world to encrypt/decrypt any kind of files extensions, using a private and personal key. Perfect for enjoy your favourite cloud provider for storage personal data with security and privacy.
 
 ## Getting Started (for developers)
 All code about SophiaBCrypt are available in **/src** directory and all libraries dependency are available in **/LIBS** directory.
