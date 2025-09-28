@@ -41,8 +41,6 @@ import com.sophiabcrypt.SbcEncryptor;
  * @author Cesar_Bianchi
  * @since January/2021
  * @see SbcEncryptor
- * @see FlatLaf
- * @see IntelliJ
  */
 public class SbcLookAndFeel {
 	

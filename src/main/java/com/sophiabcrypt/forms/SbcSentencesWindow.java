@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package sophiabcrypt.forms;
+package com.sophiabcrypt.forms;
 
 import java.awt.Cursor;
 import java.io.IOException;
@@ -27,8 +27,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import sophiabcrypt.language.SbcDictionaryBase;
-import sophiabcrypt.language.SbcDictionarySentence;
+import com.sophiabcrypt.language.SbcDictionaryBase;
+import com.sophiabcrypt.language.SbcDictionarySentence;
 
 /**
  * This class is used to prepare environment for SophiaBCrypt tool

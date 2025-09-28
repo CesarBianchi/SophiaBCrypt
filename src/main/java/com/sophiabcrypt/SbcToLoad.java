@@ -17,15 +17,14 @@
 */
 package com.sophiabcrypt;
 import com.sophiabcrypt.forms.SbcMainWindow;
-import sophiabcrypt.SbcVersion;
 import com.thoughtworks.xstream.XStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import sophiabcrypt.language.SbcDictionaryBase;
-import sophiabcrypt.language.SbcDictionarySentence;
+import com.sophiabcrypt.language.SbcDictionaryBase;
+import com.sophiabcrypt.language.SbcDictionarySentence;
 
 /**
  * This Class Load Parameters from parameters file and exec the main program

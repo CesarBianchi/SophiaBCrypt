@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package sophiabcrypt;
+package com.sophiabcrypt;
 
 /**
  * This class its used for control details at tree nodes of the main menu

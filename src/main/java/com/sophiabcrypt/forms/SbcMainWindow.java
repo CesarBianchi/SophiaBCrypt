@@ -24,13 +24,9 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import sophiabcrypt.SbcNodeDetails;
-import sophiabcrypt.language.SbcDictionaryBase;
-import sophiabcrypt.language.SbcDictionarySentence;
-import sophiabcrypt.forms.SbcExitWindow;
-import sophiabcrypt.forms.SbcAboutWindow;
-import sophiabcrypt.forms.SbcLanguageWindow;
-import sophiabcrypt.forms.SbcSentencesWindow;
+import com.sophiabcrypt.SbcNodeDetails;
+import com.sophiabcrypt.language.SbcDictionaryBase;
+import com.sophiabcrypt.language.SbcDictionarySentence;
 
 
 /**
@@ -871,7 +867,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         
         
         //Paint Button "Add File/Directory"        
-        jButAddFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/to_right_blue_small.png"))); 
+        jButAddFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/to_right_blue_small.png"))); 
         jButAddFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAddFileClicked(evt);
@@ -879,7 +875,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         });
         
         //Paint Button "Remove File/Directory"
-        jButRemoveFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/to_left_blue_small.png"))); 
+        jButRemoveFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/to_left_blue_small.png"))); 
         jButRemoveFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonRemoveFileClicked(evt);
@@ -892,7 +888,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         jScrollPaneAddedFiles.setViewportView(jListAddedFiles);
         
         //Paint the button "Encrypt"
-        jButEncrypt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v5_lock_blue_small.png")));
+        jButEncrypt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/v5_lock_blue_small.png")));
         jButEncrypt.setText("    Criptografar");
         jButEncrypt.setToolTipText("Criptografa os arquivos ou pastas selecionados a esquerda");
         jButEncrypt.addActionListener(new java.awt.event.ActionListener() {
@@ -902,7 +898,7 @@ public class SbcMainWindow extends javax.swing.JFrame {
         });
         
         //Paint the button "Decrypt"
-        jButDecrypt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sophiabcrypt/images/v5_unlock_blue_small.png")));
+        jButDecrypt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/v5_unlock_blue_small.png")));
         jButDecrypt.setText("Descriptografar");
         jButDecrypt.setToolTipText("Descriptografa os arquivos ou pastas selecionados a esquerda");
         jButDecrypt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

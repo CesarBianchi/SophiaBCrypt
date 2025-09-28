@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package sophiabcrypt;
+package com.sophiabcrypt;
 import java.io.*;
 import javax.swing.JOptionPane;
 
@@ -332,6 +332,7 @@ public class SbcPlanFile {
      * @author CesarBianchi
      * @since Sep/2018
     */
+    @Deprecated
     private void setBfaExtension(){
         cBfaExtension = ".bfa";
     }
@@ -344,6 +345,7 @@ public class SbcPlanFile {
      * @author CesarBianchi
      * @since Sep/2018
     */
+    @Deprecated
     private String getBfaExtension(){
         return cBfaExtension;
     }

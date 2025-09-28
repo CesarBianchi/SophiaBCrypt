@@ -16,28 +16,23 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package sophiabcrypt.forms;
+package com.sophiabcrypt.forms;
 import java.awt.Cursor;
 
 import java.awt.Desktop;
-import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
-import sophiabcrypt.SbcVersion;
-import sophiabcrypt.language.SbcDictionaryBase;
-import sophiabcrypt.language.SbcDictionarySentence;
-//import sophiabcrypt.images.*;
+import com.sophiabcrypt.SbcVersion;
+import com.sophiabcrypt.language.SbcDictionaryBase;
+import com.sophiabcrypt.language.SbcDictionarySentence;
+
 
 /**
  * This class is used to show a "About Program Window"
@@ -48,9 +43,9 @@ import sophiabcrypt.language.SbcDictionarySentence;
  */
 public class SbcAboutWindow extends javax.swing.JFrame {
 
-	//Graphical variables/objects
-	//Used to paint the dialog/from
-	private javax.swing.JLabel jLabAuthorTitle;
+    //Graphical variables/objects
+    //Used to paint the dialog/from
+    private javax.swing.JLabel jLabAuthorTitle;
     private javax.swing.JLabel jLabAuthorName;
     private javax.swing.JLabel jLabAuthorMail;
     private javax.swing.JLabel jLabProgramName;
@@ -62,44 +57,35 @@ public class SbcAboutWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabLicensed;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    
-    
-	
     private ArrayList<SbcDictionarySentence> SentencesInMemory = new ArrayList<SbcDictionarySentence>();
     private String cLanguage = new String();
             
     /**
      * Creates new form SbcAboutWindow
-     * @author CesarBianchi
      * @since October/2018
-     * @version 1.00
-     * @throws IOException 
      */
     public SbcAboutWindow() {
-    	try {
-			this.paintAboutDialog();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            this.paintAboutDialog();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
     /**
      * This methods sets the language defined by user for use in translations
-     * @author CesarBianchi
      * @param cLG The language defined by user
      * @since October/2018
-     * @version 1.03.1
      */
     public void setLanguage(String cLG){
         this.cLanguage = cLG;
     }
             
-	/**
-	* Set the picture of logo, load version information and show About Window
-	* @author CesarBianchi
-	* @since Oct/2018
-	*/
+    /**
+    * Set the picture of logo, load version information and show About Window
+    * @since Oct/2018
+    */
     public void init(){
         ImageIcon icon = new ImageIcon("images/logo_about_little.png");
   
@@ -126,14 +112,12 @@ public class SbcAboutWindow extends javax.swing.JFrame {
         this.jLabVersion.setText(DictionaryBase.getTranslation("0007"));
         this.jLabAuthorTitle.setText(DictionaryBase.getTranslation("0008"));
     }
-    
+
     /**
      * Set Sentences in Memory before load xml language file
-     * @author CesarBianchi
      * @since October/2018
      * @param cLang String with language defined by user
      * @param Sentences ArrayOfList with all sentences loaded from xml language file
-     * @version 1.03.1
      */
     public void SetSentences(String cLang,ArrayList<SbcDictionarySentence> Sentences) {
         this.setLanguage(cLang);

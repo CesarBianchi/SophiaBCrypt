@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package sophiabcrypt.forms;
+package com.sophiabcrypt.forms;
 
 import com.thoughtworks.xstream.XStream;
 import java.awt.Cursor;
@@ -28,9 +28,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import com.sophiabcrypt.SbcToLoad;
-import sophiabcrypt.SbcVersion;
-import sophiabcrypt.language.SbcDictionaryBase;
-import sophiabcrypt.language.SbcDictionarySentence;
+import com.sophiabcrypt.SbcVersion;
+import com.sophiabcrypt.language.SbcDictionaryBase;
+import com.sophiabcrypt.language.SbcDictionarySentence;
 
 /**
  * This class is used to user select a prefered language for SophiaBCrypt

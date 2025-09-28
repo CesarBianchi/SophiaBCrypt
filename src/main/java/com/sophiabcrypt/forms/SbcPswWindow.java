@@ -21,10 +21,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import sophiabcrypt.SbcPlanFile;
-import sophiabcrypt.SbcPswControl;
-import sophiabcrypt.language.SbcDictionaryBase;
-import sophiabcrypt.language.SbcDictionarySentence;
+import com.sophiabcrypt.SbcPlanFile;
+import com.sophiabcrypt.SbcPswControl;
+import com.sophiabcrypt.language.SbcDictionaryBase;
+import com.sophiabcrypt.language.SbcDictionarySentence;
 
 /**
  * This class create a new "Input Your Password Window" and start process of encrypt or decrypt

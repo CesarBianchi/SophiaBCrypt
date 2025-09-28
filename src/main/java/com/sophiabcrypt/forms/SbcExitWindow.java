@@ -16,14 +16,14 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package sophiabcrypt.forms;
+package com.sophiabcrypt.forms;
 
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import sophiabcrypt.language.SbcDictionaryBase;
-import sophiabcrypt.language.SbcDictionarySentence;
+import com.sophiabcrypt.language.SbcDictionaryBase;
+import com.sophiabcrypt.language.SbcDictionarySentence;
 
 /**
  * This class is used to show a new form "Do you really want quit of program"

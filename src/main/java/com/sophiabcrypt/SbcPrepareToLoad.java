@@ -16,12 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package com.sophiabcrypt;
-import sophiabcrypt.forms.SbcLanguageWindow;
+import com.sophiabcrypt.forms.SbcLanguageWindow;
 import java.io.File;
-import com.thoughtworks.xstream.XStream;
-import java.awt.Cursor;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 /**

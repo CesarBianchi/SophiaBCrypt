@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package sophiabcrypt;
+package com.sophiabcrypt;
 
 /**
  * This class store the information about version and build date of last SophiaBCrypt
@@ -25,8 +25,8 @@ package sophiabcrypt;
  */
 public class SbcVersion {
 
-    private String cVersion = "1.10.1";
-    private String cBuildDate = "28 Jan 2021";
+    private String cVersion = "1.10.4";
+    private String cBuildDate = "28 Sep 2025";
     private String cLang = "";
     
     /**
