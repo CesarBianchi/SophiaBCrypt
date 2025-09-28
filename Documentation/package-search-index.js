@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"sophiabcrypt"},{"l":"sophiabcrypt.forms"},{"l":"sophiabcrypt.language"}];updateSearchResults();

@@ -1,0 +1,372 @@
+<list>
+  <Sentence>
+    <sentenceID>0001</sentenceID>
+    <ClassOfUse>SbcMainWindow</ClassOfUse>
+    <translations>
+      <portuguese>Arquivo</portuguese>
+      <english>File</english>
+      <spanish>Ficheiro</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0002</sentenceID>
+    <ClassOfUse>SbcMainWindow</ClassOfUse>
+    <translations>
+      <portuguese>Criptografar</portuguese>
+      <english>Encrypt</english>
+      <spanish>Cifrar</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0003</sentenceID>
+    <ClassOfUse>SbcMainWindow</ClassOfUse>
+    <translations>
+      <portuguese>Descriptografar</portuguese>
+      <english>Decrypt</english>
+      <spanish>Desencriptar</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0004</sentenceID>
+    <ClassOfUse>SbcMainWindow</ClassOfUse>
+    <translations>
+      <portuguese>Sair</portuguese>
+      <english>Exit</english>
+      <spanish>Salida</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0005</sentenceID>
+    <ClassOfUse>SbcMainWindow</ClassOfUse>
+    <translations>
+      <portuguese>Ajuda</portuguese>
+      <english>Help</english>
+      <spanish>Ayuda</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0006</sentenceID>
+    <ClassOfUse>SbcMainWindow</ClassOfUse>
+    <translations>
+      <portuguese>Sobre</portuguese>
+      <english>About</english>
+      <spanish>Acerca</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0007</sentenceID>
+    <ClassOfUse>SbcAboutWindow</ClassOfUse>
+    <translations>
+      <portuguese>Versão</portuguese>
+      <english>Version</english>
+      <spanish>Versión</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0008</sentenceID>
+    <ClassOfUse>SbcAboutWindow</ClassOfUse>
+    <translations>
+      <portuguese>Desenvolvido por:</portuguese>
+      <english>Developed by:</english>
+      <spanish>Desarrollado por:</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0009</sentenceID>
+    <ClassOfUse>SbcExitWindow</ClassOfUse>
+    <translations>
+      <portuguese>Voce deseja sair ?</portuguese>
+      <english>You want to leave ?</english>
+      <spanish>Quieres salir ?</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0010</sentenceID>
+    <ClassOfUse>SbcExitWindow</ClassOfUse>
+    <translations>
+      <portuguese>Sim</portuguese>
+      <english>Yes</english>
+      <spanish>Sí</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0011</sentenceID>
+    <ClassOfUse>SbcExitWindow</ClassOfUse>
+    <translations>
+      <portuguese>Não</portuguese>
+      <english>No</english>
+      <spanish>No</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0012</sentenceID>
+    <ClassOfUse>SbcLanguageWindow</ClassOfUse>
+    <translations>
+      <portuguese>Selecione o Idioma</portuguese>
+      <english>Select language</english>
+      <spanish>Seleccione el idioma</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0013</sentenceID>
+    <ClassOfUse>SbcProgressWindow</ClassOfUse>
+    <translations>
+      <portuguese>Processando Arquivos</portuguese>
+      <english>Processing files</english>
+      <spanish>Procesando ficheiros</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0014</sentenceID>
+    <ClassOfUse>SbcProgressWindow</ClassOfUse>
+    <translations>
+      <portuguese>Aguarde</portuguese>
+      <english>Wait</english>
+      <spanish>Espere</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0015</sentenceID>
+    <ClassOfUse>SbcPswWindow</ClassOfUse>
+    <translations>
+      <portuguese>Deseja Criptografar o(s) arquivo(s) selecionado(s) ?</portuguese>
+      <english>Do you want to Encrypt the selected file(s) ?</english>
+      <spanish>Desea cifrar lo(s) ficheiro(s) seleccionado(s) ?</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0016</sentenceID>
+    <ClassOfUse>SbcPswWindow</ClassOfUse>
+    <translations>
+      <portuguese>ATENÇÃO: Memorize a sua senha para restauração futura.</portuguese>
+      <english>WARNING: Memorize your password for future decrypt.</english>
+      <spanish>ADVERTENCIA: Memorice su contraseña para descifrar en el futuro.</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0017</sentenceID>
+    <ClassOfUse>SbcPswWindow</ClassOfUse>
+    <translations>
+      <portuguese>Este arquivo só podera ser restaurado utilizando a mesma senha.</portuguese>
+      <english>This file can only be decrypetd using the same password.</english>
+      <spanish>Este archivo solo puede ser descifrado usando la misma contraseña.</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0018</sentenceID>
+    <ClassOfUse>SbcPswWindow</ClassOfUse>
+    <translations>
+      <portuguese>Senha:</portuguese>
+      <english>Password</english>
+      <spanish>Contraseña</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0019</sentenceID>
+    <ClassOfUse>SbcPswWindow</ClassOfUse>
+    <translations>
+      <portuguese>Confirme a senha:</portuguese>
+      <english>Confirm Password</english>
+      <spanish>Confirmar contraseña</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0020</sentenceID>
+    <ClassOfUse>SbcPswWindow</ClassOfUse>
+    <translations>
+      <portuguese>Confirmar</portuguese>
+      <english>Confirm</english>
+      <spanish>Confirmar</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0021</sentenceID>
+    <ClassOfUse>SbcPswWindow</ClassOfUse>
+    <translations>
+      <portuguese>Cancelar</portuguese>
+      <english>Cancel</english>
+      <spanish>Cancelar</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0022</sentenceID>
+    <ClassOfUse>SbcProgressWindow</ClassOfUse>
+    <translations>
+      <portuguese>Convertendo arquivo </portuguese>
+      <english>Converting file </english>
+      <spanish>Convertir ficheiro </spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0023</sentenceID>
+    <ClassOfUse>SbcProgressWindow</ClassOfUse>
+    <translations>
+      <portuguese> de </portuguese>
+      <english> of </english>
+      <spanish> de </spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0024</sentenceID>
+    <ClassOfUse>SbcPswWindow</ClassOfUse>
+    <translations>
+      <portuguese>Deseja descriptografar o(s) arquivo(s) selecionado(s) ?</portuguese>
+      <english>Do you want to decrypt the selected file(s) ?</english>
+      <spanish>Desea descifrar el ficheiro(s) seleccionado(s) </spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0025</sentenceID>
+    <ClassOfUse>SbcMainWindow</ClassOfUse>
+    <translations>
+      <portuguese>Opções</portuguese>
+      <english>Options</english>
+      <spanish>Opciones</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0026</sentenceID>
+    <ClassOfUse>SbcMainWindow</ClassOfUse>
+    <translations>
+      <portuguese>Selecionar Idioma</portuguese>
+      <english>Select Language</english>
+      <spanish>Seleccionar Idioma</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0027</sentenceID>
+    <ClassOfUse>SbcMainWindow</ClassOfUse>
+    <translations>
+      <portuguese>Construir Tradução</portuguese>
+      <english>Make Translation</english>
+      <spanish>Construir Traducción</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0028</sentenceID>
+    <ClassOfUse>SbcSentencesWindow</ClassOfUse>
+    <translations>
+      <portuguese>Código</portuguese>
+      <english>ID </english>
+      <spanish>ID</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0029</sentenceID>
+    <ClassOfUse>SbcSentencesWindow</ClassOfUse>
+    <translations>
+      <portuguese>Português</portuguese>
+      <english>Portuguese</english>
+      <spanish>Portugués</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0030</sentenceID>
+    <ClassOfUse>SbcSentencesWindow</ClassOfUse>
+    <translations>
+      <portuguese>Inglês</portuguese>
+      <english>English</english>
+      <spanish>Inglés</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0031</sentenceID>
+    <ClassOfUse>SbcSentencesWindow</ClassOfUse>
+    <translations>
+      <portuguese>Espanhol</portuguese>
+      <english>Spanish</english>
+      <spanish>Español</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0032</sentenceID>
+    <ClassOfUse>SbcSentencesWindow</ClassOfUse>
+    <translations>
+      <portuguese>Definido Pelo Usuário</portuguese>
+      <english>User Defined</english>
+      <spanish>Definido por el usuario</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0033</sentenceID>
+    <ClassOfUse>SbcSentencesWindow</ClassOfUse>
+    <translations>
+      <portuguese>Arquivo Atualizado</portuguese>
+      <english>File Updated</english>
+      <spanish>Ficheiro actualizado</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0034</sentenceID>
+    <ClassOfUse>SbcSentencesWindow</ClassOfUse>
+    <translations>
+      <portuguese>O arquivo de idiomas foi atualizado com sucesso.</portuguese>
+      <english>The language file has been successfully updated.</english>
+      <spanish>El archivo de idioma se ha actualizado correctamente.</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0035</sentenceID>
+    <ClassOfUse>SbcSentencesWindow</ClassOfUse>
+    <translations>
+      <portuguese>É recomendável que você reinice a aplicação agora.</portuguese>
+      <english>We recommend that you restart the app now.</english>
+      <spanish>Es recomendable que reinice la aplicación ahora.</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0036</sentenceID>
+    <ClassOfUse>SbcSentencesWindow</ClassOfUse>
+    <translations>
+      <portuguese>Idioma definido com sucesso</portuguese>
+      <english>Language successfully defined</english>
+      <spanish>Idioma definido con éxito</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+  <Sentence>
+    <sentenceID>0037</sentenceID>
+    <ClassOfUse>SbcExitWindow</ClassOfUse>
+    <translations>
+      <portuguese>Encerrar SophiaBCrypt ?</portuguese>
+      <english>Exit SophiaBCrypt</english>
+      <spanish>Cerrar SophiaBCrypt</spanish>
+      <userDefined>UNKNOW</userDefined>
+    </translations>
+  </Sentence>
+</list>

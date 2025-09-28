@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.sophiabcrypt</groupId>
+    <artifactId>SophiaBCrypt</artifactId>
+    <version>1.10.4</version>
+    <packaging>jar</packaging>
+    
+    <description>SophiaBCrypt is a simple and free tool made for Windows, Mac and Linux users across the globe to encrypt any kind of files, using a personal key.</description>
+
+    <inceptionYear>2017</inceptionYear>
+
+    <developers>
+        <developer>
+            <id>cesar_bianchi</id>
+            <name>Cesar Bianchi</name>
+            <email>cesar_bianchi@hotmail.com</email>
+            <organization>MySelf</organization>
+            <organizationUrl>https://www.linkedin.com/in/cesar-bianchi-9b90571b/</organizationUrl>
+        </developer>
+    </developers>
+    
+    <name>SophiaBCrypt</name>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>24</maven.compiler.release>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <exec.mainClass>com.sophiabcrypt.SophiaBCrypt</exec.mainClass>
+    </properties>
+    
+    <build>
+        
+	<finalName>sophiabcrypt</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.sophiabcrypt.SophiaBCrypt</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+	    </plugins>
+    </build>
+    
+    <dependencies>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.16.1</version>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.21</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.2.5</version>
+  	</dependency>
+        
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf-intellij-themes</artifactId>
+            <version>3.6</version>
+            <type>jar</type>
+        </dependency>
+        
+    </dependencies>
+
+    
+</project>
